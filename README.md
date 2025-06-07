@@ -6,6 +6,7 @@
 <font size=3><div align='center' > [[<img src="repo_imags/icon.png" width=18> Project Page](https://vision-cair.github.io/InfiniBench/)] [[📝 arXiv Paper](https://arxiv.org/abs/2406.19875)] [[🤗 Dataset](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main)]</div></font>
 
 # Overview
+
 ![InfiniBench teaser figure](repo_imags/teaser_fig_new.jpg)
 Understanding long videos, ranging from tens of minutes to several hours, presents unique challenges in video comprehension. Despite the increasing importance of long-form video content, existing benchmarks primarily focus on shorter clips. To address this gap, we introduce InfiniBench a comprehensive benchmark for very long video understanding which presents 1)The longest video duration, averaging 52.59 minutes per video. 2) The largest number of question-answer pairs, 108.2K; 3) Diversity in questions that examine nine different skills and include both multiple-choice questions and open-ended questions; 4) Human-centric, as the video sources come from movies and daily TV shows, with specific human-level question designs such as Movie Spoiler Questions that require critical thinking and comprehensive understanding. Using InfiniBench, we comprehensively evaluate existing Large Multi-Modality Models (LMMs) on each skill, including the commercial models such as  GPT-4o and Gemini 1.5 Flash and the open-source models. 
 The evaluation shows significant challenges in our benchmark.
