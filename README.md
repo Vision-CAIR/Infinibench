@@ -1,201 +1,289 @@
-# <img src="repo_imags/icon.png" width=30> InfiniBench: A Comprehensive Benchmark for Large Multimodal Models in Very Long Video Understanding
-<!-- <a href='https://vision-cair.github.io/InfiniBench/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>
-<a href='https://arxiv.org/abs/2406.19875'><img src='https://img.shields.io/badge/Paper-PDF-red'></a>
-<a href='https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main'><img src='https://img.shields.io/badge/Dataset-hf-yellow'></a> -->
+# <img src="figs/icon_png.png" width=30> InfiniBench: A Benchmark for Large Multi-Modal Models in Long-Form Movies and TV Shows
 
-<font size=3><div align='center' > [[<img src="repo_imags/icon.png" width=18> Project Page](https://vision-cair.github.io/InfiniBench/)] [[📝 arXiv Paper](https://arxiv.org/abs/2406.19875)] [[🤗 Dataset](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main)]</div></font>
+<font size=3><div align='center' > [[<img src="figs/icon_png.png" width=18> Project Page](https://vision-cair.github.io/InfiniBench/)] [[📝 arXiv Paper](https://arxiv.org/abs/2406.19875)] [[🤗 Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main)]</div></font>
 
-# Overview
+![InfiniBench teaser figure](figs/teaser_fig.png)
+<strong>InfiniBench skill set comprising eight skills. The right side represents skill categories and question types, while the left side provides examples of both multiple-choice (MCQ) and open-ended questions.</strong>
 
-![InfiniBench teaser figure](repo_imags/teaser_fig_new.jpg)
-Understanding long videos, ranging from tens of minutes to several hours, presents unique challenges in video comprehension. Despite the increasing importance of long-form video content, existing benchmarks primarily focus on shorter clips. To address this gap, we introduce InfiniBench a comprehensive benchmark for very long video understanding which presents 1)The longest video duration, averaging 52.59 minutes per video. 2) The largest number of question-answer pairs, 108.2K; 3) Diversity in questions that examine nine different skills and include both multiple-choice questions and open-ended questions; 4) Human-centric, as the video sources come from movies and daily TV shows, with specific human-level question designs such as Movie Spoiler Questions that require critical thinking and comprehensive understanding. Using InfiniBench, we comprehensively evaluate existing Large Multi-Modality Models (LMMs) on each skill, including the commercial models such as  GPT-4o and Gemini 1.5 Flash and the open-source models. 
-The evaluation shows significant challenges in our benchmark.
-Our findings reveal that even leading AI models like GPT-4o and Gemini 1.5 Flash face challenges in achieving high performance in long video understanding, with average accuracies of just 49.16\% and 42.72\%, and average scores of 3.22 and 2.71 out of 5, respectively.
-We hope this benchmark will stimulate the LMMs community towards long video and human-level understanding.
+# Overview:
+Understanding long-form videos, such as movies and TV episodes ranging from tens of minutes to two hours, remains a major challenge for multi-modal models. Existing benchmarks often fall short in testing the full range of cognitive skills needed to process these temporally rich and narratively complex inputs. We introduce InfiniBench, a comprehensive benchmark designed to rigorously evaluate the capabilities of models in long video understanding.
+InfiniBench offers:
+**(1) Over 1,000 hours of video content, with an average video length of 52.59 minutes,(2) The largest set of question-answer pairs for long video comprehension, totaling around \totalSampleNumber, (3) Eight diverse skills that span both grounding-based (e.g., scene transitions, character actions) and reasoning-based (e.g., deep context, multi-event linking) understanding, and (4) Rich annotation formats, including both multiple-choice and open-ended questions.**
+We conduct an in-depth evaluation across both commercial (GPT-4o, Gemini 1.5 Flash) and open-source (Qwen2.5-VL, InternVL2.5) vision-language models. 
+Results reveal that current models remain far from solving long video understanding: on grounding-based skills, the top open-source model (Qwen2.5-VL) and GPT-4o achieve only 39.4\% and 48.1\% accuracy, respectively. 
+Interestingly, several models achieve non-trivial performance using only the movie or episode title, without watching the video, revealing a reliance on pre-trained world knowledge that partially compensates for the absence of visual or temporal understanding.
+These findings highlight critical gaps in current approaches and underscore the need for models that truly engage with long visual narratives.
+
 # Leaderboard for top commercial and open souce models:
-![results_1](repo_imags/results_1.JPG)
-# High level aggregated skills:
-![aggregated_skills](repo_imags/skills_high_level.JPG)
-# Leaderboard for the high level aggregated skills:
-![results_2](repo_imags/results_2.JPG)
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Models</th>
+      <th rowspan="2">Frame Rate</th>
+      <th colspan="4" style="text-align:center; border-bottom: 1px solid #E4EAFF;">Grounding Skills</th>
+      <th colspan="4" style="text-align:center; border-bottom: 1px solid #FFF2CC;">Reasoning Skills</th>
+      <th rowspan="2">Avg. Acc.</th>
+      <th rowspan="2">Avg. Score</th>
+    </tr>
+    <tr>
+      <th>Global Appearance</th>
+      <th>Scene Transitions</th>
+      <th>Character Actions</th>
+      <th>Chronological Understanding</th>
+      <th>Summarization</th>
+      <th>Deep Context Understanding</th>
+      <th>Spoiler Understanding</th>
+      <th>Linking Events</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background-color:#92a2fc;">
+      <td>Baseline Random</td>
+      <td>--</td>
+      <td>16.68</td>
+      <td>16.66</td>
+      <td>16.14</td>
+      <td>41.51</td>
+      <td>--</td>
+      <td>--</td>
+      <td>--</td>
+      <td>--</td>
+      <td>22.20</td>
+      <td>--</td>
+    </tr>
+    <tr>
+      <td>GPT-4o</td>
+      <td>250 FPV</td>
+      <td>44.51</td>
+      <td>47.93</td>
+      <td>36.07</td>
+      <td>68.85</td>
+      <td>3.49</td>
+      <td>3.39</td>
+      <td>2.67</td>
+      <td>3.45</td>
+      <td>49.34</td>
+      <td>3.25</td>
+    </tr>
+    <tr>
+      <td>Gemini-1.5-flash</td>
+      <td>-</td>
+      <td>42.10</td>
+      <td>31.63</td>
+      <td>37.82</td>
+      <td>56.41</td>
+      <td>3.24</td>
+      <td>2.55</td>
+      <td>2.05</td>
+      <td>3.33</td>
+      <td>41.99</td>
+      <td>2.79</td>
+    </tr>
+    <tr>
+      <td>Qwen2.5VL</td>
+      <td>250 FPV</td>
+      <td>34.99</td>
+      <td>36.45</td>
+      <td>35.09</td>
+      <td>51.57</td>
+      <td>1.26</td>
+      <td>2.35</td>
+      <td>1.73</td>
+      <td>3.15</td>
+      <td>39.53</td>
+      <td>2.12</td>
+    </tr>
+    <tr>
+      <td>Qwen2VL</td>
+      <td>250 FPV</td>
+      <td>29.99</td>
+      <td>37.54</td>
+      <td>36.86</td>
+      <td>50.85</td>
+      <td>0.67</td>
+      <td>2.07</td>
+      <td>1.41</td>
+      <td>2.76</td>
+      <td>38.81</td>
+      <td>1.73</td>
+    </tr>
+    <tr>
+      <td>LongVU</td>
+      <td>250 FPV</td>
+      <td>38.46</td>
+      <td>22.69</td>
+      <td>28.97</td>
+      <td>45.13</td>
+      <td>0.20</td>
+      <td>1.10</td>
+      <td>0.71</td>
+      <td>1.37</td>
+      <td>33.81</td>
+      <td>0.84</td>
+    </tr>
+    <tr>
+      <td>LLaVA-OneVision</td>
+      <td>128 FPV</td>
+      <td>33.00</td>
+      <td>25.02</td>
+      <td>24.83</td>
+      <td>45.91</td>
+      <td>0.49</td>
+      <td>1.78</td>
+      <td>1.30</td>
+      <td>2.51</td>
+      <td>32.19</td>
+      <td>1.52</td>
+    </tr>
+    <tr>
+      <td>InternLM-XComposer-2.5-OL</td>
+      <td>16 FPW</td>
+      <td>27.17</td>
+      <td>24.37</td>
+      <td>30.09</td>
+      <td>46.68</td>
+      <td>0.37</td>
+      <td>1.21</td>
+      <td>0.61</td>
+      <td>2.03</td>
+      <td>32.08</td>
+      <td>1.06</td>
+    </tr>
+    <tr>
+      <td>InternVL2.5</td>
+      <td>128 FPV</td>
+      <td>29.84</td>
+      <td>25.35</td>
+      <td>26.41</td>
+      <td>45.58</td>
+      <td>0.65</td>
+      <td>1.48</td>
+      <td>1.06</td>
+      <td>2.22</td>
+      <td>31.80</td>
+      <td>1.35</td>
+    </tr>
+     <tr >
+      <td>InternVL2</td>
+      <td>128 FPV</td>
+      <td>24.60</td>
+      <td>21.98</td>
+      <td>25.00</td>
+      <td>44.63</td>
+      <td>0.69</td>
+      <td>1.68</td>
+      <td>1.25</td>
+      <td>2.47</td>
+      <td>29.05</td>
+      <td>1.52</td>
+    </tr>
+    <tr >
+      <td>LLaMA-VID</td>
+      <td>1 FPS</td>
+      <td>17.37</td>
+      <td>17.06</td>
+      <td>18.25</td>
+      <td>41.74</td>
+      <td>1.58</td>
+      <td>2.00</td>
+      <td>1.49</td>
+      <td>2.40</td>
+      <td>23.61</td>
+      <td>1.87</td>
+    </tr>
+    <tr>
+      <td>Goldfish</td>
+      <td>45 FPW</td>
+      <td>10.30</td>
+      <td>2.82</td>
+      <td>20.87</td>
+      <td>40.14</td>
+      <td>0.77</td>
+      <td>2.36</td>
+      <td>1.85</td>
+      <td>3.01</td>
+      <td>18.53</td>
+      <td>2.00</td>
+    </tr>
+    <tr>
+      <td>MiniGPT4-video</td>
+      <td>45 FPV</td>
+      <td>2.33</td>
+      <td>1.09</td>
+      <td>2.36</td>
+      <td>39.86</td>
+      <td>0.05</td>
+      <td>0.54</td>
+      <td>0.75</td>
+      <td>0.89</td>
+      <td>11.41</td>
+      <td>0.56</td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>InfiniBench leaderboard</strong> across eight skills. FPV (Frames Per Video), FPS (Frames Per Second), and FPW (Frames Per Window) are reported. All models in this evaluation utilize <strong>subtitles</strong>.</p>
+
 # Benchmark statistics:
-![benchmark_statistics_1](repo_imags/statistics_1_with_desc.JPG)
+![benchmark_statistics_1](figs/full_data_statistics.png)
+<strong>InfiniBench skills statistics. (A) Number of questions per skill, (B) Number of videos per skill, and (C) Average video duration per skill</strong>
+# Videos source statistics:
+![benchmark_statistics_2](figs/shows_vs_movies_statistics.png)
+<strong>Comparison between TV shows and Movies. (A) shows the number of questions, (B) represents the number of videos, (C) represents the Total video durations, and (D) shows The Minimum, Maximum, and average video duration for each video source</strong>
 
-![benchmark_statistics_2](repo_imags/statistics_2_with_desc.JPG)
 
-# How to download videos 
-1- TVQA videos <br>
-Download the original TVQA videos for short videos from [here](https://tvqa.cs.unc.edu/download_tvqa.html)<br>
+# Download The Benchmark
+We are only provide annotations for already extisting videos datasets, namely TVQA and MovieNet.
+To make it easier for you to use the benchmark, we have preprocessed the videos and subtitles for both TVQA and MovieNet datasets.<br>
+You can directly download the preprocessed version from the table below. <br>
+| Split | TVshows Videos | TVshows subtitles| MovieNet Videos | MovieNet subtitles | Annotations |
+|-------|----------------|------------------|------------------|--------------------|-------------|
+| Test  | [Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/resolve/main/tvqa_mp4_videos_test.zip) | [Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/resolve/main/tvqa_subtitles_test.zip) | [Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/resolve/main/movienet_mp4_videos_test.zip) | [Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/resolve/main/movienet_subtitles_test.zip) | [Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main/Benchmark_annotations) |
+| Train | [Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/resolve/main/tvqa_mp4_videos_train.zip) | [Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/resolve/main/tvqa_subtitles_train.zip) | [Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/resolve/main/movienet_mp4_videos_train.zip) | [Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/resolve/main/movienet_subtitles_train.zip) | [Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main/Benchmark_annotations) |
+
+OR <br>
+
+You can download the original data and preprocess it using the scripts provided in this repository.
+## TVQA videos <br>
+Download the original TVQA videos for short videos from [here](https://nlp.cs.unc.edu/data/jielei/tvqa/tvqa_public_html/download_tvqa.html)<br>
+Also download the original TVQA annotations from [here](https://nlp.cs.unc.edu/data/jielei/tvqa/tvqa_public_html/download_tvqa.html) <br>
+
+### Adding audio to the short clips
+Add the audio to the short clips 
+```python
+```
+### Convert the short clips to long-form videos
 Run the following commmand to convert the videos to long-form videos.<br>
 ```python
-python videos_preprocessing/convert_tvqa_from_short_to_long.py --train_path "path to the training annotation" --val_path "path to the validation annotation" --root_dir "path to the short clips directory" --full_videos_dir "path to save the full video episodes"
+python data_genration/videos_preprocessing/convert_tvqa_from_short_to_long.py --train_path "path to the training annotation" --val_path "path to the validation annotation" --root_dir "path to the short clips directory" --full_videos_dir "path to save the full video episodes"
 ```
-this script will output the full video episodes in the full_videos_dir and json annotations for only the validation data called "tvqa_val_edited.json" that will be used as a local questions later. <br>
 
-To get the video .mp4 files 
-Run the following script or  [Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main/tvqa_mp4_videos_tar_files)
+this script will output the full video episodes frames in the full_videos_dir, then you can use the following script to convert the frames to .mp4 files. <br>
+
+Run the following script
 ```python
-python videos_preprocessing/convert_to_mp4_format.py --video_frames_dir "path to the long videos frames" --output_dir "path to save the MP4 videos" --source "tvqa" --fps 3 
+python data_genration/videos_preprocessing/convert_to_mp4_format.py --video_frames_dir "path to the long videos frames" --output_dir "path to save the MP4 videos" --source "tvqa" --fps 3 
 ```
-You can download the TVQA subtitles from here[Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/blob/main/tvqa_subtitles.zip) <br>
-2- MovieNet Data <br>
+### Concate the subtitles to the long-form videos
+```python 
+```
+
+## MovieNet Data <br>
 Dowlnoad the original MovieNet data from [here](https://opendatalab.com/OpenDataLab/MovieNet/tree/main/raw) <br>
 Filter out the movies that doesn't have shot subtitles<br>
 Run the following script to filter movienet<br>
 ```python
-python filter_movienet.py
+python data_genration/filter_movienet.py
 ```
-To get the video .mp4 files 
-Run the following script to the raw data or download our version from huggingface [Download_full_length](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main/Movienet_mp4_videos_full_length) or [Download_1fps](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main/Movienet_mp4_videos_1fps)
+To get the video .mp4 files,Run the following script to the raw data 
 ```python
 # to generare movies with the original frame rate use original_fps = True
-python videos_preprocessing/convert_to_mp4_format.py --video_frames_dir "path to the long videos frames" --output_dir "path to save the MP4 videos" --source "movienet" --original_fps --movies_has_subtitles "movies_has_subtitles.json" --movies_durations "movies_durations.json" 
+python data_genration/videos_preprocessing/convert_to_mp4_format.py --video_frames_dir "path to the long videos frames" --output_dir "path to save the MP4 videos" --source "movienet" --original_fps --movies_has_subtitles "movies_has_subtitles.json" --movies_durations "movies_durations.json" 
 # to generate movies with 1 fps use original_fps = False and fps = 1 but take care that the video duration will be different from the original duration 
-python videos_preprocessing/convert_to_mp4_format.py --video_frames_dir "path to the long videos frames" --output_dir "path to save the MP4 videos" --source "movienet" --fps 1 --movies_has_subtitles "movies_has_subtitles.json" --movies_durations "movies_durations.json" 
+python data_genration/videos_preprocessing/convert_to_mp4_format.py --video_frames_dir "path to the long videos frames" --output_dir "path to save the MP4 videos" --source "movienet" --fps 1 --movies_has_subtitles "movies_has_subtitles.json" --movies_durations "movies_durations.json" 
 ```
-# Annotation files 
-You can find the annotation files for the 9 skills in huggingface datasets format [here](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main/Benchmark_annotations)
-# How to re-create the Benchmark  
-![annotation_pipeline](repo_imags/full_annotation_pileline.JPG)
-## Prepare the data sources
-### Data scrapping 
-1) We scrapped the all the TVQA summaries from IMDB. 
-2) We scrapped the all the MovieNet summaries from IMDB. 
-3) We scrapped the transcripts for all the TVQA videos. 
-5) We filtered out scripts for the movies that doesn't have shot subtitles from the MovieNet data.
-6) We filtered out scripts for the edpisodes that doesn't exist in Long TVQA.
-7) We scrapped the the spoiler questions for all the movies in movieNet.
-8) We scrapped the movies durations from IMDB. 
-
-You can see the code for scrapping the data from IMDB [here](https://github.com/Vision-CAIR/Long_video_Bench/tree/main/scrapping) but don't need to re-run it as we provide the filtered data in the benchmark sources.
-### Bechmark sources : 
-1) TVQA and MovieNet filtered summaries and scripts. [Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main/sources)
-2) TVQA+ annotations [Download](https://tvqa.cs.unc.edu/download_tvqa_plus.html) 
-## Annotation pipeline
-### Global appearance <br>
-1) Download TVQA+ annotations to this directory `global_apprerance/tvqa`.
-2) Filter the characters appearance in separate folders by running the following script.
-```python
-cd global_apprerance/tvqa
-bash Run_full_pipeline.sh
-```
-1) Choose the best and unique outfits for each character.(humanly).
-2) Run the following script to get the descriptions for the unique outfits.
-```python 
-python gpt4_description.py --data_path "path to the unique images folder" --output_path "path to the output folder" --api_key "GPT-4o API key"
-```
-1) Run the following script for question generation.
-```python
-python questions_generation/tvqa/global_apperance_qa_generation.py --gpt4_descriptions "path to the json file with the descriptions" --existed_episodes "existed_videos_tvqa.json"
-```
-### Scene transition 
-```python 
-python GPT-4/tvqa/python scene_transitions.py --api_key "GPT-4 API key" --scripts_folder "path to the episodes scripts folder" --output_dir "path to the output directory" --output_json "path to the output json file" --num_tasks 64
-# for question generation run the following script
-python questions_generation/tvqa/scene_transition_qa_generation.py --gpt4_output "path to the output json file" --existed_episodes "existed_videos_tvqa.json"
-```
-### Squence of character actions 
-For TVQA 
-```python 
-python GPT-4/tvqa/character_actions.py --api_key "GPT-4 API key" --scripts_folder "path to the episodes scripts folder" --summaries_folder "path to the summaries folder" --output_dir "path to the output directory" --output_json "path to the output json file" --num_tasks 64
-
-# for question generation run the following script
-python questions_generation/tvqa/character_actions_mcq.py --gpt4_output "path to the output json file" 
-```
-For MovieNet 
-```python 
-python GPT-4/movienet/character_actions.py --api_key "GPT-4 API key" --scripts_folder "path to the movies scripts folder" --summaries_folder "path to the movies summaries folder" --output_dir "path to the output directory" --output_json "path to the output json file" --num_tasks 64
-# for question generation run the following script
-python questions_generation/movienet/character_actions_mcq_movienet.py --gpt4_output "path to the output json file" 
-```
-### Deep context understanding 
-For TVQA 
-```python 
-python GPT-4/tvqa/context_understanding.py --api_key "GPT-4 API key" --scripts_folder "path to the episodes scripts folder" --summaries_folder "path to the summaries folder" --output_dir "path to the output directory" --output_json "path to the output json file" --num_tasks 64
-
-# for question generation run the following script
-python questions_generation/tvqa/context_understanding.py --gpt4_output "path to the output json file" 
-```
-For MovieNet 
-```python 
-python GPT-4/movienet/context_understanding.py --api_key "GPT-4 API key" --scripts_folder "path to the movies scripts folder" --summaries_folder "path to the movies summaries folder" --output_dir "path to the output directory" --output_json "path to the output json file" --num_tasks 64
-# for question generation run the following script
-python questions_generation/movienet/context_understanding.py --gpt4_output "path to the output json file" 
-```
-### Linking multiple events 
-For TVQA 
-```python 
-python GPT-4/tvqa/linking_events.py --api_key "GPT-4 API key"  --summaries_folder "path to the summaries folder" --output_dir "path to the output directory" --output_json "path to the output json file" --num_tasks 64
-
-# for question generation run the following script
-python questions_generation/tvqa/linking_events.py --gpt4_output "path to the output json file" 
-```
-For MovieNet 
-```python 
-python GPT-4/movienet/linking_events.py --api_key "GPT-4 API key"  --summaries_folder "path to the movies summaries folder" --output_dir "path to the output directory" --output_json "path to the output json file" --num_tasks 64
-# for question generation run the following script
-python questions_generation/movienet/linking_events.py --gpt4_output "path to the output json file" 
-```
-### Temporal events 
-For TVQA 
-```python 
-python GPT-4/tvqa/temporal_events.py --api_key "GPT-4 API key" --scripts_folder "path to the episodes scripts folder" --output_dir "path to the output directory" --output_json "path to the output json file" --num_tasks 64
-
-# for question generation run the following script
-python questions_generation/tvqa/temporal_events_qa_generation.py --gpt4_output "path to the output json file" 
-```
-For MovieNet 
-```python 
-python GPT-4/movienet/temporal_events.py --api_key "GPT-4 API key" --scripts_folder "path to the movies scripts folder" --output_dir "path to the output directory" --output_json "path to the output json file" --num_tasks 64
-# for question generation run the following script
-python questions_generation/movienet/temporal_events_qa_generation.py --gpt4_output "path to the output json file" 
-```
-### Movies spoiler questions 
-```python 
-python questions_generation/spoiler_questions.py --scrapped_spoiler_questions "path to the scrapped spoiler questions"
-```
-### Summarization 
-```python
-python questions_generation/summarization_skill.py --summarization_movienet_json "path to json file of movienet summaries" --summarization_tvqa_json "path to json file of tvqa summaries" --api_key "GPT-4 API key"
-```
-
-### Local visual and context understanding 
-We converted the questions of the validation split from the original TVQA to Long form questions here 
-`process_tvqa_videos/tvqa_val_edited.json`
-```python 
-python questions_generation/long_tvqa_questions.py --tvqa_val_edited "process_tvqa_videos/tvqa_val_edited.json"
-```
-
-# Evaluation
-To use our evaluation scrip for accuracy and GPT4 score you should prepare each skill prediction file in the following format.
-```python 
-# for multiple choice questions
-[
-    {"Q":"question",  "A","answer", "pred":"model_pred","options_str":"option 0 : option sentence \n option 1 option sentence \n ...","answer_idx":"correct option index"}  ,
-    {"Q":"question",  "A","answer", "pred":"model_pred","options_str":"option 0 : option sentence \n option 1 option sentence \n ...","answer_idx":"correct option index"}  ,
-    {"Q":"question",  "A","answer", "pred":"model_pred","options_str":"option 0 : option sentence \n option 1 option sentence \n ...","answer_idx":"correct option index"}  ,
-    ... 
-]
-
-# for open ended questions 
-[
-    {"Q":"question",  "A","answer", "pred":"model_pred"}  ,
-    {"Q":"question",  "A","answer", "pred":"model_pred"}  ,
-    {"Q":"question",  "A","answer", "pred":"model_pred"}  ,
-    ... 
-]
-
-```
-Then run the following script for accuracy evaluation for the skills that has multiple choice questions 
-```bash
-# set the parameters in the script
-bash evaluation/GPT4_eval/gpt4_accuracy.sh 
-```
-For the skills that has open-ended questions run the following script to get the GPT4 score
-```bash
-# set the parameters in the script
-bash evaluation/GPT4_eval/gpt4_score.sh 
-```
+Subtitles are already provided in the original MovieNet data, so you don't need to do anything for subtitles. <br>
+## Benchmark annotations pipeline
+View the [data_genration/README.md](data_genration/README.md) for the full annotation pipeline details <br>
 
 # Citation
 If you're using InfiniBench in your research or applications, please cite using this BibTeX:
@@ -211,9 +299,5 @@ If you're using InfiniBench in your research or applications, please cite using 
 }
 ```
 
-# Acknowledgements
-[Video-ChatGPT](https://mbzuai-oryx.github.io/Video-ChatGPT)
-
 # License
 This repository is under [BSD 3-Clause License](LICENSE.md).
-
