@@ -1,3 +1,44 @@
+# Prepare videos 
+## TVQA videos <br>
+Download the original TVQA videos for short videos from [here](https://nlp.cs.unc.edu/data/jielei/tvqa/tvqa_public_html/download_tvqa.html)<br>
+Also download the original TVQA annotations from [here](https://nlp.cs.unc.edu/data/jielei/tvqa/tvqa_public_html/download_tvqa.html) <br>
+
+### Adding audio to the short clips
+Add the audio to the short clips 
+```python
+```
+### Convert the short clips to long-form videos
+Run the following commmand to convert the videos to long-form videos.<br>
+```python
+python data_genration/videos_preprocessing/convert_tvqa_from_short_to_long.py --train_path "path to the training annotation" --val_path "path to the validation annotation" --root_dir "path to the short clips directory" --full_videos_dir "path to save the full video episodes"
+```
+
+this script will output the full video episodes frames in the full_videos_dir, then you can use the following script to convert the frames to .mp4 files. <br>
+
+Run the following script
+```python
+python data_genration/videos_preprocessing/convert_to_mp4_format.py --video_frames_dir "path to the long videos frames" --output_dir "path to save the MP4 videos" --source "tvqa" --fps 3 
+```
+### Concate the subtitles to the long-form videos
+```python 
+```
+
+## MovieNet Data <br>
+Dowlnoad the original MovieNet data from [here](https://opendatalab.com/OpenDataLab/MovieNet/tree/main/raw) <br>
+Filter out the movies that doesn't have shot subtitles<br>
+Run the following script to filter movienet<br>
+```python
+python data_genration/filter_movienet.py
+```
+To get the video .mp4 files,Run the following script to the raw data 
+```python
+# to generare movies with the original frame rate use original_fps = True
+python data_genration/videos_preprocessing/convert_to_mp4_format.py --video_frames_dir "path to the long videos frames" --output_dir "path to save the MP4 videos" --source "movienet" --original_fps --movies_has_subtitles "movies_has_subtitles.json" --movies_durations "movies_durations.json" 
+# to generate movies with 1 fps use original_fps = False and fps = 1 but take care that the video duration will be different from the original duration 
+python data_genration/videos_preprocessing/convert_to_mp4_format.py --video_frames_dir "path to the long videos frames" --output_dir "path to save the MP4 videos" --source "movienet" --fps 1 --movies_has_subtitles "movies_has_subtitles.json" --movies_durations "movies_durations.json" 
+```
+Subtitles are already provided in the original MovieNet data, so you don't need to do anything for subtitles. <br>
+
 # Annotation Pipeline for InfiniBench Benchmark 
 ![annotation_pipeline](../figs/ann_pipeline_iccv.png)
 ## Prepare the data sources
