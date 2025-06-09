@@ -1,84 +1,107 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
-  <meta name="description"
-        content="InfiniBench">
+  <meta name="description" content="InfiniBench">
   <meta name="keywords" content="Long video benchmark,long video understanding,benchmarks">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
   <title>InfiniBench</title>
-
-
   <meta name="google-site-verification" content="6lbYN1vX7A4sD8SrVniq84UEKyEUSBgxeP7d3FjuuK0" />
-
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-   <link rel="icon" href="images/icon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="icon" href="./static/images/icon.png">
   <link rel="stylesheet" href="./static/css/index.css">
-
   <link rel="shortcut icon" href="path/to/favicon.ico" type="image/x-icon">
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
-  </head>
+</head>
 
-  <style>
+<style>
+  #main {
+    position: relative;
+    ;
+    width: 1200px;
+  }
 
-    #main{
-        position: relative;;
-        width: 1200px;
-    }
+  .box {
+    float: left;
+    padding: 15px 0 0 15px;
+    /*        background-color: red;*/
+  }
 
-    .box{
-        float: left;
-        padding: 15px 0 0 15px;
-/*        background-color: red;*/
-    }
+  .pic {
+    width: 500px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
 
-    .pic{
-        width: 500px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #fff;
-    }
+  .pic img {
+    width: 800px;
+  }
 
-    .pic img{
-        width: 800px;
-    }
+  table {
+    width: 95%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+    text-align: center;
+  }
 
-  </style>
-  <body>
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-           <div class="title_container">
-        <img src="images/icon.png" width="80" height="80">
-        <h1 class="title is-1 publication-title">InfiniBench</h1>
-    </div>
-          <h2 class="title is-2 publication-title">A Comprehensive Benchmark for Large Multimodal Models in Very Long Video Understanding</h2>
-          <div class="is-size-5">
+  th,
+  td {
+    border: 1px solid black;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  .highlight {
+    background-color: #b3cde3;
+    font-weight: bold;
+  }
+</style>
+
+<body>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <div class="flex justify-center">
+              <h1 class="title is-1 publication-title flex items-center">
+                <img src="repo_images/icon.png" width="50" class="mr-2"> InfiniBench:
+              </h1>
+            </div>
+            <h3 class="title is-2 publication-title">A Benchmark for Large Multi-Modal Models in Long-Form Movies & TV
+              Shows.</h3>
+            <div class="is-size-5">
             <span class="author-block">
                 <a href="https://scholar.google.com/citations?user=6gRlYHAAAAAJ&hl=en" style="color:#008AD7;font-weight:normal;">Kirolos Ataallah
                 </a>,                
             </span>
             <span class="author-block">
-              <a href="https://www.linkedin.com/in/chenhui-gou-9201081a1/" style="color:#41c618;font-weight:normal;">Chenhui Gou*</a>,</span>
-            <span class="author-block">
-              <a href="https://eslambakr.github.io/" style="color:#008AD7;font-weight:normal;">Eslam Abdelrahman*</a>,
+              <a href="https://eslambakr.github.io/" style="color:#008AD7;font-weight:normal;">Eslam Abdelrahman</a>,
             </span>
+            <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=SRCGuS4AAAAJ&hl=en" style="color:#008AD7;font-weight:normal;">Mahmoud Ahmed
+                </a>,                
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/chenhui-gou-9201081a1/" style="color:#41c618;font-weight:normal;">Chenhui Gou*</a>,</span>
+            
             <span class="author-block">
               <a href="https://kpahwa16.github.io/" style="color:#F2A900;font-weight:normal;">Khushbu Pahwa</a>,
             </span>
@@ -90,275 +113,586 @@
             </span>
 
           </div>
-
-          <br>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><b style="color:#008AD7; font-weight:normal">&#x25B6 </b> King Abdullah University of Science and Technology </span>
-            <br>
-            <span class="author-block"><b style="color:#41c618; font-weight:normal">&#x25B6 </b>Monash University</span>
-            <span class="author-block"><b style="color:#F2A900; font-weight:normal">&#x25B6 </b>RICE University </span>
-          </div>
-
-          <div class="is-size-5 publication-authors">
-          </div>
-          <br>
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2406.19875" target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-
-              <span class="link-block">
-                <a href="https://github.com/Vision-CAIR/InfiniBench" target="_blank"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://github.com/Infinibench/Infinibench" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
                       <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
+                    </span>
+                    <span>Code</span>
                   </a>
-              </span>
-
-              <span class="link-block">
-                      <a href="https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main" target="_blank"
-                         class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        🤗
-                      </span>
-                      <span>Dataset</span>
-                    </a>
-                  </span>
-
-<!--              <span class="link-block">-->
-<!--                <a href="#videoDemo" class="external-link button is-normal is-rounded is-dark">-->
-<!--                  <span class="icon">-->
-<!--                    <i class="fab fa-youtube"></i>-->
-<!--                  </span>-->
-<!--                  <span>Video</span>-->
-<!--                </a>-->
-<!--              </span>-->
-
+                </span>
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/Infinibench/Infinibench" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      🤗
+                    </span>
+                    <span>Dataset</span>
+                  </a>
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-
-<link rel="stylesheet" type="text/css" href="js/simple_style.css" />
-<script type="text/javascript" src="js/simple_swiper.js"></script>
-
-
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Understanding long videos, ranging from tens of minutes to several hours, presents unique challenges in video comprehension. Despite the increasing importance of long-form video content, existing benchmarks primarily focus on shorter clips. To address this gap, we introduce InfiniBench a comprehensive benchmark for very long video understanding which presents 1)The longest video duration, averaging 52.59 minutes per video. 2) The largest number of question-answer pairs, 108.2K; 3) Diversity in questions that examine nine different skills and include both multiple-choice questions and open-ended questions; 4) Human-centric, as the video sources come from movies and daily TV shows, with specific human-level question designs such as Movie Spoiler Questions that require critical thinking and comprehensive understanding. Using InfiniBench, we comprehensively evaluate existing Large Multi-Modality Models (LMMs) on each skill, including the commercial models such as  GPT-4o and Gemini 1.5 Flash and the open-source models. 
-            The evaluation shows significant challenges in our benchmark.
-            Our findings reveal that even leading AI models like GPT-4o and Gemini 1.5 Flash face challenges in achieving high performance in long video understanding, with average accuracies of just 49.16\% and 42.72\%, and average scores of 3.22 and 2.71 out of 5, respectively.
-            We hope this benchmark will stimulate the LMMs community towards long video and human-level understanding.
-          </p>
+  </section>
+  <link rel="stylesheet" type="text/css" href="js/simple_style.css" />
+  <script type="text/javascript" src="js/simple_swiper.js"></script>
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-three-fifths">
+          <img id="teaser_fig" width="100%" src="repo_images/teaser_fig.png">
+          <h3 class="subtitle has-text-centered">
+            <p style="font-family:Times New Roman"><b>InfiniBench skill set comprising eight skills. The right side
+                represents skill categories and question types, while the left side provides examples of both
+                multiple-choice (MCQ) and open-ended questions.</b></p>
+          </h3>
         </div>
       </div>
-    </div>
-    <!--/ Abstract. -->
-    <br>
-    <br>
-    <br>
-    <br>
-    <!-- Paper Model. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-six-fifths">
-        <h2 class="title is-3">Benchmark skills</h2>
-        <img id="teaser_fig" width="80%" src="repo_imags/teaser_fig_new.jpg">
-        <h3 class="subtitle has-text-centered">
-          <p style="font-family:Times New Roman"><b>The set of skills introduced by InfiniBench includes a total of 9 skills. The figure includes two
-question examples for two distinct skills: the left example illustrates the Global Appearance skill, and the right
-example illustrates the Scene Transition skill.</b></p>
-        </h3>
-        <br>
-        <br>
-
-      </div>
-    </div>
-
-    <!-- Paper Model. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-six-fifths">
-        <h4 class="title is-4">Comparison between InfiniBench and existing video understanding benchmarks.</h4>
-        <img id="model" width="80%" src="repo_imags/comparison_table.JPG">
-        <h3 class="subtitle has-text-centered">
-          <p style="font-family:Times New Roman"><b>InfiniBench has
-the largest QA pairs, the most videos, and the longest average duration. (Note: Global Q stands for whether any
-challenging questions are designed to explain the whole video. VS is the video’s script, and VSum is the summary
-of the video.)</b></p>
-        </h3>
-        <br>
-        <br>
-
-      </div>
-    </div>
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-six-fifths">
-        <h4 class="title is-4">Benchmark statistics.</h4>
-        <img id="statistics" width="80%" src="repo_imags/statistics_1.JPG">
-        <h3 class="subtitle has-text-centered">
-          <p style="font-family:Times New Roman"><b>Left) Number of questions distribution for each skill set. Right) Number of videos for each skill.)</b></p>
-        </h3>
-        <img id="statistics_2" width="80%" src="repo_imags/statistics_2.JPG">
-        <h3 class="subtitle has-text-centered">
-          <p style="font-family:Times New Roman"><b>Data statistics. On the left, we report the number of videos and their length in hours from each data source:
-TVQA and MovieNet datasets. In the middle, we demonstrate the number of questions. On the right, we show the
-histogram of the lengths of the questions and answers.</b></p>
-        </h3>
-
-        <br>
-        <br>
-
-      </div>
-    </div>
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-six-fifths">
-        <h4 class="title is-4">Full annotation pipeline.</h4>
-        <img id="annotation_pipeline" width="80%" src="repo_imags/full_annotation_pileline.JPG">
-        <h3 class="subtitle has-text-centered">
-          <p style="font-family:Times New Roman"><b>Full annotation pipeline for InfiniBench skill set. The upper section depicts the global appearance pipeline,
-while the lower section illustrates the question generation using GPT-4. The gates for video summary and video
-transcript indicate that some skills utilize only the summary, others use only the transcript, and some use both.)</b></p>
-        </h3>
-        <br>
-        <br>
-
-      </div>
-    </div>
-
-    <!-- Paper Model. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-six-fifths">
-        <h2 class="title is-3">Results</h2>
-        <div class="content has-text-justified">
-          <p>
-            <b>The overall performance of different models on InfiniBench is shown in Table (j) below. Three findings can be observed: (1) All models' is relatively lower than other benchmarks (e.g., Movie-chat and MLVU benchmarks). This could be interpreted by the challenging nature of our skills that require deep, long-term understanding. To further verify this point, we test our benchmark on the most recent short-video models, e.g., MiniGPT4-video and LLaVA-NeXT-Interleave. We argue that short-video models should suffer if the benchmark truly assesses long-video understanding capabilities. In other words, the limited context captured by the short video models should not be enough to answer long reasoning queries. As shown in the table below, MiniGPT4-video and LLaVA-NeXT-Interleave match lower than the random performance, which shows the effectiveness of our benchmark in assessing long reasoning capabilities. (2) GPT-4o achieves the best performance on both multiple-choice and open-ended questions, with 49.16 accuracy (0-100) and 3.22 GPT4-score (0-5). There is also a large performance gap between GPT-4o and other open-source models which could be justified by the huge gap in the scale of the training data and GPUs used in training these models.(3) For open-source models, Goldfish achieves the best result. with 22.57 accuracy and 1.77 GPT-4o score.
-              One reason may be that eliminating the noisy information and focus on only the related information helps more in answering the questions. (4) short video models achieved the lowest performance because of information loss while sampling the long video into 8 or 45 frames in LLaVA-NeXT-Interleave and MiniGPT4-video respectively. (5) Models that can't input the subtitles such as Moviechat and LWM achieved low performance as the questions in our benchmark depends on both visual and textual information such as the questions that relies on the specific character actions or outfit and so on, these skills need the audio or the subtitles to be answered correctly.
-              
-              Performance on specific skills. Tables (a)-(i) shows the performance of SOTA long video understanding models on each skill. The performance varies significantly among different skills, highlighting the unique challenges introduced by each one. Observations of the results: (1) scene transition is the most difficult MCQ question type, with Gemini achieving only 29.48\% accuracy. The potential reason for the low performance is that this question requires global reasoning across the entire hour-long video instead of one clip we can also see that Goldfish is the lowest long video model in this skill (2) all models struggle with Movie Spoiler questions in open-ended questions with score 2.64 out of 5. The difficulty lies in the need for deeper understanding and reasoning to get the correct answer. Since Movie Spoiler questions are meaningful for human-centric video understanding, current model capabilities need improvement. (3) All open-source models' results on MCQ are below random choice, except for the Local visual+context questions. This shows that the main challenge for existing models is long-sequence global reasoning.
-              (4) For the local questions our results is consistence with Gemini technical report that shows that Gemini and GPT-4o excel in the "needle in the haystack" skill, achieving high scores across all modalities. This aligns with our benchmark results in the local vision context skill, where Gemini and GPT-4o achieve the highest scores among all skills.
-              
-              Performance on Four Types of Questions.
-              As introduced in Section skills in the main paper, in the InfiniBench questions for each skill can be identified as one of four high-level types: Global visual, Global contextual, Global vision + text, and Local vision + context. The results for each type of question are provided in the Table below.Among the commercial models, GPT-4o performs best across all four question types, despite being limited to processing only 250 frames, whereas Gemini can access the entire video. One possible reason for GPT-4o's superior performance could be its additional knowledge of these movies and TV shows, which enhances its ability to answer the questions accurately
-              
-              For the open-source models, the table indicates that LLaMA-vid excels in Global Vision questions, while Goldfish outperforms in the remaining three question types. This suggests that skills like Global Appearance and Scene Transitions require information from the entire video, rather than just the top-k segments as used by Goldfish. In contrast, for local questions, there's a significant gap between LLaMA-vid and Goldfish, with Goldfish benefiting from filtering out noisy information by focusing only on the top-k clips.The main reason for the poor performance of LWM and MovieChat is that these two models make predictions from video only, missing important text information. This highlights the importance of long video understanding models handling both modalities. Additionally, global contextual questions are challenging for all models, requiring complex reasoning.
-              </b>:
-          </p>
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Understanding long videos, ranging from tens of minutes to several hours, presents unique challenges in
+              video comprehension. We introduce InfiniBench, a comprehensive benchmark designed to push the limits of
+              extremely long video understanding.
+              InfiniBench presents <strong>1)The longest</strong> total video duration, exceeding 1,000 hours, with an
+              average of 52.59 minutes per video; <strong>2) The largest</strong> number of question-answer pairs,
+              totaling 111.82 K; <strong>3) Grounding and reasoning questions</strong> that require MVLMs to retrieve,
+              structure, and interpret complex video content while establishing causal relationships; <strong>4) Diverse
+                question types spanning eight distinct skills</strong> and including both multiple-choice and open-ended
+              formats.
+              We comprehensively evaluate the state-of-the-art Large Multi-Modality Models on each skill, including
+              commercial models such as GPT-4o and Gemini 1.5 Flash and recent open-source models.
+              The results highlight significant challenges, with leading models struggling to achieve high
+              performance.GPT-4o and Gemini 1.5 Flash attained average accuracies of just 49.34\% and 41.99\%, and
+              average scores of 3.25 and 2.79 out of 5, respectively.
+              Qwen2.5VL is the strongest contender among open-source models, nearing Gemini-1.5-Flash in performance.
+            </p>
+          </div>
         </div>
-        <div class="columns is-centered has-text-centered">
-      <div class="column is-six-fifths">
-        <img id="results_1" width="80%" src="repo_imags/results_1.JPG">
+      </div>
+      <!-- Paper Model. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-six-fifths">
+          <div class="max-w-7xl mx-auto bg-white shadow-lg rounded-lg p-6 overflow-x-auto">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">InfiniBench Leaderboard</h2>
+            <table class="w-full border-collapse border border-gray-200">
+              <thead class="bg-gray-200 text-gray-700 text-sm">
+                <tr>
+                  <th rowspan="2" class="border border-gray-300 p-2">Models</th>
+                  <th rowspan="2" class="border border-gray-300 p-2">Frame Rate</th>
+                  <th colspan="4" class="border border-gray-300 p-2 bg-[#A5BBFF]">Grounding Skills</th>
+                  <th colspan="4" class="border border-gray-300 p-2 bg-[#FFEFD9]">Reasoning Skills</th>
+                  <th rowspan="2" class="border border-gray-300 p-2">Avg. Acc.</th>
+                  <th rowspan="2" class="border border-gray-300 p-2">Avg. Score</th>
+                </tr>
+                <tr class="bg-gray-100">
+                  <th class="border border-gray-300 p-2">Global Appearance</th>
+                  <th class="border border-gray-300 p-2">Scene Transitions</th>
+                  <th class="border border-gray-300 p-2">Character Actions</th>
+                  <th class="border border-gray-300 p-2">Chronological Understanding</th>
+                  <th class="border border-gray-300 p-2">Summarization</th>
+                  <th class="border border-gray-300 p-2">Deep Context Understanding</th>
+                  <th class="border border-gray-300 p-2">Spoiler Understanding</th>
+                  <th class="border border-gray-300 p-2">Linking Events</th>
+                </tr>
+              </thead>
+              <tbody class="text-gray-600 text-sm">
+                <tr class="bg-blue-50">
+                  <td class="border border-gray-300 p-2 font-medium">Baseline Random</td>
+                  <td class="border border-gray-300 p-2">--</td>
+                  <td class="border border-gray-300 p-2">16.68</td>
+                  <td class="border border-gray-300 p-2">16.66</td>
+                  <td class="border border-gray-300 p-2">16.14</td>
+                  <td class="border border-gray-300 p-2">41.51</td>
+                  <td class="border border-gray-300 p-2">--</td>
+                  <td class="border border-gray-300 p-2">--</td>
+                  <td class="border border-gray-300 p-2">--</td>
+                  <td class="border border-gray-300 p-2">--</td>
+                  <td class="border border-gray-300 p-2 font-bold">22.20</td>
+                  <td class="border border-gray-300 p-2 font-bold">--</td>
+                </tr>
+                <tr class="hover:bg-gray-100">
+                  <td class="border border-gray-300 p-2 font-medium">GPT-4o</td>
+                  <td class="border border-gray-300 p-2">250 FPV</td>
+                  <td class="border border-gray-300 p-2">44.51</td>
+                  <td class="border border-gray-300 p-2">47.93</td>
+                  <td class="border border-gray-300 p-2">36.07</td>
+                  <td class="border border-gray-300 p-2">68.85</td>
+                  <td class="border border-gray-300 p-2">3.49</td>
+                  <td class="border border-gray-300 p-2">3.39</td>
+                  <td class="border border-gray-300 p-2">2.67</td>
+                  <td class="border border-gray-300 p-2">3.45</td>
+                  <td class="border border-gray-300 p-2 font-bold">49.34</td>
+                  <td class="border border-gray-300 p-2 font-bold">3.25</td>
+                </tr>
+                <tr class="bg-gray-50 hover:bg-gray-100">
+                  <td class="border border-gray-300 p-2 font-medium">Gemini-1.5-flash</td>
+                  <td class="border border-gray-300 p-2">-</td>
+                  <td class="border border-gray-300 p-2">42.10</td>
+                  <td class="border border-gray-300 p-2">31.63</td>
+                  <td class="border border-gray-300 p-2">37.82</td>
+                  <td class="border border-gray-300 p-2">56.41</td>
+                  <td class="border border-gray-300 p-2">3.24</td>
+                  <td class="border border-gray-300 p-2">2.55</td>
+                  <td class="border border-gray-300 p-2">2.05</td>
+                  <td class="border border-gray-300 p-2">3.33</td>
+                  <td class="border border-gray-300 p-2 font-bold">41.99</td>
+                  <td class="border border-gray-300 p-2 font-bold">2.79</td>
+                </tr>
+
+                <tr class="bg-gray-50 hover:bg-gray-100">
+                  <td class="border border-gray-300 p-2 font-medium">Qwen2.5VL</td>
+                  <td class="border border-gray-300 p-2">250 FPV</td>
+                  <td class="border border-gray-300 p-2">34.99</td>
+                  <td class="border border-gray-300 p-2">36.45</td>
+                  <td class="border border-gray-300 p-2">35.09</td>
+                  <td class="border border-gray-300 p-2">51.57</td>
+                  <td class="border border-gray-300 p-2">1.26</td>
+                  <td class="border border-gray-300 p-2">2.35</td>
+                  <td class="border border-gray-300 p-2">1.73</td>
+                  <td class="border border-gray-300 p-2">3.15</td>
+                  <td class="border border-gray-300 p-2 font-bold">39.53</td>
+                  <td class="border border-gray-300 p-2 font-bold">2.12</td>
+                </tr>
+                <tr class="bg-gray-50 hover:bg-gray-100">
+                  <td class="border border-gray-300 p-2 font-medium">Qwen2VL</td>
+                  <td class="border border-gray-300 p-2">250 FPV</td>
+                  <td class="border border-gray-300 p-2">29.99</td>
+                  <td class="border border-gray-300 p-2">37.54</td>
+                  <td class="border border-gray-300 p-2">36.86</td>
+                  <td class="border border-gray-300 p-2">50.85</td>
+                  <td class="border border-gray-300 p-2">0.67</td>
+                  <td class="border border-gray-300 p-2">2.07</td>
+                  <td class="border border-gray-300 p-2">1.41</td>
+                  <td class="border border-gray-300 p-2">2.76</td>
+                  <td class="border border-gray-300 p-2 font-bold">38.81</td>
+                  <td class="border border-gray-300 p-2 font-bold">1.73</td>
+                </tr>
+                <tr class="bg-gray-50 hover:bg-gray-100">
+                  <td class="border border-gray-300 p-2 font-medium">LongVU</td>
+                  <td class="border border-gray-300 p-2">250 FPV</td>
+                  <td class="border border-gray-300 p-2">38.46</td>
+                  <td class="border border-gray-300 p-2">22.69</td>
+                  <td class="border border-gray-300 p-2">28.97</td>
+                  <td class="border border-gray-300 p-2">45.13</td>
+                  <td class="border border-gray-300 p-2">0.20</td>
+                  <td class="border border-gray-300 p-2">1.10</td>
+                  <td class="border border-gray-300 p-2">0.71</td>
+                  <td class="border border-gray-300 p-2">1.37</td>
+                  <td class="border border-gray-300 p-2 font-bold">33.81</td>
+                  <td class="border border-gray-300 p-2 font-bold">0.84</td>
+                </tr>
+                <tr class="bg-gray-50 hover:bg-gray-100">
+                  <td class="border border-gray-300 p-2 font-medium">LLaVA-OneVision</td>
+                  <td class="border border-gray-300 p-2">128 FPV</td>
+                  <td class="border border-gray-300 p-2">33.00</td>
+                  <td class="border border-gray-300 p-2">25.02</td>
+                  <td class="border border-gray-300 p-2">24.83</td>
+                  <td class="border border-gray-300 p-2">45.91</td>
+                  <td class="border border-gray-300 p-2">0.49</td>
+                  <td class="border border-gray-300 p-2">1.78</td>
+                  <td class="border border-gray-300 p-2">1.30</td>
+                  <td class="border border-gray-300 p-2">2.51</td>
+                  <td class="border border-gray-300 p-2 font-bold">32.19</td>
+                  <td class="border border-gray-300 p-2 font-bold">1.52</td>
+                </tr>
+                <tr class="bg-gray-50 hover:bg-gray-100">
+                  <td class="border border-gray-300 p-2 font-medium">InternLM-XComposer-2.5-OL</td>
+                  <td class="border border-gray-300 p-2">16 FPW</td>
+                  <td class="border border-gray-300 p-2">27.17</td>
+                  <td class="border border-gray-300 p-2">24.37</td>
+                  <td class="border border-gray-300 p-2">30.09</td>
+                  <td class="border border-gray-300 p-2">46.68</td>
+                  <td class="border border-gray-300 p-2">0.37</td>
+                  <td class="border border-gray-300 p-2">1.21</td>
+                  <td class="border border-gray-300 p-2">0.61</td>
+                  <td class="border border-gray-300 p-2">2.03</td>
+                  <td class="border border-gray-300 p-2 font-bold">32.08</td>
+                  <td class="border border-gray-300 p-2 font-bold">1.06</td>
+                </tr>
+                <tr class="bg-gray-50 hover:bg-gray-100">
+                  <td class="border border-gray-300 p-2 font-medium">InternVL2.5</td>
+                  <td class="border border-gray-300 p-2">128 FPV</td>
+                  <td class="border border-gray-300 p-2">29.84</td>
+                  <td class="border border-gray-300 p-2">25.35</td>
+                  <td class="border border-gray-300 p-2">26.41</td>
+                  <td class="border border-gray-300 p-2">45.58</td>
+                  <td class="border border-gray-300 p-2">0.65</td>
+                  <td class="border border-gray-300 p-2">1.48</td>
+                  <td class="border border-gray-300 p-2">1.06</td>
+                  <td class="border border-gray-300 p-2">2.22</td>
+                  <td class="border border-gray-300 p-2 font-bold">31.80</td>
+                  <td class="border border-gray-300 p-2 font-bold">1.35</td>
+                </tr>
+                <tr class="bg-gray-50 hover:bg-gray-100">
+                  <td class="border border-gray-300 p-2 font-medium">InternVL2</td>
+                  <td class="border border-gray-300 p-2">128 FPV</td>
+                  <td class="border border-gray-300 p-2">24.60</td>
+                  <td class="border border-gray-300 p-2">21.98</td>
+                  <td class="border border-gray-300 p-2">25.00</td>
+                  <td class="border border-gray-300 p-2">44.63</td>
+                  <td class="border border-gray-300 p-2">0.69</td>
+                  <td class="border border-gray-300 p-2">1.68</td>
+                  <td class="border border-gray-300 p-2">1.25</td>
+                  <td class="border border-gray-300 p-2">2.47</td>
+                  <td class="border border-gray-300 p-2 font-bold">29.05</td>
+                  <td class="border border-gray-300 p-2 font-bold">1.52</td>
+                </tr>
+                <tr class="bg-gray-50 hover:bg-gray-100">
+                  <td class="border border-gray-300 p-2 font-medium">LLaMA-VID</td>
+                  <td class="border border-gray-300 p-2">1 FPS</td>
+                  <td class="border border-gray-300 p-2">17.37</td>
+                  <td class="border border-gray-300 p-2">17.06</td>
+                  <td class="border border-gray-300 p-2">18.25</td>
+                  <td class="border border-gray-300 p-2">41.74</td>
+                  <td class="border border-gray-300 p-2">1.58</td>
+                  <td class="border border-gray-300 p-2">2.00</td>
+                  <td class="border border-gray-300 p-2">1.49</td>
+                  <td class="border border-gray-300 p-2">2.40</td>
+                  <td class="border border-gray-300 p-2 font-bold">23.61</td>
+                  <td class="border border-gray-300 p-2 font-bold">1.87</td>
+                </tr>
+                <tr class="bg-gray-50 hover:bg-gray-100">
+                  <td class="border border-gray-300 p-2 font-medium">Goldfish</td>
+                  <td class="border border-gray-300 p-2">45 FPW</td>
+                  <td class="border border-gray-300 p-2">10.30</td>
+                  <td class="border border-gray-300 p-2">2.82</td>
+                  <td class="border border-gray-300 p-2">20.87</td>
+                  <td class="border border-gray-300 p-2">40.14</td>
+                  <td class="border border-gray-300 p-2">0.77</td>
+                  <td class="border border-gray-300 p-2">2.36</td>
+                  <td class="border border-gray-300 p-2">1.85</td>
+                  <td class="border border-gray-300 p-2">3.01</td>
+                  <td class="border border-gray-300 p-2 font-bold">18.53</td>
+                  <td class="border border-gray-300 p-2 font-bold">2.00</td>
+                </tr>
+                <tr class="bg-gray-50 hover:bg-gray-100">
+                  <td class="border border-gray-300 p-2 font-medium">MiniGPT4-video</td>
+                  <td class="border border-gray-300 p-2">45 FPV</td>
+                  <td class="border border-gray-300 p-2">2.33</td>
+                  <td class="border border-gray-300 p-2">1.09</td>
+                  <td class="border border-gray-300 p-2">2.36</td>
+                  <td class="border border-gray-300 p-2">39.86</td>
+                  <td class="border border-gray-300 p-2">0.05</td>
+                  <td class="border border-gray-300 p-2">0.54</td>
+                  <td class="border border-gray-300 p-2">0.75</td>
+                  <td class="border border-gray-300 p-2">0.89</td>
+                  <td class="border border-gray-300 p-2 font-bold">11.41</td>
+                  <td class="border border-gray-300 p-2 font-bold">0.56</td>
+                </tr>
+
+              </tbody>
+            </table>
+            <p class="text-gray-600 mt-4 text-sm">
+              <strong>InfiniBench leaderboard</strong> across eight skills. FPV (Frames Per Video), FPS (Frames Per
+              Second), and FPW (Frames Per Window) are reported. All models in this evaluation utilize
+              <strong>subtitles</strong>.
+            </p>
+          </div>
+          <div class="columns is-centered has-text-centered">
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <!-- Paper Model. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-three-fifths">
+          <h4 class="title is-4">InfiniBench Vs. Existing video understanding benchmarks.</h4>
+          <table class="w-full border-collapse border border-gray-200">
+            <thead class="bg-gray-200 text-gray-700 text-sm">
+              <tr>
+                <th class="border border-gray-300 p-2" rowspan="2">Category</th>
+                <th class="border border-gray-300 p-2" rowspan="2">Benchmarks</th>
+                <th class="border border-gray-300 p-2" rowspan="2">Number Questions</th>
+                <th class="border border-gray-300 p-2" rowspan="2">Number Videos</th>
+                <th class="border border-gray-300 p-2" rowspan="2">Avg Video Duration (mins)</th>
+                <th class="border border-gray-300 p-2" rowspan="2">Total Video Duration (hours)</th>
+                <th class="border border-gray-300 p-2" colspan="2">Questions Type</th>
+                <th class="border border-gray-300 p-2" colspan="3">QA Source</th>
+                <th class="border border-gray-300 p-2" colspan="2">Annotations</th>
+              </tr>
+              <tr>
+                <th class="border border-gray-300 p-2">MCQ</th>
+                <th class="border border-gray-300 p-2">Open</th>
+                <th class="border border-gray-300 p-2">Video</th>
+                <th class="border border-gray-300 p-2">Transcript</th>
+                <th class="border border-gray-300 p-2">Summary</th>
+                <th class="border border-gray-300 p-2">Auto</th>
+                <th class="border border-gray-300 p-2">Human</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="border border-gray-300 p-2" rowspan="3">Short</td>
+                <td class="border border-gray-300 p-2">TGIF-QA</td>
+                <td class="border border-gray-300 p-2">8.5 K</td>
+                <td class="border border-gray-300 p-2"><b>9575</b></td>
+                <td class="border border-gray-300 p-2">0.05</td>
+                <td class="border border-gray-300 p-2">7.98</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">MSRVTT-QA</td>
+                <td class="border border-gray-300 p-2">72.8 K</td>
+                <td class="border border-gray-300 p-2">2990</td>
+                <td class="border border-gray-300 p-2">0.25</td>
+                <td class="border border-gray-300 p-2">12.45</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">MV-Bench</td>
+                <td class="border border-gray-300 p-2">4.0 K</td>
+                <td class="border border-gray-300 p-2">3641</td>
+                <td class="border border-gray-300 p-2">0.27</td>
+                <td class="border border-gray-300 p-2">16.38</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2" rowspan="8">Long</td>
+                <td class="border border-gray-300 p-2">Activity-QA</td>
+                <td class="border border-gray-300 p-2">8.0 K</td>
+                <td class="border border-gray-300 p-2">800</td>
+                <td class="border border-gray-300 p-2">1.85</td>
+                <td class="border border-gray-300 p-2">24.67</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">TVQA</td>
+                <td class="border border-gray-300 p-2">15.2 K</td>
+                <td class="border border-gray-300 p-2">2179</td>
+                <td class="border border-gray-300 p-2">1.86</td>
+                <td class="border border-gray-300 p-2">67.55</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">Egoschema</td>
+                <td class="border border-gray-300 p-2">5.0 K</td>
+                <td class="border border-gray-300 p-2">5063</td>
+                <td class="border border-gray-300 p-2">3.00</td>
+                <td class="border border-gray-300 p-2">253.15</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">LongVideoBench</td>
+                <td class="border border-gray-300 p-2">6.7 K</td>
+                <td class="border border-gray-300 p-2">3763</td>
+                <td class="border border-gray-300 p-2">7.88</td>
+                <td class="border border-gray-300 p-2">494.21</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">Moviechat</td>
+                <td class="border border-gray-300 p-2">13.0 K</td>
+                <td class="border border-gray-300 p-2">1000</td>
+                <td class="border border-gray-300 p-2">9.40</td>
+                <td class="border border-gray-300 p-2">156.67</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">MLVU</td>
+                <td class="border border-gray-300 p-2">3.1 K</td>
+                <td class="border border-gray-300 p-2">1730</td>
+                <td class="border border-gray-300 p-2">15.50</td>
+                <td class="border border-gray-300 p-2">446.92</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">MoVQA</td>
+                <td class="border border-gray-300 p-2">21.9 K</td>
+                <td class="border border-gray-300 p-2">100</td>
+                <td class="border border-gray-300 p-2">16.53</td>
+                <td class="border border-gray-300 p-2">27.55</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2">Video-MME</td>
+                <td class="border border-gray-300 p-2">2.7 K</td>
+                <td class="border border-gray-300 p-2">900</td>
+                <td class="border border-gray-300 p-2">16.97</td>
+                <td class="border border-gray-300 p-2">254.55</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+              </tr>
+              <tr>
+                <td class="border border-gray-300 p-2" rowspan="2">Very Long</td>
+                <td class="border border-gray-300 p-2">LVBench</td>
+                <td class="border border-gray-300 p-2">1.6 K</td>
+                <td class="border border-gray-300 p-2">103</td>
+                <td class="border border-gray-300 p-2"><b>68.35</b></td>
+                <td class="border border-gray-300 p-2">117.33</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10008;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+              </tr>
+              <tr class="highlight">
+                <td class="border border-gray-300 p-2"><b>InfiniBench (Ours)</b></td>
+                <td class="border border-gray-300 p-2"><b>111.82 K</b></td>
+                <td class="border border-gray-300 p-2">1219</td>
+                <td class="border border-gray-300 p-2">52.59</td>
+                <td class="border border-gray-300 p-2"><b>1068.45</b></td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+                <td class="border border-gray-300 p-2">&#10004;</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3 class="subtitle has-text-centered">
+            <p style="font-family:Times New Roman"><b>Comparison between InfiniBench and existing video understanding
+                benchmarks.InfiniBench has the largest QA pairs and the longest total video durations.</b></p>
+          </h3>
           <br>
-          <!-- <img id="without_subtitle" width="60%" src="repo_imags\f_leaderboard_without_subtitle.JPG">
-           <h4 class="title is-4">InfiniBench leaderboard without subtitles for fair comparison between the models</h4>
-           <br> -->
-         <h4 class="title is-4">High level aggregated skills.</h4>
-        <img id="agregated_skills" width="60%" src="repo_imags/skills_high_level.JPG">
-           <h4 class="title is-4">Results for the high level aggregated skills.</h4>
-        <img id="results_2" width="80%" src="repo_imags/high_level_results_with_short.JPG">
+          <br>
 
+        </div>
+      </div>
 
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-three-fifths">
+          <h4 class="title is-4">Benchmark statistics.</h4>
+          <img id="statistics" width="100%" src="repo_images/full_data_statistics.png">
+          <h3 class="subtitle has-text-centered">
+            <p style="font-family:Times New Roman"><b>InfiniBench skills statistics. (A) Number of questions per skill,
+                (B) Number of videos per skill, and (C) Average video duration per skill</b></p>
+          </h3>
+          <img id="statistics_2" width="100%" src="repo_images/shows_vs_movies_statistics.png">
+          <h3 class="subtitle has-text-centered">
+            <p style="font-family:Times New Roman"><b>Comparison between TV shows and Movies. (A) shows the number of
+                questions, (B) represents the number of videos, (C) represents the Total video durations, and (D) shows
+                The Minimum, Maximum, and average video duration for each video source</b></p>
+          </h3>
+
+        </div>
+      </div>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-three-fifths">
+          <h4 class="title is-4">Full annotation pipeline.</h4>
+          <img id="annotation_pipeline" width="100%" src="repo_images/ann_pipeline_iccv.png">
+          <h3 class="subtitle has-text-centered">
+            <p style="font-family:Times New Roman"><b>Full annotation pipeline for InfiniBench skill set. The upper
+                section depicts the global appearance pipeline, while the lower section illustrates the question
+                generation using GPT-4o. The gates for video summary and video transcript indicate that some skills
+                utilize only the summary, others use only the transcript, and some use both.</b></p>
+          </h3>
+        </div>
+      </div>
+      <!-- Paper Model. -->
+
+      <!--/ Paper video. -->
+    </div>
+
+  </section>
+
+  <script src="js/Underscore-min.js"></script>
+  <script src="js/index.js"></script>
+    <!--/ Results. -->
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-three-fifths">
+          <h2 class="title is-3">Skills Examples</h2>
+          <div>
+            <img src="repo_images/skills/linking_multiple_events.png" alt="Linking multiple events questions example">
+            <img src="repo_images/skills/spoiler_questions.png" alt="spoiler questions example">
+            <img src="repo_images/skills/choronoligical_understanding.png" alt="choronoligical_understanding questions example">
+            <img src="repo_images/skills/deep_context_understanding.png" alt="Deep context understanding questions skill">
+            <img src="repo_images/skills/character_actions_example.png" alt="Squence of the Character actions questions skill">
+            <img src="repo_images/skills/summarization.png" alt="Summarization questions example">
+            <img src="repo_images/skills/global_appearance_example.png" alt="Global appearance questions skill">
+            <img src="repo_images/skills/scene_transition.png" alt="Scene transition questions example">
+          </div>
+        </div>
       </div>
     </div>
-      </div>
-    </div>
-    <!--/ Paper video. -->
-  </div>
-
-</section>
-
-<script src="js/Underscore-min.js"></script>
-<script src="js/index.js"></script>
-<section class="section">
-  <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-      <div class="column is-six-fifths">
-        <h2 class="title is-3">Some qualitative results</h2>
-          <div>
-            
-            <img src="repo_imags\comparison_global_appearance.jpg" alt="Linking events failure and success cases">
-            <h3 >Example question of global appearance skill and how the models performs on it</h3>
-            
-            <img src="repo_imags\comparison_scene_transition.jpg" alt="">
-            <h3 >Example question of Scene transition skill and how the models performs on it</h3>
-            
-            <img src="repo_imags\comparison_spoiler_questions.jpg" alt="Linking events failure and success cases">
-            <h3 >Example question of Spoiler questions skill and how the models performs on it, note that S:number is the GPT4-o score</h3>
-            
-            <img src="repo_imags\comparison_deep_context_understanding.jpg" alt="">
-            <h3 >Example question of Deep context understanding skill and how the models performs on it, note that S:number is the GPT4-o score</h3>
-
-            
-        </div>
-    </div>
-  </div>
-    </div>
-  <!--/ Results. -->
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-      <div class="column is-six-fifths">
-        <h2 class="title is-3">Failure and success cases while generating the benchmark</h2>
-          <div>
-            <img src="repo_imags\failure_success_linking_events.jpg" alt="Linking events failure and success cases">
-            <h3 >Linking multiple events failure and success cases </h3>
-            
-            <img src="repo_imags\failure_cases_temporal_questions.jpg" alt="Temporal order of events failure and success cases">
-            <h3 >Temporal order of events failure and success cases </h3>
-        </div>
-    </div>
-  </div>
-    </div>
-  <!--/ Results. -->
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-      <div class="column is-six-fifths">
-        <h2 class="title is-3">Examples</h2>
-          <div>
-            <img src="repo_imags/linking_multiple_events.jpg" alt="Linking multiple events questions example">
-            <img src="repo_imags/spoiler_questions.jpg" alt="spoiler questions example">
-            <img src="repo_imags/temporal_questions.jpg" alt="Temporal order of events questions example">
-            <img src="repo_imags/local_vision_context.jpg" alt="Local questions example">
-            <img src="repo_imags/context_understanding.jpg" alt="Deep context understanding questions skill">
-            <img src="repo_imags\character_actions_example.jpg" alt="Squence of the Character actions questions skill">
-            <img src="repo_imags/summarization.jpg" alt="Summarization questions example">
-        </div>
-    </div>
-  </div>
-    </div>
-  <!--/ Results. -->
-</section>
-  
-
-
+    <!--/ Results. -->
+  </section>
 
 
 </body>
 
 </html>
-
