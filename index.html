@@ -88,35 +88,31 @@
             <h3 class="title is-2 publication-title">A Benchmark for Large Multi-Modal Models in Long-Form Movies & TV
               Shows.</h3>
             <div class="is-size-5">
-              <span class="author-block">
-                <a href="https://scholar.google.com/citations?user=6gRlYHAAAAAJ&hl=en"
-                  style="color:#008AD7;font-weight:normal;">Kirolos Ataallah
-                </a>,
-              </span>
-              <span class="author-block">
-                <a href="https://eslambakr.github.io/" style="color:#008AD7;font-weight:normal;">Eslam Abdelrahman</a>,
-              </span>
-              <span class="author-block">
-                <a href="https://scholar.google.com/citations?user=SRCGuS4AAAAJ&hl=en"
-                  style="color:#008AD7;font-weight:normal;">Mahmoud Ahmed
-                </a>,
-              </span>
-              <span class="author-block">
-                <a href="https://www.linkedin.com/in/chenhui-gou-9201081a1/"
-                  style="color:#41c618;font-weight:normal;">Chenhui Gou*</a>,</span>
+            <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=6gRlYHAAAAAJ&hl=en" style="color:#008AD7;font-weight:normal;">Kirolos Ataallah
+                </a>,                
+            </span>
+            <span class="author-block">
+              <a href="https://eslambakr.github.io/" style="color:#008AD7;font-weight:normal;">Eslam Abdelrahman</a>,
+            </span>
+            <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=SRCGuS4AAAAJ&hl=en" style="color:#008AD7;font-weight:normal;">Mahmoud Ahmed
+                </a>,                
+            </span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/chenhui-gou-9201081a1/" style="color:#41c618;font-weight:normal;">Chenhui Gou*</a>,</span>
+            
+            <span class="author-block">
+              <a href="https://kpahwa16.github.io/" style="color:#F2A900;font-weight:normal;">Khushbu Pahwa</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://dingjiansw101.github.io/" style="color:#008AD7;font-weight:normal;">Jian Ding</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.mohamed-elhoseiny.com/" style="color:#008AD7;font-weight:normal;">Mohamed Elhoseiny</a>
+            </span>
 
-              <span class="author-block">
-                <a href="https://kpahwa16.github.io/" style="color:#F2A900;font-weight:normal;">Khushbu Pahwa</a>,
-              </span>
-              <span class="author-block">
-                <a href="https://dingjiansw101.github.io/" style="color:#008AD7;font-weight:normal;">Jian Ding</a>,
-              </span>
-              <span class="author-block">
-                <a href="https://www.mohamed-elhoseiny.com/" style="color:#008AD7;font-weight:normal;">Mohamed
-                  Elhoseiny</a>
-              </span>
-
-            </div>
+          </div>
             <div class="column has-text-centered">
               <div class="publication-links">
                 <span class="link-block">
@@ -164,78 +160,62 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Understanding long-form videos, such as movies and TV episodes ranging from tens of minutes to two hours,
-              remains a major challenge for multi-modal models. Existing benchmarks often fall short in testing the full
-              range of cognitive skills needed to process these temporally rich and narratively complex inputs. We
-              introduce InfiniBench, a comprehensive benchmark designed to rigorously evaluate the capabilities of
-              models in long video understanding. InfiniBench offers: (1) Over 1,000 hours of video content, with an
-              average video length of 52.59 minutes,(2) The largest set of question-answer pairs for long video
-              comprehension, totaling around 91 K, (3) Eight diverse skills that span both grounding-based (e.g., scene
-              transitions, character actions) and reasoning-based (e.g., deep context, multi-event linking)
-              understanding, and (4) Rich annotation formats, including both multiple-choice and open-ended questions.
-              We conduct an in-depth evaluation across both commercial (GPT-4o, Gemini 1.5 Flash) and open-source
-              (Qwen2.5-VL, InternVL2.5) vision-language models. Results reveal that current models remain far from
-              solving long video understanding: on grounding-based skills, the top open-source model (Qwen2.5-VL) and
-              GPT-4o achieve only 39.4% and 48.1% accuracy, respectively. Interestingly, several models achieve
-              non-trivial performance using only the movie or episode title, without watching the video, revealing a
-              reliance on pre-trained world knowledge that partially compensates for the absence of visual or temporal
-              understanding. These findings highlight critical gaps in current approaches and underscore the need for
-              models that truly engage with long visual narratives.
+              Understanding long-form videos, such as movies and TV episodes ranging from tens of minutes to two hours, remains a major challenge for multi-modal models. Existing benchmarks often fall short in testing the full range of cognitive skills needed to process these temporally rich and narratively complex inputs. We introduce InfiniBench, a comprehensive benchmark designed to rigorously evaluate the capabilities of models in long video understanding. InfiniBench offers: (1) Over 1,000 hours of video content, with an average video length of 52.59 minutes,(2) The largest set of question-answer pairs for long video comprehension, totaling around 91 K, (3) Eight diverse skills that span both grounding-based (e.g., scene transitions, character actions) and reasoning-based (e.g., deep context, multi-event linking) understanding, and (4) Rich annotation formats, including both multiple-choice and open-ended questions. We conduct an in-depth evaluation across both commercial (GPT-4o, Gemini 1.5 Flash) and open-source (Qwen2.5-VL, InternVL2.5) vision-language models. Results reveal that current models remain far from solving long video understanding: on grounding-based skills, the top open-source model (Qwen2.5-VL) and GPT-4o achieve only 39.4% and 48.1% accuracy, respectively. Interestingly, several models achieve non-trivial performance using only the movie or episode title, without watching the video, revealing a reliance on pre-trained world knowledge that partially compensates for the absence of visual or temporal understanding. These findings highlight critical gaps in current approaches and underscore the need for models that truly engage with long visual narratives.
             </p>
           </div>
         </div>
       </div>
-      <!-- InfiniBench Leaderboard v2 -->
-      <div class="max-w-screen-xl mx-auto p-6">
-        <div class="bg-white shadow-xl rounded-2xl overflow-hidden" x-data="leaderboardApp">
-          <div class="flex items-center justify-between p-4 border-b">
-            <h2 class="text-2xl font-bold text-gray-800">InfiniBench Leaderboard</h2>
-            <input type="text" placeholder="Search models..." x-model="search"
-              class="border rounded-md px-3 py-1 text-sm" />
-          </div>
-
-          <div class="overflow-x-auto">
-            <table class="w-full text-sm text-left text-gray-700">
-              <thead class="text-xs uppercase bg-gray-100 text-gray-600 sticky top-0 z-10">
+      <!-- Paper Model. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-six-fifths">
+          <div class="max-w-7xl mx-auto bg-white shadow-lg rounded-lg p-6 overflow-x-auto">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">InfiniBench Leaderboard</h2>
+            <table class="w-full border-collapse border border-gray-200">
+              <thead class="bg-gray-200 text-gray-700 text-sm">
                 <tr>
-                  <th @click="sort('model')" class="cursor-pointer p-3">Model</th>
-                  <th @click="sort('frameRate')" class="cursor-pointer p-3">Frame Rate</th>
-                  <th colspan="4" class="bg-blue-100 p-3 text-center">Grounding Skills</th>
-                  <th colspan="4" class="bg-yellow-100 p-3 text-center">Reasoning Skills</th>
-                  <th @click="sort('avgAcc')" class="cursor-pointer p-3">Avg. Acc.</th>
-                  <th @click="sort('avgScore')" class="cursor-pointer p-3">Avg. Score</th>
+                  <th rowspan="2" class="border border-gray-300 p-2">Models</th>
+                  <th rowspan="2" class="border border-gray-300 p-2">Frame Rate</th>
+                  <th colspan="4" class="border border-gray-300 p-2 bg-[#A5BBFF]">Grounding Skills</th>
+                  <th colspan="4" class="border border-gray-300 p-2 bg-[#FFEFD9]">Reasoning Skills</th>
+                  <th rowspan="2" class="border border-gray-300 p-2">Avg. Acc.</th>
+                  <th rowspan="2" class="border border-gray-300 p-2">Avg. Score</th>
                 </tr>
-                <tr class="bg-gray-50 text-xs text-gray-500">
-                  <template x-for="header in skillHeaders" :key="header.key">
-                    <th class="p-2 text-[11px] font-medium" x-text="header.label"></th>
-                  </template>
+                <tr class="bg-gray-100">
+                  <th class="border border-gray-300 p-2">Global Appearance</th>
+                  <th class="border border-gray-300 p-2">Scene Transitions</th>
+                  <th class="border border-gray-300 p-2">Character Actions</th>
+                  <th class="border border-gray-300 p-2">Chronological Understanding</th>
+                  <th class="border border-gray-300 p-2">Summarization</th>
+                  <th class="border border-gray-300 p-2">Deep Context Understanding</th>
+                  <th class="border border-gray-300 p-2">Spoiler Understanding</th>
+                  <th class="border border-gray-300 p-2">Linking Events</th>
                 </tr>
               </thead>
-              <tbody>
-                <template x-for="row in filteredData()" :key="row.model">
-                  <tr class="hover:bg-gray-50 even:bg-gray-50">
-                    <td class="p-2 font-medium" x-text="row.model"></td>
-                    <td class="p-2" x-text="row.frameRate || '--'"></td>
-                    <td class="p-2" x-text="row.globalAppearance || '--'"></td>
-                    <td class="p-2" x-text="row.sceneTransitions || '--'"></td>
-                    <td class="p-2" x-text="row.characterActions || '--'"></td>
-                    <td class="p-2" x-text="row.chronologicalUnderstanding || '--'"></td>
-                    <td class="p-2" x-text="row.summarization || '--'"></td>
-                    <td class="p-2" x-text="row.deepContextUnderstanding || '--'"></td>
-                    <td class="p-2" x-text="row.spoilerUnderstanding || '--'"></td>
-                    <td class="p-2" x-text="row.linkingEvents || '--'"></td>
-                    <td class="p-2" x-text="row.avgAcc || '--'"></td>
-                    <td class="p-2" x-text="row.avgScore || '--'"></td>
-                  </tr>
-                </template>
-              </tbody>
+            <tbody>
+              <tr style="background-color:#92a2fc;"><td>Baseline Random</td><td>--</td><td>19.96</td><td>19.77</td><td>18.41</td><td>36.45</td><td>--</td><td>--</td><td>--</td><td>--</td><td>23.65</td><td>--</td></tr>
+              <tr><td>GPT-4o</td><td>450</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>Gemini Flash 2.0</td><td>1 FPS</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>Qwen2.5VL</td><td>768</td><td>33.16</td><td>29.85</td><td>29.31</td><td>45.37</td><td>3.34</td><td>4.82</td><td>3.67</td><td>6.39</td><td>34.42</td><td>4.56</td></tr>
+              <tr><td>Qwen2VL</td><td>768</td><td>25.79</td><td>31.02</td><td>35.91</td><td>43.07</td><td>2.25</td><td>4.90</td><td>3.29</td><td>6.01</td><td>33.95</td><td>4.11</td></tr>
+              <tr><td>Intern VL 3.0</td><td>128</td><td>35.73</td><td>29.64</td><td>24.96</td><td>43.73</td><td>3.92</td><td>4.13</td><td>3.63</td><td>6.17</td><td>33.52</td><td>4.46</td></tr>
+              <tr><td>Video-Flash</td><td>1000</td><td>22.01</td><td>30.81</td><td>37.67</td><td>47.58</td><td>2.70</td><td>3.87</td><td>2.95</td><td>5.02</td><td>34.52</td><td>3.64</td></tr>
+              <tr><td>LongVU</td><td>1 FPS</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+              <tr><td>LLava-Onevision</td><td>128</td><td>24.19</td><td>27.83</td><td>25.26</td><td>46.50</td><td>2.00</td><td>4.09</td><td>3.31</td><td>6.14</td><td>30.95</td><td>3.89</td></tr>
+              <tr><td>InternLM-XComposer</td><td>16 FPW</td><td>23.27</td><td>29.53</td><td>29.99</td><td>42.78</td><td>1.67</td><td>2.84</td><td>2.46</td><td>5.00</td><td>31.39</td><td>2.99</td></tr>
+              <tr><td>InternVL2.5</td><td>128</td><td>29.05</td><td>26.65</td><td>23.99</td><td>36.26</td><td>2.51</td><td>3.14</td><td>2.32</td><td>5.06</td><td>28.99</td><td>3.26</td></tr>
+              <tr><td>InternVL2</td><td>128</td><td>27.44</td><td>25.48</td><td>23.76</td><td>40.93</td><td>2.81</td><td>3.77</td><td>3.08</td><td>5.93</td><td>29.40</td><td>3.90</td></tr>
+              <tr><td>Goldfish (Mistral)</td><td>60 FPW</td><td>17.55</td><td>23.67</td><td>23.99</td><td>39.37</td><td>3.00</td><td>5.42</td><td>3.69</td><td>6.45</td><td>26.15</td><td>4.64</td></tr>
+              <tr><td>MiniGPT4-video (Mistral)</td><td>60</td><td>18.49</td><td>25.16</td><td>28.49</td><td>41.06</td><td>2.81</td><td>3.11</td><td>3.08</td><td>3.87</td><td>28.30</td><td>3.22</td></tr>
+            </tbody>
             </table>
+            <p class="text-gray-600 mt-4 text-sm">
+              <strong>InfiniBench leaderboard</strong> across eight skills. FPV (Frames Per Video), FPS (Frames Per
+              Second), and FPW (Frames Per Window) are reported. All models in this evaluation utilize
+              <strong>subtitles</strong>.
+            </p>
           </div>
-
-          <p class="text-gray-500 text-sm p-4 border-t">
-            InfiniBench leaderboard across eight skills. FPV (Frames Per Video), FPS (Frames Per Second), and FPW
-            (Frames Per Window) are reported. All models utilize <strong>subtitles</strong>.
-          </p>
+          <div class="columns is-centered has-text-centered">
+          </div>
         </div>
       </div>
       <br>
@@ -504,9 +484,7 @@
 
   <script src="js/Underscore-min.js"></script>
   <script src="js/index.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-  <script src="js/leaderboard.js"></script>
-  <!--/ Results. -->
+    <!--/ Results. -->
   </section>
 
   <section class="section">
@@ -517,12 +495,9 @@
           <div>
             <img src="repo_images/skills/linking_multiple_events.png" alt="Linking multiple events questions example">
             <img src="repo_images/skills/spoiler_questions.png" alt="spoiler questions example">
-            <img src="repo_images/skills/choronoligical_understanding.png"
-              alt="choronoligical_understanding questions example">
-            <img src="repo_images/skills/deep_context_understanding.png"
-              alt="Deep context understanding questions skill">
-            <img src="repo_images/skills/character_actions_example.png"
-              alt="Squence of the Character actions questions skill">
+            <img src="repo_images/skills/choronoligical_understanding.png" alt="choronoligical_understanding questions example">
+            <img src="repo_images/skills/deep_context_understanding.png" alt="Deep context understanding questions skill">
+            <img src="repo_images/skills/character_actions_example.png" alt="Squence of the Character actions questions skill">
             <img src="repo_images/skills/summarization.png" alt="Summarization questions example">
             <img src="repo_images/skills/global_appearance_example.png" alt="Global appearance questions skill">
             <img src="repo_images/skills/scene_transition.png" alt="Scene transition questions example">
