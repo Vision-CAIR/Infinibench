@@ -101,6 +101,7 @@ View [Videos preprocessing](data_genration/README.md)
     <img src="figs/skills_examples/summarization.png" width="60%" height="60%">
 </details>
 </div>
+
 ## Benchmark annotations pipeline
 View the [data_genration/README.md](data_genration/README.md) for the full annotation pipeline details <br>
 
