@@ -2,10 +2,32 @@
 <html>
 
 <head>
+  <!-- Update these in the <head> section -->
   <meta charset="utf-8">
-  <meta name="description" content="InfiniBench">
-  <meta name="keywords" content="Long video benchmark,long video understanding,benchmarks">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="InfiniBench: A comprehensive benchmark for large multi-modal models in long-form videos with over 1,000 hours of content across movies and TV shows.">
+  <meta name="keywords"
+    content="InfiniBench, Video Understanding, Long-form Video, Benchmark, Multi-modal Models, AI, Machine Learning, Computer Vision, NLP, Movies, TV Shows">
+  <meta name="author"
+    content="Kirolos Ataallah, Eslam Abdelrahman, Mahmoud Ahmed, Chenhui Gou, Khushbu Pahwa, Jian Ding, Mohamed Elhoseiny">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title"
+    content="InfiniBench: A Benchmark for Large Multi-Modal Models in Long-Form Movies & TV Shows">
+  <meta property="og:description"
+    content="A comprehensive benchmark with 91K QA pairs across 8 skills for evaluating video understanding models on long-form content.">
+  <meta property="og:image" content="https://yourdomain.com/repo_images/teaser_fig.png">
+  <meta property="og:url" content="https://yourdomain.com">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="InfiniBench: Video Understanding Benchmark">
+  <meta name="twitter:description"
+    content="Evaluating multi-modal models on long-form movies and TV shows with 8 diverse skills.">
+  <meta name="twitter:image" content="https://yourdomain.com/repo_images/teaser_fig.png">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <title>InfiniBench</title>
   <meta name="google-site-verification" content="6lbYN1vX7A4sD8SrVniq84UEKyEUSBgxeP7d3FjuuK0" />
@@ -26,28 +48,48 @@
 </head>
 
 <style>
+  /* Warm color palette */
+  :root {
+    --primary-orange: #e67e22;
+    --primary-orange-light: #f39c12;
+    --primary-orange-dark: #d35400;
+    --warm-brown: #8b4513;
+    --warm-brown-light: #a0522d;
+    --warm-gray: #2c3e50;
+    --warm-gray-light: #34495e;
+    --cream: #fef5e7;
+    --warm-white: #fefdfb;
+    --gold: #f1c40f;
+    --gold-light: #f4d03f;
+    --success: #27ae60;
+    --error: #e74c3c;
+    --text-dark: #2c3e50;
+    --text-medium: #5d6d7e;
+    --text-light: #85929e;
+  }
+
   #main {
     position: relative;
-    ;
     width: 1200px;
   }
 
   .box {
     float: left;
     padding: 15px 0 0 15px;
-    /*        background-color: red;*/
   }
 
   .pic {
     width: 500px;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: var(--warm-white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 
   .pic img {
     width: 800px;
+    border-radius: 4px;
   }
 
   table {
@@ -60,102 +102,1406 @@
 
   th,
   td {
-    border: 1px solid black;
-    padding: 8px;
+    border: 1px solid #e8e8e8;
+    padding: 12px 8px;
   }
 
   th {
-    background-color: #f2f2f2;
+    background-color: var(--warm-gray);
+    color: white;
   }
 
   .highlight {
-    background-color: #b3cde3;
+    background-color: var(--cream);
     font-weight: bold;
+    color: var(--warm-brown);
+  }
+
+  /* Enhanced warm design system */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--warm-white);
+  }
+
+  .benchmark-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--warm-white);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px rgba(217, 100, 17, 0.1);
+    overflow: hidden;
+    border: 1px solid rgba(230, 126, 34, 0.1);
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--warm-brown) 50%, var(--warm-gray) 100%);
+    padding: 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+    opacity: 0.3;
+  }
+
+  .header h1 {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .table-container {
+    padding: 2rem;
+    overflow-x: auto;
+    background-color: var(--warm-white);
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.9rem;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(139, 69, 19, 0.08);
+  }
+
+  .table-header {
+    background: linear-gradient(135deg, var(--warm-brown) 0%, var(--warm-gray) 100%);
+    color: white;
+  }
+
+  .table-header th {
+    padding: 1rem 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    font-size: 0.85rem;
+    letter-spacing: 0.025em;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    background: transparent;
+    color: white;
+  }
+
+  .table-header th:last-child {
+    border-right: none;
+  }
+
+  .sub-header {
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--warm-brown-light) 100%);
+  }
+
+  .category-cell {
+    background: linear-gradient(135deg, var(--cream) 0%, #f8f4e6 100%);
+    font-weight: 700;
+    color: var(--warm-brown);
+    text-align: center;
+    vertical-align: middle;
+    border-right: 2px solid var(--primary-orange-light);
+    position: relative;
+  }
+
+  .category-cell::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--gold) 100%);
+  }
+
+  .comparison-table tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .comparison-table tbody tr:hover {
+    background: linear-gradient(135deg, var(--cream) 0%, #faf6ed 100%);
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.1);
+  }
+
+  .infinibench-row {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%) !important;
+    font-weight: 600;
+    border: 2px solid var(--primary-orange);
+    position: relative;
+  }
+
+  .infinibench-row::before {
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .infinibench-row:hover {
+    background: linear-gradient(135deg, #fff1b8 0%, #fed766 100%) !important;
+    box-shadow: 0 8px 25px rgba(230, 126, 34, 0.2);
+  }
+
+  .comparison-table td {
+    padding: 1rem 0.75rem;
+    text-align: center;
+    border-right: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+  }
+
+  .comparison-table td:last-child {
+    border-right: none;
+  }
+
+  .benchmark-name {
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: left;
+    position: relative;
+  }
+
+  .number-cell {
+    font-weight: 600;
+    color: var(--text-medium);
+  }
+
+  .highlight-number {
+    font-weight: 700;
+    color: var(--warm-brown);
+    background: linear-gradient(135deg, var(--cream) 0%, #f4e8d0 100%);
+    padding: 0.25rem 0.5rem;
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  .check-icon {
+    color: var(--success);
+    font-size: 1.1rem;
+    filter: drop-shadow(0 2px 4px rgba(39, 174, 96, 0.3));
+  }
+
+  .cross-icon {
+    color: var(--error);
+    font-size: 1.1rem;
+    filter: drop-shadow(0 2px 4px rgba(231, 76, 60, 0.3));
+  }
+
+  .stats-row {
+    background: linear-gradient(135deg, var(--cream) 0%, #f8f4e6 100%);
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.05);
+    transition: transform 0.2s ease;
+    border: 1px solid rgba(230, 126, 34, 0.1);
+  }
+
+  .stat-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(139, 69, 19, 0.1);
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-orange);
+    display: block;
+  }
+
+  .stat-label {
+    color: var(--text-medium);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  .legend {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+    border-radius: 16px;
+    border-left: 4px solid var(--gold);
+  }
+
+  .legend h3 {
+    color: var(--warm-brown);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .legend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--warm-brown);
+  }
+
+  /* Modal styles with warm theme */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(44, 62, 80, 0.9);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(5px);
+  }
+
+  .modal-overlay.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .modal-container {
+    position: relative;
+    max-width: 95vw;
+    max-height: 95vh;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-image {
+    display: block;
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .modal-overlay.active .modal-image {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: -50px;
+    right: -10px;
+    background-color: var(--primary-orange);
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 10001;
+  }
+
+  .modal-close:hover {
+    opacity: 1;
+    background-color: var(--primary-orange-dark);
+    transform: scale(1.1);
+  }
+
+  .modal-caption {
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+    padding: 15px 20px;
+    opacity: 0.9;
+    background: linear-gradient(135deg, var(--warm-brown) 0%, var(--warm-gray) 100%);
+    border-radius: 8px;
+    margin: 0 20px;
+    backdrop-filter: blur(10px);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Clickable image enhancements */
+  .clickable-image {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    position: relative;
+  }
+
+  .clickable-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(139, 69, 19, 0.2);
+    filter: brightness(1.05);
+  }
+
+  .clickable-image:focus {
+    outline: 3px solid var(--primary-orange);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+
+  /* Zoom indicator styling */
+  .zoom-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 8px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 0.8rem;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  img.clickable-image:hover .zoom-indicator {
+    opacity: 1;
+  }
+
+  /* Enhanced modal styles */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(44, 62, 80, 0.95);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .modal-overlay.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .modal-container {
+    position: relative;
+    max-width: 95vw;
+    max-height: 95vh;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-image {
+    display: block;
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+
+  .modal-overlay.active .modal-image {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: -50px;
+    right: -10px;
+    background-color: var(--primary-orange);
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 10001;
+  }
+
+  .modal-close:hover {
+    opacity: 1;
+    background-color: var(--primary-orange-dark);
+    transform: scale(1.1);
+  }
+
+  .modal-caption {
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+    font-size: 1rem;
+    padding: 15px 20px;
+    opacity: 0.9;
+    background: linear-gradient(135deg, var(--warm-brown) 0%, var(--warm-gray) 100%);
+    border-radius: 8px;
+    margin: 0 20px;
+    backdrop-filter: blur(10px);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Table images specific styling */
+  .comparison-table img {
+    max-height: none !important;
+  }
+
+  /* Skills section images */
+  #skills img {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.1);
+  }
+
+  /* Statistics section images */
+  #statistics img {
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.15);
+  }
+
+  /* Responsive modal adjustments */
+  @media (max-width: 768px) {
+    .modal-container {
+      max-width: 98vw;
+      max-height: 98vh;
+    }
+
+    .modal-image {
+      max-height: 80vh;
+    }
+
+    .modal-close {
+      top: -40px;
+      right: 5px;
+      width: 35px;
+      height: 35px;
+      font-size: 1.5rem;
+    }
+
+    .modal-caption {
+      bottom: -50px;
+      margin: 0 10px;
+      font-size: 0.9rem;
+      padding: 10px 15px;
+    }
+
+    .zoom-indicator {
+      top: 5px;
+      right: 5px;
+      padding: 3px 6px;
+      font-size: 0.7rem;
+    }
+  }
+
+  /* Prevent layout shift when hovering images in tables */
+  table img.clickable-image:hover {
+    transform: scale(1.05);
+    z-index: 10;
+    position: relative;
+  }
+
+  /* Loading state animation for modal image */
+  .modal-image[src=""] {
+    background: linear-gradient(90deg, #f0f0f0 25%, transparent 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    min-height: 200px;
+    min-width: 300px;
+  }
+
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Add skill card styles */
+  .skill-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(139, 69, 19, 0.1);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(230, 126, 34, 0.1);
+    will-change: transform;
+  }
+
+  .skill-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(139, 69, 19, 0.15);
+  }
+
+  .skill-header {
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--warm-brown) 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .skill-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  .skill-content {
+    padding: 1rem 1.5rem 1.5rem;
+  }
+
+  /* Fix for skill card images */
+  .skill-card .clickable-image {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 0;
+  }
+
+  .skill-card .clickable-image:hover {
+    transform: scale(1.05);
+    z-index: 10;
+  }
+
+  /* Remove the zoom indicator positioning issue */
+  .skill-card .relative {
+    position: relative;
+  }
+
+  .skill-card .zoom-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 8px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 0.8rem;
+    pointer-events: none;
+    z-index: 20;
+  }
+
+  .skill-card .relative:hover .zoom-indicator {
+    opacity: 1;
   }
 </style>
 
 <body>
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <div class="flex justify-center">
-              <h1 class="title is-1 publication-title flex items-center">
-                <img src="repo_images/icon.png" width="50" class="mr-2"> InfiniBench:</h1>
+  <header class="sticky top-0 bg-white shadow-md z-50">
+    <nav class="container mx-auto px-4 py-3">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <img src="repo_images/icon.png" width="40" alt="InfiniBench Logo">
+          <span class="font-bold text-xl" style="color: var(--warm-brown);">InfiniBench</span>
+        </div>
+        <div class="hidden md:flex space-x-6">
+          <a href="#about" class="hover:text-orange-600 transition-colors">About</a>
+          <a href="#benchmark" class="hover:text-orange-600 transition-colors">Benchmark</a>
+          <a href="#statistics" class="hover:text-orange-600 transition-colors">Statistics</a>
+          <a href="#skills" class="hover:text-orange-600 transition-colors">Skills</a>
+          <a href="leaderboard.html" class="hover:text-orange-600 transition-colors">Leaderboard</a>
+          <a href="https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main"
+            class="hover:text-orange-600 transition-colors">Download</a>
+        </div>
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="mobile-menu" class="hidden md:hidden mt-2 py-2">
+        <a href="#about" class="block px-4 py-2 hover:bg-gray-100">About</a>
+        <a href="#benchmark" class="block px-4 py-2 hover:bg-gray-100">Benchmark</a>
+        <a href="#statistics" class="block px-4 py-2 hover:bg-gray-100">Statistics</a>
+        <a href="#skills" class="block px-4 py-2 hover:bg-gray-100">Skills</a>
+        <a href="leaderboard.html" class="block px-4 py-2 hover:bg-gray-100">Leaderboard</a>
+        <a href="https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main"
+          class="block px-4 py-2 hover:bg-gray-100">Download</a>
+      </div>
+    </nav>
+  </header>
+
+  <section id="about" class="hero min-h-screen flex items-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-black/90 to-black/30 z-10"></div>
+    <div class="absolute inset-0 z-0">
+      <video autoplay muted loop class="w-full h-full object-cover">
+        <source src="repo_images/hero-background.mp4" type="video/mp4">
+        <!-- Fallback image if video doesn't load -->
+        <img src="repo_images/teaser_fig.png" alt="InfiniBench" class="w-full h-full object-cover">
+      </video>
+    </div>
+    <div class="container mx-auto px-4 z-20 text-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="flex justify-center items-center mb-4">
+          <img src="repo_images/icon.png" width="60" class="mr-3">
+          <h1 class="text-5xl font-bold">InfiniBench</h1>
+        </div>
+        <h2 class="text-3xl font-semibold mb-6">A Benchmark for Large Multi-Modal Models<br>in Long-Form Movies & TV
+          Shows</h2>
+
+        <div class="mb-6 text-lg">
+          <span class="author-block">
+            <a href="https://scholar.google.com/citations?user=6gRlYHAAAAAJ&hl=en"
+              style="color:#f39c12;font-weight:normal;">Kirolos Ataallah</a>,
+          </span>
+          <span class="author-block">
+            <a href="https://eslambakr.github.io/" style="color:#f39c12;font-weight:normal;">Eslam Abdelrahman</a>,
+          </span>
+          <span class="author-block">
+            <a href="https://scholar.google.com/citations?user=SRCGuS4AAAAJ&hl=en"
+              style="color:#f39c12;font-weight:normal;">Mahmoud Ahmed</a>,
+          </span>
+          <span class="author-block">
+            <a href="https://www.linkedin.com/in/chenhui-gou-9201081a1/"
+              style="color:#27ae60;font-weight:normal;">Chenhui Gou</a>,
+          </span>
+          <br>
+          <span class="author-block">
+            <a href="https://kpahwa16.github.io/" style="color:#f1c40f;font-weight:normal;">Khushbu Pahwa</a>,
+          </span>
+          <span class="author-block">
+            <a href="https://dingjiansw101.github.io/" style="color:#f39c12;font-weight:normal;">Jian Ding</a>,
+          </span>
+          <span class="author-block">
+            <a href="https://www.mohamed-elhoseiny.com/" style="color:#f39c12;font-weight:normal;">Mohamed Elhoseiny</a>
+          </span>
+        </div>
+
+        <p class="text-xl mb-8">Rigorously evaluating the capabilities of multimodal models across 8 key skills with
+          over 1,000 hours of video content</p>
+
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+          <a href="https://arxiv.org/abs/2406.19875" target="_blank" class="btn-primary flex items-center">
+            <i class="fas fa-file-alt mr-2"></i> Paper
+          </a>
+          <a href="https://github.com/Vision-CAIR/Infinibench/tree/main" target="_blank"
+            class="btn-primary flex items-center">
+            <i class="fab fa-github mr-2"></i> GitHub
+          </a>
+          <a href="https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main" target="_blank"
+            class="btn-primary flex items-center">
+            <span class="mr-2">🤗</span> Download Dataset
+          </a>
+          <a href="leaderboard.html" class="btn-primary flex items-center">
+            <span class="mr-2">🏆</span> Interactive Leaderboard
+          </a>
+        </div>
+
+        <div class="flex flex-wrap justify-center text-sm opacity-80">
+          <span class="mx-2"><b style="color:#f39c12;">◆</b> King Abdullah University of Science and Technology
+            (KAUST)</span>
+          <span class="mx-2"><b style="color:#27ae60;">◆</b> Monash University</span>
+          <span class="mx-2"><b style="color:#f1c40f;">◆</b> RICE University</span>
+        </div>
+      </div>
+
+      <section class="section mt-16">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-three-fifths">
+              <img id="teaser_fig" width="100%" src="repo_images/teaser_fig.png" class="clickable-image rounded-xl">
+              <h3 class="subtitle has-text-centered mt-6">
+                <p style="font-family:Times New Roman; color: white;"><b>InfiniBench skill set comprising eight skills.
+                    The right side represents skill categories and question types, while the left side provides examples
+                    of both multiple-choice (MCQ) and open-ended questions.</b></p>
+              </h3>
             </div>
-            <h2 class="title is-2 publication-title">A Benchmark for Large Multi-Modal Models <br>in Long-Form Movies & TV
-              Shows</h2>
-            <div class="is-size-5">
-            <span class="author-block">
-                <a href="https://scholar.google.com/citations?user=6gRlYHAAAAAJ&hl=en" style="color:#008AD7;font-weight:normal;">Kirolos Ataallah
-                </a>,                
-            </span>
-            <span class="author-block">
-              <a href="https://eslambakr.github.io/" style="color:#008AD7;font-weight:normal;">Eslam Abdelrahman</a>,
-            </span>
-            <span class="author-block">
-                <a href="https://scholar.google.com/citations?user=SRCGuS4AAAAJ&hl=en" style="color:#008AD7;font-weight:normal;">Mahmoud Ahmed
-                </a>,                
-            </span>
-            <span class="author-block">
-              <a href="https://www.linkedin.com/in/chenhui-gou-9201081a1/" style="color:#41c618;font-weight:normal;">Chenhui Gou</a>,</span>
-            <br>
-            <span class="author-block">
-              <a href="https://kpahwa16.github.io/" style="color:#F2A900;font-weight:normal;">Khushbu Pahwa</a>,
-            </span>
-            <span class="author-block">
-              <a href="https://dingjiansw101.github.io/" style="color:#008AD7;font-weight:normal;">Jian Ding</a>,
-            </span>
-            <span class="author-block">
-              <a href="https://www.mohamed-elhoseiny.com/" style="color:#008AD7;font-weight:normal;">Mohamed Elhoseiny</a>
-            </span>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><b style="color:#008AD7; font-weight:normal">&#x25B6 </b> King Abdullah University of Science and Technology (KAUST) </span>
-            <br>
-            <span class="author-block"><b style="color:#41c618; font-weight:normal">&#x25B6 </b>Monash University  </span>
-            <span class="author-block"><b style="color:#F2A900; font-weight:normal">&#x25B6 </b>RICE University </span>
-            <!-- <span class="author-block"><b style="color:#008AD7; font-weight:normal">&#x25B6 </b>Microsoft Cloud & AI </span> -->
           </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+      <a href="#benchmark" class="text-white">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <link rel="stylesheet" type="text/css" href="js/simple_style.css" />
+  <script type="text/javascript" src="js/simple_swiper.js"></script>
+  <script src="js/Underscore-min.js"></script>
+  <script src="js/index.js"></script>
+
+  <section id="benchmark" class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8 text-center" style="color: var(--warm-brown);">Abstract</h2>
+        <div class="bg-white rounded-xl shadow-lg p-8 mb-12 border border-orange-100">
+          <p class="text-gray-700 leading-relaxed mb-6">
+            Understanding long-form videos, such as movies and TV episodes ranging from tens of minutes to two hours,
+            remains a major challenge for multi-modal models. Existing benchmarks often fall short in testing the full
+            range of cognitive skills needed to process these temporally rich and narratively complex inputs. We
+            introduce {\papernameAbbrev}, a comprehensive benchmark designed to rigorously evaluate the capabilities of
+            models in long video understanding.
+            InfiniBench offers:(1) Over 1,000 hours of video content, with an average video length of 52.59 minutes, (2)
+            The largest set of question-answer pairs for long video comprehension, totaling around \totalSampleNumber,
+            (3) Eight diverse skills that span both grounding-based (e.g., scene transitions, character actions) and
+            reasoning-based (e.g., deep context, multi-event linking) understanding, and (4) Rich annotation formats,
+            including both multiple-choice and open-ended questions.
+            We conduct an in-depth evaluation across both commercial (GPT-4o, Gemini 1.5 Flash) and open-source
+            (Qwen2.5-VL, InternVL2.5) vision-language models.
+            Results reveal that current models remain far from solving long video understanding: on grounding-based
+            skills, the top open-source model (Qwen2.5-VL) and GPT-4o achieve only 39.4\% and 48.1\% accuracy,
+            respectively.
+            Interestingly, several models achieve non-trivial performance using only the movie or episode title, without
+            watching the video, revealing a reliance on pre-trained world knowledge that partially compensates for the
+            absence of visual or temporal understanding.
+            These findings highlight critical gaps in current approaches and underscore the need for models that truly
+            engage with long visual narratives.
+          </p>
+          <!-- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-orange-50 p-6 rounded-lg border border-orange-200">
+              <h3 class="font-semibold text-orange-800 mb-3 flex items-center">
+                <span class="mr-2">📊</span> Scale & Diversity
+              </h3>
+              <ul class="list-disc list-inside text-gray-700 space-y-2">
+                <li>Over 1,000 hours of video content</li>
+                <li>Average video length of 52.59 minutes</li>
+                <li>~91K question-answer pairs</li>
+                <li>Both multiple-choice and open-ended formats</li>
+              </ul>
+            </div>
+            <div class="bg-amber-50 p-6 rounded-lg border border-amber-200">
+              <h3 class="font-semibold text-amber-800 mb-3 flex items-center">
+                <span class="mr-2">🧠</span> Comprehensive Skills
+              </h3>
+              <ul class="list-disc list-inside text-gray-700 space-y-2">
+                <li>Grounding-based: scene transitions, character actions</li>
+                <li>Reasoning-based: deep context, event linking</li>
+                <li>Evaluates model's temporal reasoning</li>
+                <li>Tests narrative understanding capabilities</li>
+              </ul>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Replace the existing leaderboard section with this updated version: -->
+<div class="mt-20 text-center" data-aos="fade-up" data-aos-delay="200">
+  <!-- Background container with enhanced styling -->
+  <div class="relative mx-auto max-w-4xl p-8 rounded-3xl shadow-2xl border-2 border-orange-200 overflow-hidden"
+       style="background: linear-gradient(135deg, var(--cream) 0%, #fff8e1 50%, var(--warm-white) 100%);">
+    
+    <!-- Animated background elements -->
+    <div class="absolute top-0 left-0 w-32 h-32 rounded-full opacity-20 animate-pulse"
+         style="background: linear-gradient(135deg, var(--primary-orange) 0%, var(--gold) 100%); transform: translate(-50%, -50%);"></div>
+    <div class="absolute bottom-0 right-0 w-40 h-40 rounded-full opacity-15 animate-pulse"
+         style="background: linear-gradient(135deg, var(--warm-brown) 0%, var(--primary-orange) 100%); transform: translate(50%, 50%); animation-delay: 1s;"></div>
+    
+    <!-- Content container -->
+    <div class="relative z-10">
+      <!-- Header section -->
+      <div class="mb-8">
+        <div class="flex justify-center items-center mb-4">
+          <div class="p-3 rounded-full mr-4 shadow-lg" style="background: linear-gradient(135deg, var(--primary-orange) 0%, var(--gold) 100%);">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
           </div>
-            <div class="column has-text-centered">
-              <div class="publication-links">
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/2406.19875" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-arxiv"></i>
-                    </span>
-                    <span>Paper</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="https://github.com/Vision-CAIR/Infinibench/tree/main" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Github code</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      🤗
-                    </span>
-                    <span>Benchmark Download</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <!-- go to the leaderbord section -->
-                  <a href="#leaderboard" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      🏆
-                    </span>
-                    <span>Leaderboard</span>
-                  </a>
-                </span>
+          <h3 class="text-3xl font-bold" style="color: var(--warm-brown);">
+            🏆 Model Performance Results
+          </h3>
+        </div>
+        
+        <p class="text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed">
+          Explore comprehensive evaluation results across all 8 skills with detailed performance metrics, 
+          interactive comparisons, and downloadable datasets.
+        </p>
+      </div>
+
+      <!-- Highlighted stats row (simplified to 2 columns) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 max-w-2xl mx-auto">
+        <div class="p-6 rounded-xl shadow-md transform transition-transform hover:scale-105" 
+             style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.1) 0%, rgba(230, 126, 34, 0.05) 100%);">
+          <div class="text-3xl font-bold" style="color: var(--primary-orange);">10+</div>
+          <div class="text-sm text-gray-600 mt-2">Evaluated Models</div>
+        </div>
+        <div class="p-6 rounded-xl shadow-md transform transition-transform hover:scale-105" 
+             style="background: linear-gradient(135deg, rgba(241, 196, 15, 0.1) 0%, rgba(241, 196, 15, 0.05) 100%);">
+          <div class="text-3xl font-bold" style="color: var(--gold);">8</div>
+          <div class="text-sm text-gray-600 mt-2">Core Skills</div>
+        </div>
+      </div>
+
+      <!-- Enhanced CTA button -->
+      <div class="relative inline-block">
+        <!-- Glow effect -->
+        <div class="absolute inset-0 rounded-2xl blur-xl opacity-30 animate-pulse"
+             style="background: linear-gradient(135deg, var(--primary-orange) 0%, var(--gold) 100%);"></div>
+        
+        <!-- Main button -->
+        <a href="leaderboard.html" 
+           class="relative btn-primary inline-flex items-center px-12 py-6 text-xl font-semibold rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-3xl group"
+           style="background: linear-gradient(135deg, var(--primary-orange) 0%, var(--warm-brown) 50%, var(--primary-orange-dark) 100%); 
+                  border: 2px solid var(--gold);">
+          
+          <!-- Button content -->
+          <span class="mr-3">🏆</span>
+          <span class="group-hover:translate-x-1 transition-transform duration-300">
+            Go to Interactive Leaderboard
+          </span>
+          
+          <!-- Animated arrow -->
+          <svg xmlns="http://www.w3.org/2000/svg" 
+               class="h-6 w-6 ml-3 transform group-hover:translate-x-2 group-hover:scale-110 transition-all duration-300" 
+               viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+                  d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                  clip-rule="evenodd" />
+          </svg>
+          
+          <!-- Sparkle effects -->
+          <div class="absolute -top-1 -right-1 w-3 h-3 rounded-full animate-ping" style="background-color: var(--gold);"></div>
+          <div class="absolute -bottom-1 -left-1 w-2 h-2 rounded-full animate-ping" style="background-color: var(--gold); animation-delay: 0.5s;"></div>
+        </a>
+      </div>
+
+      <!-- Simplified features showcase (single feature only) -->
+      <div class="mt-8 max-w-md mx-auto">
+        <div class="p-4 rounded-lg text-center" style="background: rgba(255, 255, 255, 0.7);">
+          <h4 class="font-semibold mb-2 flex items-center justify-center" style="color: var(--warm-brown);">
+            <span class="w-2 h-2 rounded-full mr-2" style="background-color: var(--primary-orange);"></span>
+            Interactive Comparisons
+          </h4>
+          <p class="text-sm text-gray-600">Side-by-side model performance analysis with dynamic filtering</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </section>
+
+  <div class="benchmark-container my-16">
+    <div class="header">
+      <h1>InfiniBench vs. Existing Video Understanding Benchmarks</h1>
+      <p>Comprehensive comparison of video question-answering datasets and benchmarks</p>
+    </div>
+
+    <div class="table-container">
+      <table class="comparison-table">
+        <thead>
+          <tr class="table-header">
+            <th rowspan="2">Category</th>
+            <th rowspan="2">Benchmark</th>
+            <th rowspan="2">Questions</th>
+            <th rowspan="2">Videos</th>
+            <th rowspan="2">Avg Duration<br>(minutes)</th>
+            <th rowspan="2">Total Duration<br>(hours)</th>
+            <th colspan="2">Question Type</th>
+            <th colspan="3">QA Source</th>
+            <th colspan="2">Annotations</th>
+          </tr>
+          <tr class="table-header sub-header">
+            <th>MCQ</th>
+            <th>Open</th>
+            <th>Video</th>
+            <th>Transcript</th>
+            <th>Summary</th>
+            <th>Auto</th>
+            <th>Human</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Short Category -->
+          <tr>
+            <td class="category-cell" rowspan="3">Short</td>
+            <td class="benchmark-name">TGIF-QA</td>
+            <td class="number-cell">8.5K</td>
+            <td class="number-cell">9,575</td>
+            <td class="number-cell">0.05</td>
+            <td class="number-cell">7.98</td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="check-icon">✓</span></td>
+          </tr>
+          <tr>
+            <td class="benchmark-name">MSRVTT-QA</td>
+            <td class="number-cell">72.8K</td>
+            <td class="number-cell">2,990</td>
+            <td class="number-cell">0.25</td>
+            <td class="number-cell">12.45</td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+          </tr>
+          <tr>
+            <td class="benchmark-name">MV-Bench</td>
+            <td class="number-cell">4.0K</td>
+            <td class="number-cell">3,641</td>
+            <td class="number-cell">0.27</td>
+            <td class="number-cell">16.38</td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td class="cross-icon">✗</td>
+            <td class="cross-icon">✗</td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+          </tr>
+
+          <!-- Long Category -->
+          <tr>
+            <td class="category-cell" rowspan="8">Long</td>
+            <td class="benchmark-name">Activity-QA</td>
+            <td class="number-cell">8.0K</td>
+            <td class="number-cell">800</td>
+            <td class="number-cell">1.85</td>
+            <td class="number-cell">24.67</td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+          </tr>
+          <tr>
+            <td class="benchmark-name">TVQA</td>
+            <td class="number-cell">15.2K</td>
+            <td class="number-cell">2,179</td>
+            <td class="number-cell">1.86</td>
+            <td class="number-cell">67.55</td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+          </tr>
+          <tr>
+            <td class="benchmark-name">Egoschema</td>
+            <td class="number-cell">5.0K</td>
+            <td class="number-cell">5,063</td>
+            <td class="number-cell">3.00</td>
+            <td class="number-cell">253.15</td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td class="check-icon">✓</td>
+            <td class="cross-icon">✗</td>
+            <td class="cross-icon">✗</td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="check-icon">✓</span></td>
+          </tr>
+          <tr>
+            <td class="benchmark-name">LongVideoBench</td>
+            <td class="number-cell">6.7K</td>
+            <td class="number-cell">3,763</td>
+            <td class="number-cell">7.88</td>
+            <td class="number-cell">494.21</td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td class="cross-icon">✗</td>
+            <td class="cross-icon">✗</td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+          </tr>
+          <tr>
+            <td class="benchmark-name">Moviechat</td>
+            <td class="number-cell">13.0K</td>
+            <td class="number-cell">1,000</td>
+            <td class="number-cell">9.40</td>
+            <td class="number-cell">156.67</td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+          </tr>
+          <tr>
+            <td class="benchmark-name">MLVU</td>
+            <td class="number-cell">3.1K</td>
+            <td class="number-cell">1,730</td>
+            <td class="number-cell">15.50</td>
+            <td class="number-cell">446.92</td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="check-icon">✓</span></td>
+          </tr>
+          <tr>
+            <td class="benchmark-name">MoVQA</td>
+            <td class="number-cell">21.9K</td>
+            <td class="number-cell">100</td>
+            <td class="number-cell">16.53</td>
+            <td class="number-cell">27.55</td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td class="check-icon">✓</td>
+            <td class="cross-icon">✗</td>
+            <td class="cross-icon">✗</span></td>
+            <td class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+          </tr>
+          <tr>
+            <td class="benchmark-name">Video-MME</td>
+            <td class="number-cell">2.7K</td>
+            <td class="number-cell">900</td>
+            <td class="number-cell">16.97</td>
+            <td class="number-cell">254.55</td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td class="check-icon">✓</span></td>
+            <td class="cross-icon">✗</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+          </tr>
+
+          <!-- Very Long Category -->
+          <tr>
+            <td class="category-cell" rowspan="2">Very Long</td>
+            <td class="benchmark-name">LVBench</td>
+            <td class="number-cell">1.6K</td>
+            <td class="number-cell">103</td>
+            <td class="number-cell highlight-number">68.35</td>
+            <td class="number-cell">117.33</td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td><span class="check-icon">✓</span></td>
+            <td><span class="cross-icon">✗</span></td>
+            <td class="cross-icon">✗</td>
+            <td class="cross-icon">✗</td>
+            <td><span class="check-icon">✓</span></td>
+          </tr>
+          <tr class="infinibench-row">
+            <td class="benchmark-name">★ InfiniBench (Ours)</td>
+            <td class="number-cell highlight-number">91K</td>
+            <td class="number-cell">1,219</td>
+            <td class="number-cell">52.59</td>
+            <td class="number-cell highlight-number">1,068.45</td>
+            <td><span class="check-icon" style="color: #27ae60; font-size: 1.2rem;">✓</span></td>
+            <td><span class="check-icon" style="color: #27ae60; font-size: 1.2rem;">✓</span></td>
+            <td><span class="check-icon" style="color: #27ae60; font-size: 1.2rem;">✓</span></td>
+            <td><span class="check-icon" style="color: #27ae60; font-size: 1.2rem;">✓</span></td>
+            <td><span class="check-icon" style="color: #27ae60; font-size: 1.2rem;">✓</span></td>
+            <td><span class="check-icon" style="color: #27ae60; font-size: 1.2rem;">✓</span></td>
+            <td><span class="check-icon" style="color: #27ae60; font-size: 1.2rem;">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="stats-row">
+        <div class="stat-item">
+          <span class="stat-number">91K</span>
+          <div class="stat-label">Total Questions in InfiniBench</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">1,068</span>
+          <div class="stat-label">Total Video Hours</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">52.6</span>
+          <div class="stat-label">Average Video Duration (min)</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">100%</span>
+          <div class="stat-label">Feature Coverage</div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h3>Legend & Key Features</h3>
+        <div class="legend-grid">
+          <div class="legend-item">
+            <span class="check-icon">✓</span>
+            <span>Feature Available</span>
+          </div>
+          <div class="legend-item">
+            <span class="cross-icon">✗</span>
+            <span>Feature Not Available</span>
+          </div>
+          <div class="legend-item">
+            <span>📊</span>
+            <span>MCQ: Multiple Choice Questions</span>
+          </div>
+          <div class="legend-item">
+            <span>💬</span>
+            <span>Open: Open-ended Questions</span>
+          </div>
+          <div class="legend-item">
+            <span>🎥</span>
+            <span>Video: Video-based QA Source</span>
+          </div>
+          <div class="legend-item">
+            <span>📝</span>
+            <span>Transcript: Transcript-based QA</span>
+          </div>
+          <div class="legend-item">
+            <span>📋</span>
+            <span>Summary: Summary-based QA</span>
+          </div>
+          <div class="legend-item">
+            <span>🤖</span>
+            <span>Auto: Automated Annotations</span>
+          </div>
+          <div class="legend-item">
+            <span>👥</span>
+            <span>Human: Human Annotations</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-8">
+      <h3 class="subtitle text-gray-600 italic">
+        Comparison between InfiniBench and existing video understanding benchmarks.
+        InfiniBench has the largest number of QA pairs and the longest total video duration.
+      </h3>
+    </div>
+  </div>
+
+  <section id="statistics" class="py-24">
+    <div class="container mx-auto px-4">
+      <div data-aos="fade-up" data-aos-duration="800">
+        <h2 class="text-4xl font-bold mb-3 text-center" style="color: var(--warm-brown);">Benchmark Statistics</h2>
+        <div class="w-24 h-1 rounded-full mx-auto mb-6"
+          style="background: linear-gradient(135deg, var(--primary-orange) 0%, var(--gold) 100%);"></div>
+        <p class="text-center text-gray-600 mb-16 max-w-2xl mx-auto text-lg">Comprehensive analysis across skills and
+          video types, showcasing the breadth and depth of InfiniBench</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div
+          class="bg-white p-8 rounded-2xl shadow-xl transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-orange-100"
+          data-aos="fade-right">
+          <div class="flex items-center mb-6">
+            <div class="p-3 rounded-full mr-4" style="background-color: var(--cream);">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" style="color: var(--primary-orange);" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold" style="color: var(--warm-brown);">InfiniBench Skills Statistics</h3>
+          </div>
+          <div class="relative overflow-hidden rounded-xl">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-orange-900/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+              <span class="text-white text-sm font-medium">Hover to analyze details</span>
+            </div>
+            <img src="repo_images/full_data_statistics.png" alt="Skills Statistics"
+              class="clickable-image w-full rounded-xl transition-all duration-700 hover:scale-105">
+          </div>
+          <div class="mt-6 space-y-3">
+            <div class="flex items-center">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-full text-white font-bold mr-3"
+                style="background-color: var(--primary-orange);">A</span>
+              <p class="text-gray-700">Number of questions per skill</p>
+            </div>
+            <div class="flex items-center">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-full text-white font-bold mr-3"
+                style="background-color: var(--warm-brown);">B</span>
+              <p class="text-gray-700">Number of videos per skill</p>
+            </div>
+            <div class="flex items-center">
+              <span class="inline-flex items-center justify-center w-8 h-8 rounded-full text-white font-bold mr-3"
+                style="background-color: var(--gold);">C</span>
+              <p class="text-gray-700">Average video duration per skill</p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-white p-8 rounded-2xl shadow-xl transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-orange-100"
+          data-aos="fade-left">
+          <div class="flex items-center mb-6">
+            <div class="p-3 rounded-full mr-4" style="background-color: var(--cream);">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" style="color: var(--warm-brown);" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold" style="color: var(--warm-brown);">TV Shows vs. Movies</h3>
+          </div>
+          <div class="relative overflow-hidden rounded-xl">
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-amber-900/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+              <span class="text-white text-sm font-medium">Hover to analyze details</span>
+            </div>
+            <img src="repo_images/shows_vs_movies_statistics.png" alt="TV Shows vs Movies"
+              class="clickable-image w-full rounded-xl transition-all duration-700 hover:scale-105">
+          </div>
+          <div class="mt-6 grid grid-cols-2 gap-4">
+            <div class="p-4 rounded-lg transform transition hover:scale-105" style="background-color: var(--cream);">
+              <h4 class="font-semibold" style="color: var(--warm-brown);">TV Shows</h4>
+              <p class="text-sm text-gray-600">Episodic content with recurring characters and settings</p>
+            </div>
+            <div class="p-4 rounded-lg transform transition hover:scale-105" style="background-color: #fff8e1;">
+              <h4 class="font-semibold" style="color: var(--primary-orange);">Movies</h4>
+              <p class="text-sm text-gray-600">Self-contained narratives with complete story arcs</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-20 max-w-6xl mx-auto" data-aos="zoom-in" data-aos-delay="200">
+        <div class="bg-white p-8 rounded-2xl shadow-xl relative overflow-hidden border border-orange-100">
+          <div class="absolute top-0 right-0 w-64 h-64 rounded-full -mr-32 -mt-32 opacity-70"
+            style="background: linear-gradient(135deg, var(--cream) 0%, transparent 100%);"></div>
+          <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full -ml-48 -mb-48 opacity-70"
+            style="background: linear-gradient(135deg, #fff8e1 0%, transparent 100%);"></div>
+
+          <div class="relative z-10">
+            <div class="flex items-center mb-6">
+              <div class="p-3 rounded-full mr-4" style="background-color: var(--cream);">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" style="color: var(--gold);" fill="none"
+                  viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold" style="color: var(--warm-brown);">Annotation Pipeline</h3>
+            </div>
+
+            <div class="p-1 rounded-xl mb-6"
+              style="background: linear-gradient(135deg, var(--cream) 0%, #fff8e1 100%);">
+              <div class="relative overflow-hidden rounded-lg">
+                <img src="repo_images/ann_pipeline_iccv.png" alt="Annotation Pipeline" class="clickable-image w-full">
+                <div
+                  class="absolute inset-0 bg-gradient-to-b from-orange-900/0 to-orange-900/20 opacity-0 hover:opacity-100 transition-opacity duration-300">
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="rounded-xl p-5 transform transition-transform hover:-translate-y-1"
+                style="background: linear-gradient(135deg, var(--cream) 0%, #f8f4e6 100%);">
+                <h4 class="font-semibold mb-2 flex items-center" style="color: var(--warm-brown);">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-white text-xs mr-2"
+                    style="background-color: var(--primary-orange);">1</span>
+                  Data Collection
+                </h4>
+                <p class="text-sm text-gray-600">Diverse sources of movies and TV shows carefully selected for quality
+                  and representation</p>
+              </div>
+
+              <div class="rounded-xl p-5 transform transition-transform hover:-translate-y-1"
+                style="background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);">
+                <h4 class="font-semibold mb-2 flex items-center" style="color: var(--warm-brown);">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-white text-xs mr-2"
+                    style="background-color: var(--gold);">2</span>
+                  Question Generation
+                </h4>
+                <p class="text-sm text-gray-600">Rigorous process to create challenging questions that test all 8 core
+                  skills</p>
+              </div>
+
+              <div class="rounded-xl p-5 transform transition-transform hover:-translate-y-1"
+                style="background: linear-gradient(135deg, var(--cream) 0%, #f8f4e6 100%);">
+                <h4 class="font-semibold mb-2 flex items-center" style="color: var(--warm-brown);">
+                  <span class="inline-flex items-center justify-center w-6 h-6 rounded-full text-white text-xs mr-2"
+                    style="background-color: var(--warm-brown);">3</span>
+                  Human Verification
+                </h4>
+                <p class="text-sm text-gray-600">Multi-stage quality control to ensure accuracy and relevance of all
+                  benchmark questions</p>
               </div>
             </div>
           </div>
@@ -163,374 +1509,696 @@
       </div>
     </div>
   </section>
-  <link rel="stylesheet" type="text/css" href="js/simple_style.css" />
-  <script type="text/javascript" src="js/simple_swiper.js"></script>
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-three-fifths">
-          <img id="teaser_fig" width="100%" src="repo_images/teaser_fig.png">
-          <h3 class="subtitle has-text-centered">
-            <p style="font-family:Times New Roman"><b>InfiniBench skill set comprising eight skills. The right side
-                represents skill categories and question types, while the left side provides examples of both
-                multiple-choice (MCQ) and open-ended questions.</b></p>
-          </h3>
-        </div>
+
+  <section id="skills" class="py-20">
+    <div class="container mx-auto px-4">
+      <div data-aos="fade-up">
+        <h2 class="text-4xl font-bold mb-3 text-center" style="color: var(--warm-brown);">Skills Examples</h2>
+        <div class="w-24 h-1 rounded-full mx-auto mb-6"
+          style="background: linear-gradient(135deg, var(--primary-orange) 0%, var(--gold) 100%);"></div>
+        <p class="text-center text-gray-600 mb-16 max-w-2xl mx-auto text-lg">Explore the 8 key skills evaluated in
+          InfiniBench through interactive examples</p>
       </div>
-      <!-- Abstract. -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified">
-            <p>
-              Understanding long-form videos, such as movies and TV episodes ranging from tens of minutes to two hours, remains a major challenge for multi-modal models. Existing benchmarks often fall short in testing the full range of cognitive skills needed to process these temporally rich and narratively complex inputs. We introduce InfiniBench, a comprehensive benchmark designed to rigorously evaluate the capabilities of models in long video understanding. InfiniBench offers: (1) Over 1,000 hours of video content, with an average video length of 52.59 minutes,(2) The largest set of question-answer pairs for long video comprehension, totaling around 91 K, (3) Eight diverse skills that span both grounding-based (e.g., scene transitions, character actions) and reasoning-based (e.g., deep context, multi-event linking) understanding, and (4) Rich annotation formats, including both multiple-choice and open-ended questions. We conduct an in-depth evaluation across both commercial (GPT-4o, Gemini 1.5 Flash) and open-source (Qwen2.5-VL, InternVL2.5) vision-language models. Results reveal that current models remain far from solving long video understanding: on grounding-based skills, the top open-source model (Qwen2.5-VL) and GPT-4o achieve only 39.4% and 48.1% accuracy, respectively. Interestingly, several models achieve non-trivial performance using only the movie or episode title, without watching the video, revealing a reliance on pre-trained world knowledge that partially compensates for the absence of visual or temporal understanding. These findings highlight critical gaps in current approaches and underscore the need for models that truly engage with long visual narratives.
-            </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="skill-header">Global Appearance</div>
+          <div class="skill-content">
+            <div class="relative">
+              <img src="repo_images/skills/global_appearance_example.png"
+                alt="Global appearance skill example - showing character tracking across video timeline"
+                class="clickable-image w-full h-48 object-cover">
+            </div>
+            <p class="text-sm text-gray-700 mt-4">Ability to identify and track visual elements across the entire video
+              duration</p>
+          </div>
+        </div>
+
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="skill-header">Scene Transitions</div>
+          <div class="skill-content">
+            <div class="relative">
+              <img src="repo_images/skills/scene_transition.png" alt="Scene transition skill example"
+                class="clickable-image w-full h-48 object-cover transition-all duration-300 hover:scale-105">
+            </div>
+            <p class="text-sm text-gray-700 mt-4">Understanding how scenes change and transition throughout the video
+              narrative</p>
+          </div>
+        </div>
+
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="skill-header">Character Actions</div>
+          <div class="skill-content">
+            <div class="relative">
+              <img src="repo_images/skills/character_actions_example.png" alt="Character actions skill example"
+                class="clickable-image w-full h-48 object-cover transition-all duration-300 hover:scale-105">
+            </div>
+            <p class="text-sm text-gray-700 mt-4">Recognition and interpretation of character behaviors and actions over
+              time</p>
+          </div>
+        </div>
+
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="skill-header">Chronological Understanding</div>
+          <div class="skill-content">
+            <div class="relative">
+              <img src="repo_images/skills/choronoligical_understanding.png"
+                alt="Chronological understanding skill example"
+                class="clickable-image w-full h-48 object-cover transition-all duration-300 hover:scale-105">
+            </div>
+            <p class="text-sm text-gray-700 mt-4">Comprehension of temporal sequences and time-based relationships in
+              narratives</p>
+          </div>
+        </div>
+
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="skill-header">Summarization</div>
+          <div class="skill-content">
+            <div class="relative">
+              <img src="repo_images/skills/summarization.png" alt="Summarization skill example"
+                class="clickable-image w-full h-48 object-cover transition-all duration-300 hover:scale-105">
+            </div>
+            <p class="text-sm text-gray-700 mt-4">Ability to create concise and accurate summaries of complex video
+              content</p>
+          </div>
+        </div>
+
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="600">
+          <div class="skill-header">Deep Context Understanding</div>
+          <div class="skill-content">
+            <div class="relative">
+              <img src="repo_images/skills/deep_context_understanding.png"
+                alt="Deep context understanding skill example"
+                class="clickable-image w-full h-48 object-cover transition-all duration-300 hover:scale-105">
+            </div>
+            <p class="text-sm text-gray-700 mt-4">Advanced comprehension of implicit meanings and contextual
+              relationships</p>
+          </div>
+        </div>
+
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="700">
+          <div class="skill-header">Spoiler Understanding</div>
+          <div class="skill-content">
+            <div class="relative">
+              <img src="repo_images/skills/spoiler_questions.png" alt="Spoiler understanding skill example"
+                class="clickable-image w-full h-48 object-cover transition-all duration-300 hover:scale-105">
+            </div>
+            <p class="text-sm text-gray-700 mt-4">Recognition of plot-revealing information and story elements that
+              affect narrative</p>
+          </div>
+        </div>
+
+        <div class="skill-card" data-aos="fade-up" data-aos-delay="800">
+          <div class="skill-header">Linking Events</div>
+          <div class="skill-content">
+            <div class="relative">
+              <img src="repo_images/skills/linking_multiple_events.png" alt="Linking events skill example"
+                class="clickable-image w-full h-48 object-cover transition-all duration-300 hover:scale-105">
+            </div>
+            <p class="text-sm text-gray-700 mt-4">Ability to connect and relate different events within the video
+              timeline</p>
           </div>
         </div>
       </div>
-      <!-- Paper Model. -->
-      <div class="columns is-centered has-text-centered" id="leaderboard">
-        <div class="column is-six-fifths">
-          <div class="max-w-7xl mx-auto bg-white shadow-lg rounded-lg p-6 overflow-x-auto">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4">InfiniBench Leaderboard</h2>
-            <table class="w-full border-collapse border border-gray-200">
-              <thead class="bg-gray-200 text-gray-700 text-sm">
-                <tr>
-                  <th rowspan="2" class="border border-gray-300 p-2">Models</th>
-                  <th rowspan="2" class="border border-gray-300 p-2">Frame Rate</th>
-                  <th colspan="4" class="border border-gray-300 p-2 bg-[#A5BBFF]">Grounding Skills</th>
-                  <th colspan="4" class="border border-gray-300 p-2 bg-[#FFEFD9]">Reasoning Skills</th>
-                  <th rowspan="2" class="border border-gray-300 p-2">Avg. Acc.</th>
-                  <th rowspan="2" class="border border-gray-300 p-2">Avg. Score</th>
-                </tr>
-                <tr class="bg-gray-100">
-                  <th class="border border-gray-300 p-2">Global Appearance</th>
-                  <th class="border border-gray-300 p-2">Scene Transitions</th>
-                  <th class="border border-gray-300 p-2">Character Actions</th>
-                  <th class="border border-gray-300 p-2">Chronological Understanding</th>
-                  <th class="border border-gray-300 p-2">Summarization</th>
-                  <th class="border border-gray-300 p-2">Deep Context Understanding</th>
-                  <th class="border border-gray-300 p-2">Spoiler Understanding</th>
-                  <th class="border border-gray-300 p-2">Linking Events</th>
-                </tr>
-              </thead>
-            <tbody>
-              <tr style="background-color:#92a2fc;"><td>Baseline Random</td><td>--</td><td>19.96</td><td>19.77</td><td>18.41</td><td>36.45</td><td>--</td><td>--</td><td>--</td><td>--</td><td>23.65</td><td>--</td></tr>
-              <tr><td>GPT-4o</td><td>450</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr><td>Gemini Flash 2.0</td><td>1 FPS</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr><td>Qwen2.5VL</td><td>768</td><td>33.16</td><td>29.85</td><td>29.31</td><td>45.37</td><td>3.34</td><td>4.82</td><td>3.67</td><td>6.39</td><td>34.42</td><td>4.56</td></tr>
-              <tr><td>Qwen2VL</td><td>768</td><td>25.79</td><td>31.02</td><td>35.91</td><td>43.07</td><td>2.25</td><td>4.90</td><td>3.29</td><td>6.01</td><td>33.95</td><td>4.11</td></tr>
-              <tr><td>Intern VL 3.0</td><td>128</td><td>35.73</td><td>29.64</td><td>24.96</td><td>43.73</td><td>3.92</td><td>4.13</td><td>3.63</td><td>6.17</td><td>33.52</td><td>4.46</td></tr>
-              <tr><td>Video-Flash</td><td>1000</td><td>22.01</td><td>30.81</td><td>37.67</td><td>47.58</td><td>2.70</td><td>3.87</td><td>2.95</td><td>5.02</td><td>34.52</td><td>3.64</td></tr>
-              <tr><td>LongVU</td><td>1 FPS</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-              <tr><td>LLava-Onevision</td><td>128</td><td>24.19</td><td>27.83</td><td>25.26</td><td>46.50</td><td>2.00</td><td>4.09</td><td>3.31</td><td>6.14</td><td>30.95</td><td>3.89</td></tr>
-              <tr><td>InternLM-XComposer</td><td>16 FPW</td><td>23.27</td><td>29.53</td><td>29.99</td><td>42.78</td><td>1.67</td><td>2.84</td><td>2.46</td><td>5.00</td><td>31.39</td><td>2.99</td></tr>
-              <tr><td>InternVL2.5</td><td>128</td><td>29.05</td><td>26.65</td><td>23.99</td><td>36.26</td><td>2.51</td><td>3.14</td><td>2.32</td><td>5.06</td><td>28.99</td><td>3.26</td></tr>
-              <tr><td>InternVL2</td><td>128</td><td>27.44</td><td>25.48</td><td>23.76</td><td>40.93</td><td>2.81</td><td>3.77</td><td>3.08</td><td>5.93</td><td>29.40</td><td>3.90</td></tr>
-              <tr><td>Goldfish (Mistral)</td><td>60 FPW</td><td>17.55</td><td>23.67</td><td>23.99</td><td>39.37</td><td>3.00</td><td>5.42</td><td>3.69</td><td>6.45</td><td>26.15</td><td>4.64</td></tr>
-              <tr><td>MiniGPT4-video (Mistral)</td><td>60</td><td>18.49</td><td>25.16</td><td>28.49</td><td>41.06</td><td>2.81</td><td>3.11</td><td>3.08</td><td>3.87</td><td>28.30</td><td>3.22</td></tr>
-            </tbody>
-            </table>
-            <p class="text-gray-600 mt-4 text-sm">
-              <strong>InfiniBench leaderboard</strong> across eight skills. FPV (Frames Per Video), FPS (Frames Per
-              Second), and FPW (Frames Per Window) are reported. All models in this evaluation utilize
-              <strong>subtitles</strong>.
-            </p>
-          </div>
-          <div class="columns is-centered has-text-centered">
-          </div>
-        </div>
-      </div>
-      <br>
-      <br>
-      <!-- Paper Model. -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-three-fifths">
-          <h4 class="title is-4">InfiniBench Vs. Existing video understanding benchmarks.</h4>
-          <table class="w-full border-collapse border border-gray-200">
-            <thead class="bg-gray-200 text-gray-700 text-sm">
-              <tr>
-                <th class="border border-gray-300 p-2" rowspan="2">Category</th>
-                <th class="border border-gray-300 p-2" rowspan="2">Benchmarks</th>
-                <th class="border border-gray-300 p-2" rowspan="2">Number Questions</th>
-                <th class="border border-gray-300 p-2" rowspan="2">Number Videos</th>
-                <th class="border border-gray-300 p-2" rowspan="2">Avg Video Duration (mins)</th>
-                <th class="border border-gray-300 p-2" rowspan="2">Total Video Duration (hours)</th>
-                <th class="border border-gray-300 p-2" colspan="2">Questions Type</th>
-                <th class="border border-gray-300 p-2" colspan="3">QA Source</th>
-                <th class="border border-gray-300 p-2" colspan="2">Annotations</th>
-              </tr>
-              <tr>
-                <th class="border border-gray-300 p-2">MCQ</th>
-                <th class="border border-gray-300 p-2">Open</th>
-                <th class="border border-gray-300 p-2">Video</th>
-                <th class="border border-gray-300 p-2">Transcript</th>
-                <th class="border border-gray-300 p-2">Summary</th>
-                <th class="border border-gray-300 p-2">Auto</th>
-                <th class="border border-gray-300 p-2">Human</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="border border-gray-300 p-2" rowspan="3">Short</td>
-                <td class="border border-gray-300 p-2">TGIF-QA</td>
-                <td class="border border-gray-300 p-2">8.5 K</td>
-                <td class="border border-gray-300 p-2"><b>9575</b></td>
-                <td class="border border-gray-300 p-2">0.05</td>
-                <td class="border border-gray-300 p-2">7.98</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-              </tr>
-              <tr>
-                <td class="border border-gray-300 p-2">MSRVTT-QA</td>
-                <td class="border border-gray-300 p-2">72.8 K</td>
-                <td class="border border-gray-300 p-2">2990</td>
-                <td class="border border-gray-300 p-2">0.25</td>
-                <td class="border border-gray-300 p-2">12.45</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-              </tr>
-              <tr>
-                <td class="border border-gray-300 p-2">MV-Bench</td>
-                <td class="border border-gray-300 p-2">4.0 K</td>
-                <td class="border border-gray-300 p-2">3641</td>
-                <td class="border border-gray-300 p-2">0.27</td>
-                <td class="border border-gray-300 p-2">16.38</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-              </tr>
-              <tr>
-                <td class="border border-gray-300 p-2" rowspan="8">Long</td>
-                <td class="border border-gray-300 p-2">Activity-QA</td>
-                <td class="border border-gray-300 p-2">8.0 K</td>
-                <td class="border border-gray-300 p-2">800</td>
-                <td class="border border-gray-300 p-2">1.85</td>
-                <td class="border border-gray-300 p-2">24.67</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-              </tr>
-              <tr>
-                <td class="border border-gray-300 p-2">TVQA</td>
-                <td class="border border-gray-300 p-2">15.2 K</td>
-                <td class="border border-gray-300 p-2">2179</td>
-                <td class="border border-gray-300 p-2">1.86</td>
-                <td class="border border-gray-300 p-2">67.55</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-              </tr>
-              <tr>
-                <td class="border border-gray-300 p-2">Egoschema</td>
-                <td class="border border-gray-300 p-2">5.0 K</td>
-                <td class="border border-gray-300 p-2">5063</td>
-                <td class="border border-gray-300 p-2">3.00</td>
-                <td class="border border-gray-300 p-2">253.15</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-              </tr>
-              <tr>
-                <td class="border border-gray-300 p-2">LongVideoBench</td>
-                <td class="border border-gray-300 p-2">6.7 K</td>
-                <td class="border border-gray-300 p-2">3763</td>
-                <td class="border border-gray-300 p-2">7.88</td>
-                <td class="border border-gray-300 p-2">494.21</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-              </tr>
-              <tr>
-                <td class="border border-gray-300 p-2">Moviechat</td>
-                <td class="border border-gray-300 p-2">13.0 K</td>
-                <td class="border border-gray-300 p-2">1000</td>
-                <td class="border border-gray-300 p-2">9.40</td>
-                <td class="border border-gray-300 p-2">156.67</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-              </tr>
-              <tr>
-                <td class="border border-gray-300 p-2">MLVU</td>
-                <td class="border border-gray-300 p-2">3.1 K</td>
-                <td class="border border-gray-300 p-2">1730</td>
-                <td class="border border-gray-300 p-2">15.50</td>
-                <td class="border border-gray-300 p-2">446.92</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-              </tr>
-              <tr>
-                <td class="border border-gray-300 p-2">MoVQA</td>
-                <td class="border border-gray-300 p-2">21.9 K</td>
-                <td class="border border-gray-300 p-2">100</td>
-                <td class="border border-gray-300 p-2">16.53</td>
-                <td class="border border-gray-300 p-2">27.55</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-              </tr>
-              <tr>
-                <td class="border border-gray-300 p-2">Video-MME</td>
-                <td class="border border-gray-300 p-2">2.7 K</td>
-                <td class="border border-gray-300 p-2">900</td>
-                <td class="border border-gray-300 p-2">16.97</td>
-                <td class="border border-gray-300 p-2">254.55</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-              </tr>
-              <tr>
-                <td class="border border-gray-300 p-2" rowspan="2">Very Long</td>
-                <td class="border border-gray-300 p-2">LVBench</td>
-                <td class="border border-gray-300 p-2">1.6 K</td>
-                <td class="border border-gray-300 p-2">103</td>
-                <td class="border border-gray-300 p-2"><b>68.35</b></td>
-                <td class="border border-gray-300 p-2">117.33</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10008;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-              </tr>
-              <tr class="highlight">
-                <td class="border border-gray-300 p-2"><b>InfiniBench (Ours)</b></td>
-                <td class="border border-gray-300 p-2"><b>91 K</b></td>
-                <td class="border border-gray-300 p-2">1219</td>
-                <td class="border border-gray-300 p-2">52.59</td>
-                <td class="border border-gray-300 p-2"><b>1068.45</b></td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-                <td class="border border-gray-300 p-2">&#10004;</td>
-              </tr>
-            </tbody>
-          </table>
-          <h3 class="subtitle has-text-centered">
-            <p style="font-family:Times New Roman"><b>Comparison between InfiniBench and existing video understanding
-                benchmarks.InfiniBench has the largest QA pairs and the longest total video durations.</b></p>
-          </h3>
-          <br>
-          <br>
 
-        </div>
-      </div>
-
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-three-fifths">
-          <h4 class="title is-4">Benchmark statistics.</h4>
-          <img id="statistics" width="100%" src="repo_images/full_data_statistics.png">
-          <h3 class="subtitle has-text-centered">
-            <p style="font-family:Times New Roman"><b>InfiniBench skills statistics. (A) Number of questions per skill,
-                (B) Number of videos per skill, and (C) Average video duration per skill</b></p>
-          </h3>
-          <img id="statistics_2" width="100%" src="repo_images/shows_vs_movies_statistics.png">
-          <h3 class="subtitle has-text-centered">
-            <p style="font-family:Times New Roman"><b>Comparison between TV shows and Movies. (A) shows the number of
-                questions, (B) represents the number of videos, (C) represents the Total video durations, and (D) shows
-                The Minimum, Maximum, and average video duration for each video source</b></p>
-          </h3>
-
-        </div>
-      </div>
-
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-three-fifths">
-          <h4 class="title is-4">Full annotation pipeline.</h4>
-          <img id="annotation_pipeline" width="100%" src="repo_images/ann_pipeline_iccv.png">
-          <h3 class="subtitle has-text-centered">
-            <p style="font-family:Times New Roman"><b>Full annotation pipeline for InfiniBench skill set. The upper
-                section depicts the global appearance pipeline, while the lower section illustrates the question
-                generation using GPT-4o. The gates for video summary and video transcript indicate that some skills
-                utilize only the summary, others use only the transcript, and some use both.</b></p>
-          </h3>
-        </div>
-      </div>
-      <!-- Paper Model. -->
-
-      <!--/ Paper video. -->
-    </div>
-
-  </section>
-
-  <script src="js/Underscore-min.js"></script>
-  <script src="js/index.js"></script>
-    <!--/ Results. -->
-  </section>
-
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-three-fifths">
-          <h2 class="title is-3">Skills Examples</h2>
-          <div>
-            <img src="repo_images/skills/linking_multiple_events.png" alt="Linking multiple events questions example">
-            <img src="repo_images/skills/spoiler_questions.png" alt="spoiler questions example">
-            <img src="repo_images/skills/choronoligical_understanding.png" alt="choronoligical_understanding questions example">
-            <img src="repo_images/skills/deep_context_understanding.png" alt="Deep context understanding questions skill">
-            <img src="repo_images/skills/character_actions_example.png" alt="Squence of the Character actions questions skill">
-            <img src="repo_images/skills/summarization.png" alt="Summarization questions example">
-            <img src="repo_images/skills/global_appearance_example.png" alt="Global appearance questions skill">
-            <img src="repo_images/skills/scene_transition.png" alt="Scene transition questions example">
+      <div class="mt-16 text-center" data-aos="fade-up" data-aos-delay="900">
+        <div class="max-w-4xl mx-auto p-8 rounded-2xl shadow-lg border border-orange-100"
+          style="background: linear-gradient(135deg, var(--cream) 0%, #faf6ed 100%);">
+          <h3 class="text-2xl font-bold mb-6" style="color: var(--warm-brown);">Grounding vs. Reasoning Skills</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="text-left p-6 rounded-xl"
+              style="background: linear-gradient(135deg, rgba(230, 126, 34, 0.1) 0%, rgba(230, 126, 34, 0.05) 100%);">
+              <h4 class="font-semibold mb-4 flex items-center text-lg" style="color: var(--primary-orange);">
+                <span class="w-4 h-4 rounded-full mr-3" style="background-color: var(--primary-orange);"></span>
+                Grounding-Based Skills
+              </h4>
+              <ul class="space-y-3 text-gray-700">
+                <li class="flex items-center">
+                  <span class="w-2 h-2 rounded-full mr-3" style="background-color: var(--primary-orange);"></span>
+                  Global Appearance
+                </li>
+                <li class="flex items-center">
+                  <span class="w-2 h-2 rounded-full mr-3" style="background-color: var(--primary-orange);"></span>
+                  Scene Transitions
+                </li>
+                <li class="flex items-center">
+                  <span class="w-2 h-2 rounded-full mr-3" style="background-color: var(--primary-orange);"></span>
+                  Character Actions
+                </li>
+                <li class="flex items-center">
+                  <span class="w-2 h-2 rounded-full mr-3" style="background-color: var(--primary-orange);"></span>
+                  Chronological Understanding
+                </li>
+              </ul>
+            </div>
+            <div class="text-left p-6 rounded-xl"
+              style="background: linear-gradient(135deg, rgba(241, 196, 15, 0.1) 0%, rgba(241, 196, 15, 0.05) 100%);">
+              <h4 class="font-semibold mb-4 flex items-center text-lg" style="color: var(--gold);">
+                <span class="w-4 h-4 rounded-full mr-3" style="background-color: var(--gold);"></span>
+                Reasoning-Based Skills
+              </h4>
+              <ul class="space-y-3 text-gray-700">
+                <li class="flex items-center">
+                  <span class="w-2 h-2 rounded-full mr-3" style="background-color: var(--gold);"></span>
+                  Summarization
+                </li>
+                <li class="flex items-center">
+                  <span class="w-2 h-2 rounded-full mr-3" style="background-color: var(--gold);"></span>
+                  Deep Context Understanding
+                </li>
+                <li class="flex items-center">
+                  <span class="w-2 h-2 rounded-full mr-3" style="background-color: var(--gold);"></span>
+                  Spoiler Understanding
+                </li>
+                <li class="flex items-center">
+                  <span class="w-2 h-2 rounded-full mr-3" style="background-color: var(--gold);"></span>
+                  Linking Events
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!--/ Results. -->
   </section>
 
+  <footer style="background: linear-gradient(135deg, var(--warm-gray) 0%, var(--warm-brown) 100%);"
+    class="text-white py-16 relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 left-0 w-64 h-64 rounded-full"
+        style="background: linear-gradient(135deg, var(--primary-orange) 0%, transparent 100%); transform: translate(-50%, -50%);">
+      </div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full"
+        style="background: linear-gradient(135deg, var(--gold) 0%, transparent 100%); transform: translate(50%, 50%);">
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="space-y-6">
+          <div class="flex items-center space-x-3">
+            <img src="repo_images/icon.png" width="48" class="rounded-lg" alt="InfiniBench Logo">
+            <h3 class="text-2xl font-bold">InfiniBench</h3>
+          </div>
+          <p class="text-gray-300 leading-relaxed max-w-sm">
+            A comprehensive benchmark designed to rigorously evaluate the capabilities of multimodal models in long
+            video understanding across movies and TV shows.
+          </p>
+          <div class="flex space-x-6">
+            <a href="https://github.com/Vision-CAIR/Infinibench/tree/main"
+              class="group flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 transform hover:scale-110">
+              <i class="fab fa-github text-xl group-hover:text-white transition-colors"></i>
+            </a>
+            <a href="https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main"
+              class="group flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 transform hover:scale-110">
+              <span class="text-xl group-hover:text-white transition-colors">🤗</span>
+            </a>
+            <a href="https://arxiv.org/abs/2406.19875"
+              class="group flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 transition-all duration-300 transform hover:scale-110">
+              <i class="fas fa-file-alt text-xl group-hover:text-white transition-colors"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <h3 class="text-xl font-semibold mb-6" style="color: var(--gold-light);">Quick Links</h3>
+          <nav class="space-y-3">
+            <a href="#about"
+              class="block text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2 flex items-center group">
+              <span class="w-0 group-hover:w-4 h-0.5 mr-0 group-hover:mr-2 transition-all duration-300"
+                style="background-color: var(--gold);"></span>
+              About
+            </a>
+            <a href="#benchmark"
+              class="block text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2 flex items-center group">
+              <span class="w-0 group-hover:w-4 h-0.5 mr-0 group-hover:mr-2 transition-all duration-300"
+                style="background-color: var(--gold);"></span>
+              Benchmark
+            </a>
+            <a href="#statistics"
+              class="block text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2 flex items-center group">
+              <span class="w-0 group-hover:w-4 h-0.5 mr-0 group-hover:mr-2 transition-all duration-300"
+                style="background-color: var(--gold);"></span>
+              Statistics
+            </a>
+            <a href="#skills"
+              class="block text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2 flex items-center group">
+              <span class="w-0 group-hover:w-4 h-0.5 mr-0 group-hover:mr-2 transition-all duration-300"
+                style="background-color: var(--gold);"></span>
+              Skills
+            </a>
+            <a href="leaderboard.html"
+              class="block text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2 flex items-center group">
+              <span class="w-0 group-hover:w-4 h-0.5 mr-0 group-hover:mr-2 transition-all duration-300"
+                style="background-color: var(--gold);"></span>
+              Leaderboard
+            </a>
+          </nav>
+        </div>
+
+        <div class="space-y-6">
+          <h3 class="text-xl font-semibold mb-6" style="color: var(--gold-light);">Research Team</h3>
+          <div class="space-y-3">
+            <a href="https://scholar.google.com/citations?user=6gRlYHAAAAAJ&hl=en"
+              class="block text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">Kirolos
+              Ataallah</a>
+            <a href="https://eslambakr.github.io/"
+              class="block text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">Eslam
+              Abdelrahman</a>
+            <a href="https://scholar.google.com/citations?user=SRCGuS4AAAAJ&hl=en"
+              class="block text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">Mahmoud
+              Ahmed</a>
+            <a href="https://www.linkedin.com/in/chenhui-gou-9201081a1/"
+              class="block text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">Chenhui
+              Gou</a>
+            <a href="https://kpahwa16.github.io/"
+              class="block text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">Khushbu
+              Pahwa</a>
+            <a href="https://dingjiansw101.github.io/"
+              class="block text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">Jian Ding</a>
+            <a href="https://www.mohamed-elhoseiny.com/"
+              class="block text-gray-300 hover:text-white transition-all duration-300 hover:translate-x-2">Mohamed
+              Elhoseiny</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-600 mt-12 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <p class="text-gray-400 text-sm text-center md:text-left">
+            © 2025 InfiniBench. All rights reserved.
+          </p>
+          <div class="flex items-center space-x-6 text-sm text-gray-400">
+            <span class="flex items-center">
+              <span class="w-2 h-2 rounded-full mr-2" style="background-color: var(--primary-orange);"></span>
+              KAUST
+            </span>
+            <span class="flex items-center">
+              <span class="w-2 h-2 rounded-full mr-2" style="background-color: var(--success);"></span>
+              Monash University
+            </span>
+            <span class="flex items-center">
+              <span class="w-2 h-2 rounded-full mr-2" style="background-color: var(--gold);"></span>
+              RICE University
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Enhanced JavaScript for better interactivity -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Enhanced image loading with fallback
+      function handleImageLoading() {
+        document.querySelectorAll('img').forEach(img => {
+          // Set initial opacity to 1 for skill cards to prevent loading flash
+          if (img.closest('.skill-card')) {
+            img.style.opacity = '1';
+            img.classList.add('loaded');
+          } else if (!img.classList.contains('loaded')) {
+            img.style.opacity = '0';
+          }
+
+          // Handle successful load
+          img.addEventListener('load', function () {
+            this.style.opacity = '1';
+            this.classList.add('loaded');
+          });
+
+          // Handle errors with retry mechanism
+          img.addEventListener('error', function () {
+            console.warn('Failed to load image:', this.src);
+            this.style.opacity = '0.3';
+            this.style.border = '2px dashed #ccc';
+            this.setAttribute('title', 'Image failed to load: ' + this.src);
+
+            // Try loading again after a delay (one time only)
+            if (!this.dataset.retried) {
+              this.dataset.retried = 'true';
+              setTimeout(() => {
+                const originalSrc = this.src;
+                this.src = '';
+                this.src = originalSrc;
+              }, 1000);
+            }
+          });
+
+          // Force load if already cached
+          if (img.complete && img.naturalHeight !== 0) {
+            img.style.opacity = '1';
+            img.classList.add('loaded');
+          }
+        });
+      }
+
+      // Call image loading handler
+      handleImageLoading();
+
+      // Replace the makeAllImagesClickable function with this improved version:
+      function makeAllImagesClickable() {
+        // Get all images on the page
+        const allImages = document.querySelectorAll('img');
+
+        allImages.forEach(function (img) {
+          // Skip very small images (likely icons) and images in navigation
+          const isSmallIcon = img.width <= 60 && img.height <= 60;
+          const isNavImage = img.closest('nav') || img.closest('header');
+
+          // Skip if it's a small icon or navigation image
+          if (isSmallIcon || isNavImage) {
+            return;
+          }
+
+          // Skip if already processed
+          if (img.dataset.modalProcessed) {
+            return;
+          }
+
+          // Mark as processed
+          img.dataset.modalProcessed = 'true';
+
+          // Add clickable styling and functionality
+          img.style.cursor = 'pointer';
+          img.classList.add('clickable-image');
+
+          // Add hover effect if not already present
+          if (!img.style.transition) {
+            img.style.transition = 'all 0.3s ease';
+          }
+
+          // Add click event
+          img.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            console.log('Image clicked:', this.src); // Debug log
+
+            if (this.complete && this.naturalHeight !== 0) {
+              openModal(this.src, this.alt || this.title || 'Image');
+            } else {
+              console.warn('Image not loaded yet:', this.src);
+              // Try to load and then open modal
+              this.onload = () => {
+                openModal(this.src, this.alt || this.title || 'Image');
+              };
+            }
+          });
+
+          // Add keyboard support for accessibility
+          img.setAttribute('tabindex', '0');
+          img.setAttribute('aria-label', 'Click to view full size image');
+
+          img.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              if (this.complete && this.naturalHeight !== 0) {
+                openModal(this.src, this.alt || this.title || 'Image');
+              }
+            }
+          });
+        });
+      }
+
+      // Replace the openModal function:
+      function openModal(src, alt) {
+        console.log('Opening modal for:', src); // Debug log
+
+        // Create modal if it doesn't exist
+        let modal = document.getElementById('imageModal');
+        if (!modal) {
+          createModal();
+          modal = document.getElementById('imageModal');
+        }
+
+        const modalImg = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+
+        if (!modal || !modalImg || !modalCaption) {
+          console.error('Modal elements not found');
+          return;
+        }
+
+        // Reset modal state
+        modal.classList.remove('active');
+        modalImg.style.opacity = '0';
+        modalCaption.textContent = 'Loading...';
+
+        // Load image
+        const loadPromise = new Promise((resolve, reject) => {
+          modalImg.onload = function () {
+            console.log('Modal image loaded successfully');
+            this.style.opacity = '1';
+            modalCaption.textContent = alt || 'Image';
+            resolve();
+          };
+
+          modalImg.onerror = function () {
+            console.error('Failed to load modal image:', src);
+            modalCaption.textContent = 'Failed to load image';
+            this.style.opacity = '1';
+            reject();
+          };
+
+          modalImg.src = src;
+        });
+
+        // Show modal
+        setTimeout(() => {
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          modal.focus();
+        }, 10);
+      }
+
+      // Enhanced modal creation
+      function createModal() {
+        // Remove existing modal if any
+        const existingModal = document.getElementById('imageModal');
+        if (existingModal) {
+          existingModal.remove();
+        }
+
+        const modalHTML = `
+          <div id="imageModal" class="modal-overlay" role="dialog" aria-labelledby="modalCaption" aria-modal="true">
+            <div class="modal-container">
+              <button class="modal-close" aria-label="Close modal">&times;</button>
+              <img id="modalImage" class="modal-image" src="" alt="">
+              <div id="modalCaption" class="modal-caption"></div>
+            </div>
+          </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+        // Add event listeners to the new modal
+        const modal = document.getElementById('imageModal');
+        const closeBtn = modal.querySelector('.modal-close');
+
+        modal.addEventListener('click', function (e) {
+          if (e.target === this) {
+            closeModal(e);
+          }
+        });
+
+        closeBtn.addEventListener('click', closeModal);
+      }
+
+      // Make global functions available
+      window.openModal = openModal;
+      window.closeModal = function (event) {
+        if (event.target.id === 'imageModal' ||
+          event.target.classList.contains('modal-close')) {
+          const modal = document.getElementById('imageModal');
+          if (modal) {
+            modal.classList.remove('active');
+
+            setTimeout(() => {
+              if (!modal.classList.contains('active')) {
+                document.body.style.overflow = '';
+              }
+            }, 300);
+          }
+        }
+      };
+
+      // Add keyboard support for modal
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          const modal = document.getElementById('imageModal');
+          if (modal && modal.classList.contains('active')) {
+            window.closeModal({ target: modal });
+          }
+        }
+      });
+
+      // Initialize clickable images
+      makeAllImagesClickable();
+
+      // Re-check images periodically for dynamic content
+      const imageObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          if (mutation.type === 'childList') {
+            mutation.addedNodes.forEach(function (node) {
+              if (node.nodeType === 1) { // Element node
+                const newImages = node.querySelectorAll ? node.querySelectorAll('img') : [];
+                if (newImages.length > 0) {
+                  handleImageLoading();
+                  makeAllImagesClickable();
+                }
+                if (node.tagName === 'IMG') {
+                  handleImageLoading();
+                  makeAllImagesClickable();
+                }
+              }
+            });
+          }
+        });
+      });
+
+      imageObserver.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+
+      // Rest of your existing JavaScript...
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', function () {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+
+      // Initialize AOS if available
+      if (typeof AOS !== 'undefined') {
+        AOS.init({
+          duration: 800,
+          once: true,
+          offset: 100,
+          easing: 'ease-out-cubic',
+          delay: 100
+        });
+      }
+    });
+  </script>
+
+  <!-- Enhanced CSS for additional animations and fixes -->
+  <style>
+    .animate-in {
+      animation: slideInUp 0.6s ease-out forwards;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Enhanced header transition */
+    header {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    /* Loading state for images */
+    img {
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    img.loaded {
+      opacity: 1;
+    }
+
+    /* Focus styles for accessibility */
+    .clickable-image:focus {
+      outline: 2px solid var(--primary-orange);
+      outline-offset: 2px;
+      border-radius: 8px;
+    }
+
+    /* Enhanced button hover effects */
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(230, 126, 34, 0.3);
+    }
+
+    /* Enhanced skill card styling */
+    .skill-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(139, 69, 19, 0.15);
+    }
+
+    /* Improved responsive behavior */
+    @media (max-width: 768px) {
+      .comparison-table {
+        font-size: 0.75rem;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 0.5rem 0.25rem;
+      }
+
+      .skill-card {
+        margin-bottom: 1rem;
+      }
+
+      .grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-4 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        gap: 1rem;
+      }
+    }
+
+    @media (min-width: 640px) and (max-width: 1024px) {
+      .grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    /* Footer link animations */
+    footer a {
+      transition: all 0.3s ease;
+    }
+
+    /* Smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+
+  <!-- Add modal HTML -->
+  <div id="imageModal" class="modal-overlay" onclick="closeModal(event)" role="dialog" aria-labelledby="modalCaption"
+    aria-modal="true">
+    <div class="modal-container">
+      <button class="modal-close" onclick="closeModal(event)" aria-label="Close modal">&times;</button>
+      <img id="modalImage" class="modal-image" src="" alt="">
+      <div id="modalCaption" class="modal-caption"></div>
+    </div>
+  </div>
+
+  <!-- Add AOS animation library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
 </body>
 

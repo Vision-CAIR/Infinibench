@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfiniBench Leaderboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="./static/images/icon.png">
+    <style>
+        /* Warm color palette - matching index.html */
+        :root {
+            --primary-orange: #e67e22;
+            --primary-orange-light: #f39c12;
+            --primary-orange-dark: #d35400;
+            --warm-brown: #8b4513;
+            --warm-brown-light: #a0522d;
+            --warm-gray: #2c3e50;
+            --warm-gray-light: #34495e;
+            --cream: #fef5e7;
+            --warm-white: #fefdfb;
+            --gold: #f1c40f;
+            --gold-light: #f4d03f;
+            --success: #27ae60;
+            --error: #e74c3c;
+            --text-dark: #2c3e50;
+            --text-medium: #5d6d7e;
+            --text-light: #85929e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--warm-white) 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        /* Header styling matching index.html */
+        .site-header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(139, 69, 19, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            border-bottom: 1px solid rgba(230, 126, 34, 0.1);
+        }
+
+        .site-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .site-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .site-logo span {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--warm-brown);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-orange);
+            background: var(--cream);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-orange);
+            background: linear-gradient(135deg, var(--cream) 0%, #f8f4e6 100%);
+            font-weight: 600;
+        }
+
+        /* Main container */
+        .main-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            background: white;
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(139, 69, 19, 0.1);
+            overflow: hidden;
+            border: 1px solid rgba(230, 126, 34, 0.1);
+        }
+
+        /* Hero section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--warm-brown) 0%, var(--primary-orange) 50%, var(--warm-gray) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            background: linear-gradient(45deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Stats grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+        }
+
+        /* Controls section */
+        .controls-section {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--cream) 0%, #f8f4e6 100%);
+            border-bottom: 1px solid rgba(230, 126, 34, 0.1);
+        }
+
+        .controls-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .search-container {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.875rem 1rem 0.875rem 3rem;
+            border: 2px solid rgba(139, 69, 19, 0.1);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            background: white;
+            transition: all 0.3s ease;
+            color: var(--text-dark);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.25rem;
+            border: 2px solid var(--primary-orange-light);
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--primary-orange);
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover {
+            background: var(--cream);
+            transform: translateY(-1px);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary-orange) 0%, var(--warm-brown) 100%);
+            color: white;
+            border-color: var(--primary-orange);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+
+        /* Table container */
+        .table-section {
+            background: white;
+            overflow-x: auto;
+            max-height: 70vh;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.9rem;
+        }
+
+        .leaderboard-table thead {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .leaderboard-table th {
+            background: linear-gradient(135deg, var(--warm-brown) 0%, var(--warm-gray) 100%);
+            color: white;
+            padding: 1rem 0.75rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .leaderboard-table th:hover {
+            background: linear-gradient(135deg, var(--primary-orange) 0%, var(--warm-brown) 100%);
+        }
+
+        .leaderboard-table th.sortable::after {
+            content: '⇅';
+            margin-left: 0.5rem;
+            opacity: 0.6;
+        }
+
+        .leaderboard-table th.sort-asc::after {
+            content: '↑';
+            opacity: 1;
+            color: var(--gold-light);
+        }
+
+        .leaderboard-table th.sort-desc::after {
+            content: '↓';
+            opacity: 1;
+            color: var(--gold-light);
+        }
+
+        .grounding-header {
+            background: linear-gradient(135deg, var(--primary-orange-light) 0%, var(--primary-orange) 100%) !important;
+        }
+
+        .reasoning-header {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--primary-orange-light) 100%) !important;
+        }
+
+        .leaderboard-table td {
+            padding: 1rem 0.75rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(139, 69, 19, 0.08);
+            border-right: 1px solid rgba(139, 69, 19, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .leaderboard-table tbody tr {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .leaderboard-table tbody tr:nth-child(odd) {
+            background: white;
+        }
+
+        .leaderboard-table tbody tr:nth-child(even) {
+            background: var(--cream);
+        }
+
+        .leaderboard-table tbody tr:hover {
+            background: linear-gradient(135deg, rgba(230, 126, 34, 0.1) 0%, rgba(241, 196, 15, 0.05) 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.1);
+        }
+
+        .model-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            text-align: left !important;
+            position: relative;
+        }
+
+        .rank-badge {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 28px;
+            text-align: center;
+            margin-right: 0.75rem;
+            vertical-align: middle;
+        }
+
+        .rank-1 { 
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); 
+            box-shadow: 0 2px 8px rgba(241, 196, 15, 0.4);
+        }
+        .rank-2 { 
+            background: linear-gradient(135deg, #C0C0C0 0%, #A8A8A8 100%); 
+            box-shadow: 0 2px 8px rgba(192, 192, 192, 0.4);
+        }
+        .rank-3 { 
+            background: linear-gradient(135deg, #CD7F32 0%, #B8860B 100%); 
+            box-shadow: 0 2px 8px rgba(205, 127, 50, 0.4);
+        }
+        .rank-other { 
+            background: linear-gradient(135deg, var(--text-medium) 0%, var(--text-light) 100%); 
+        }
+
+        .baseline-row {
+            background: linear-gradient(135deg, rgba(230, 126, 34, 0.15) 0%, rgba(241, 196, 15, 0.1) 100%) !important;
+            border-left: 4px solid var(--primary-orange);
+        }
+
+        .score-cell {
+            font-weight: 600;
+            position: relative;
+            padding: 0.75rem 0.5rem;
+        }
+
+        .empty-cell {
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Footer */
+        .footer-section {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--cream) 0%, #f8f4e6 100%);
+            border-top: 1px solid rgba(230, 126, 34, 0.1);
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--text-medium);
+            font-size: 0.9rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Loading state */
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            color: var(--text-medium);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--cream);
+            border-left: 4px solid var(--primary-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .site-nav {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-section {
+                padding: 2rem 1rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .controls-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-container {
+                min-width: auto;
+            }
+
+            .filter-buttons {
+                justify-content: center;
+            }
+
+            .leaderboard-table {
+                font-size: 0.8rem;
+            }
+
+            .leaderboard-table th,
+            .leaderboard-table td {
+                padding: 0.5rem 0.25rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Enhanced button styles */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-orange) 0%, var(--warm-brown) 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230, 126, 34, 0.3);
+        }
+
+        /* Tooltip styles */
+        [title] {
+            position: relative;
+        }
+
+        /* Skills indicators */
+        .skill-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+
+        .grounding-skill { background-color: var(--primary-orange); }
+        .reasoning-skill { background-color: var(--gold); }
+    </style>
+</head>
+<body>
+    <!-- Header matching index.html -->
+    <header class="site-header">
+        <nav class="site-nav">
+            <a href="index.html" class="site-logo">
+                <img src="repo_images/icon.png" alt="InfiniBench Logo">
+                <span>InfiniBench</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#benchmark">Benchmark</a>
+                <a href="index.html#statistics">Statistics</a>
+                <a href="index.html#skills">Skills</a>
+                <a href="leaderboard.html" class="active">Leaderboard</a>
+                <a href="https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main" target="_blank">
+                    <span>🤗</span> Download
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main container -->
+    <div class="main-container fade-in">
+        <!-- Hero section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <h1>🏆 InfiniBench Leaderboard</h1>
+                <p>Comprehensive evaluation across eight key video understanding skills</p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-value" id="total-models">--</span>
+                        <span class="stat-label">Models Evaluated</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="avg-accuracy">--%</span>
+                        <span class="stat-label">Top Accuracy</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="top-score">--</span>
+                        <span class="stat-label">Best Score</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">8</span>
+                        <span class="stat-label">Skills Tested</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls section -->
+        <div class="controls-section">
+            <div class="controls-container">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search" class="search-input" placeholder="Search models...">
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-list mr-2"></i>All Models
+                    </button>
+                    <button class="filter-btn" data-filter="high-performance">
+                        <i class="fas fa-star mr-2"></i>High Performance
+                    </button>
+                    <button class="filter-btn" data-filter="open-source">
+                        <i class="fas fa-code mr-2"></i>Open Source
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table section -->
+        <div class="table-section">
+            <table class="leaderboard-table" id="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th rowspan="2" class="sortable" data-sort="model">
+                            <i class="fas fa-robot mr-2"></i>Models
+                        </th>
+                        <th rowspan="2" class="sortable" data-sort="framerate">
+                            <i class="fas fa-video mr-2"></i>Frame Rate
+                        </th>
+                        <th colspan="4" class="grounding-header">
+                            <span class="skill-indicator grounding-skill"></span>Grounding Skills
+                        </th>
+                        <th colspan="4" class="reasoning-header">
+                            <span class="skill-indicator reasoning-skill"></span>Reasoning Skills
+                        </th>
+                        <th rowspan="2" class="sortable" data-sort="avg_acc">
+                            <i class="fas fa-chart-line mr-2"></i>Avg. Acc.
+                        </th>
+                        <th rowspan="2" class="sortable" data-sort="avg_score">
+                            <i class="fas fa-trophy mr-2"></i>Avg. Score
+                        </th>
+                    </tr>
+                    <tr class="sub-header">
+                        <th class="grounding-header sortable" data-sort="global_appearance" title="Ability to identify and track visual elements across the entire video">Global Appearance</th>
+                        <th class="grounding-header sortable" data-sort="scene_transitions" title="Understanding of how scenes change and transition throughout the video">Scene Transitions</th>
+                        <th class="grounding-header sortable" data-sort="character_actions" title="Recognition and interpretation of character behaviors and actions">Character Actions</th>
+                        <th class="grounding-header sortable" data-sort="chronological" title="Comprehension of temporal sequences and time-based relationships">Chronological Understanding</th>
+                        <th class="reasoning-header sortable" data-sort="summarization" title="Ability to create concise summaries of video content">Summarization</th>
+                        <th class="reasoning-header sortable" data-sort="deep_context" title="Advanced comprehension of implicit meanings and context">Deep Context Understanding</th>
+                        <th class="reasoning-header sortable" data-sort="spoiler" title="Recognition of plot-revealing information and story elements">Spoiler Understanding</th>
+                        <th class="reasoning-header sortable" data-sort="linking_events" title="Ability to connect and relate different events within the video">Linking Events</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <tr class="loading-container">
+                        <td colspan="12">
+                            <div class="spinner"></div>
+                            Loading leaderboard data...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer section -->
+        <div class="footer-section">
+            <p class="footer-text">
+                <strong>InfiniBench Leaderboard</strong> - Comprehensive evaluation across eight video understanding skills. 
+                All models utilize <strong>subtitles</strong> for enhanced performance. Results show Frame Rate configurations: 
+                FPV (Frames Per Video), FPS (Frames Per Second), and FPW (Frames Per Window).
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Model data (keeping the existing data structure)
+        const modelData = [
+            {
+                model: "Baseline Random",
+                framerate: "--",
+                global_appearance: 19.96,
+                scene_transitions: 19.77,
+                character_actions: 18.41,
+                chronological: 36.45,
+                summarization: null,
+                deep_context: null,
+                spoiler: null,
+                linking_events: null,
+                avg_acc: 23.65,
+                avg_score: null,
+                isBaseline: true
+            },
+            {
+                model: "GPT-4o",
+                framerate: "450",
+                global_appearance: null,
+                scene_transitions: null,
+                character_actions: null,
+                chronological: null,
+                summarization: null,
+                deep_context: null,
+                spoiler: null,
+                linking_events: null,
+                avg_acc: null,
+                avg_score: null
+            },
+            {
+                model: "Gemini Flash 2.0",
+                framerate: "1 FPS",
+                global_appearance: null,
+                scene_transitions: null,
+                character_actions: null,
+                chronological: null,
+                summarization: null,
+                deep_context: null,
+                spoiler: null,
+                linking_events: null,
+                avg_acc: null,
+                avg_score: null
+            },
+            {
+                model: "Qwen2.5VL",
+                framerate: "768",
+                global_appearance: 33.16,
+                scene_transitions: 29.85,
+                character_actions: 29.31,
+                chronological: 45.37,
+                summarization: 3.34,
+                deep_context: 4.82,
+                spoiler: 3.67,
+                linking_events: 6.39,
+                avg_acc: 34.42,
+                avg_score: 4.56
+            },
+            {
+                model: "Qwen2VL",
+                framerate: "768",
+                global_appearance: 25.79,
+                scene_transitions: 31.02,
+                character_actions: 35.91,
+                chronological: 43.07,
+                summarization: 2.25,
+                deep_context: 4.90,
+                spoiler: 3.29,
+                linking_events: 6.01,
+                avg_acc: 33.95,
+                avg_score: 4.11
+            },
+            {
+                model: "Intern VL 3.0",
+                framerate: "128",
+                global_appearance: 35.73,
+                scene_transitions: 29.64,
+                character_actions: 24.96,
+                chronological: 43.73,
+                summarization: 3.92,
+                deep_context: 4.13,
+                spoiler: 3.63,
+                linking_events: 6.17,
+                avg_acc: 33.52,
+                avg_score: 4.46
+            },
+            {
+                model: "Video-Flash",
+                framerate: "1000",
+                global_appearance: 22.01,
+                scene_transitions: 30.81,
+                character_actions: 37.67,
+                chronological: 47.58,
+                summarization: 2.70,
+                deep_context: 3.87,
+                spoiler: 2.95,
+                linking_events: 5.02,
+                avg_acc: 34.52,
+                avg_score: 3.64
+            },
+            {
+                model: "LongVU",
+                framerate: "1 FPS",
+                global_appearance: null,
+                scene_transitions: null,
+                character_actions: null,
+                chronological: null,
+                summarization: null,
+                deep_context: null,
+                spoiler: null,
+                linking_events: null,
+                avg_acc: null,
+                avg_score: null
+            },
+            {
+                model: "LLava-Onevision",
+                framerate: "128",
+                global_appearance: 24.19,
+                scene_transitions: 27.83,
+                character_actions: 25.26,
+                chronological: 46.50,
+                summarization: 2.00,
+                deep_context: 4.09,
+                spoiler: 3.31,
+                linking_events: 6.14,
+                avg_acc: 30.95,
+                avg_score: 3.89
+            },
+            {
+                model: "InternLM-XComposer",
+                framerate: "16 FPW",
+                global_appearance: 23.27,
+                scene_transitions: 29.53,
+                character_actions: 29.99,
+                chronological: 42.78,
+                summarization: 1.67,
+                deep_context: 2.84,
+                spoiler: 2.46,
+                linking_events: 5.00,
+                avg_acc: 31.39,
+                avg_score: 2.99
+            },
+            {
+                model: "InternVL2.5",
+                framerate: "128",
+                global_appearance: 29.05,
+                scene_transitions: 26.65,
+                character_actions: 23.99,
+                chronological: 36.26,
+                summarization: 2.51,
+                deep_context: 3.14,
+                spoiler: 2.32,
+                linking_events: 5.06,
+                avg_acc: 28.99,
+                avg_score: 3.26
+            },
+            {
+                model: "InternVL2",
+                framerate: "128",
+                global_appearance: 27.44,
+                scene_transitions: 25.48,
+                character_actions: 23.76,
+                chronological: 40.93,
+                summarization: 2.81,
+                deep_context: 3.77,
+                spoiler: 3.08,
+                linking_events: 5.93,
+                avg_acc: 29.40,
+                avg_score: 3.90
+            },
+            {
+                model: "Goldfish (Mistral)",
+                framerate: "60 FPW",
+                global_appearance: 17.55,
+                scene_transitions: 23.67,
+                character_actions: 23.99,
+                chronological: 39.37,
+                summarization: 3.00,
+                deep_context: 5.42,
+                spoiler: 3.69,
+                linking_events: 6.45,
+                avg_acc: 26.15,
+                avg_score: 4.64
+            },
+            {
+                model: "MiniGPT4-video (Mistral)",
+                framerate: "60",
+                global_appearance: 18.49,
+                scene_transitions: 25.16,
+                character_actions: 28.49,
+                chronological: 41.06,
+                summarization: 2.81,
+                deep_context: 3.11,
+                spoiler: 3.08,
+                linking_events: 3.87,
+                avg_acc: 28.30,
+                avg_score: 3.22
+            }
+        ];
+
+        let currentSort = { column: 'avg_acc', direction: 'desc' };
+        let filteredData = [...modelData];
+
+        function initializeTable() {
+            console.log('Initializing table with', modelData.length, 'models');
+            renderTable();
+            updateStats();
+            
+            // Add event listeners
+            const searchInput = document.getElementById('search');
+            if (searchInput) {
+                searchInput.addEventListener('input', handleSearch);
+            }
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', handleFilter);
+            });
+            
+            document.querySelectorAll('.sortable').forEach(th => {
+                th.addEventListener('click', handleSort);
+            });
+        }
+
+        function renderTable() {
+            console.log('Rendering table with', filteredData.length, 'filtered models');
+            const tbody = document.getElementById('table-body');
+            
+            if (!tbody) {
+                console.error('Table body element not found');
+                return;
+            }
+            
+            tbody.innerHTML = '';
+
+            if (filteredData.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="12" class="empty-cell">No models match your search criteria</td></tr>';
+                return;
+            }
+
+            // Sort data by avg_acc for ranking (excluding null values and baseline)
+            const sortedForRank = [...filteredData]
+                .filter(m => m.avg_acc !== null && !m.isBaseline)
+                .sort((a, b) => b.avg_acc - a.avg_acc);
+
+            filteredData.forEach((model, index) => {
+                const row = document.createElement('tr');
+                if (model.isBaseline) {
+                    row.className = 'baseline-row';
+                }
+
+                // Calculate rank only for models with valid avg_acc and not baseline
+                let rankHtml = '';
+                if (model.avg_acc !== null && !model.isBaseline) {
+                    const rank = sortedForRank.findIndex(m => m.model === model.model) + 1;
+                    const rankClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : 'rank-other';
+                    rankHtml = `<span class="rank-badge ${rankClass}">${rank}</span>`;
+                }
+
+                row.innerHTML = `
+                    <td class="model-name">
+                        ${rankHtml}
+                        ${model.model}
+                    </td>
+                    <td>${model.framerate}</td>
+                    <td class="score-cell">${formatValue(model.global_appearance)}</td>
+                    <td class="score-cell">${formatValue(model.scene_transitions)}</td>
+                    <td class="score-cell">${formatValue(model.character_actions)}</td>
+                    <td class="score-cell">${formatValue(model.chronological)}</td>
+                    <td class="score-cell">${formatValue(model.summarization)}</td>
+                    <td class="score-cell">${formatValue(model.deep_context)}</td>
+                    <td class="score-cell">${formatValue(model.spoiler)}</td>
+                    <td class="score-cell">${formatValue(model.linking_events)}</td>
+                    <td class="score-cell">${formatValue(model.avg_acc)}</td>
+                    <td class="score-cell">${formatValue(model.avg_score)}</td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            console.log('Table rendered successfully');
+        }
+
+        function formatValue(value) {
+            if (value === null || value === undefined) {
+                return '<span class="empty-cell">--</span>';
+            }
+            return value.toString();
+        }
+
+        function handleSearch(e) {
+            const query = e.target.value.toLowerCase();
+            filteredData = modelData.filter(model => 
+                model.model.toLowerCase().includes(query)
+            );
+            renderTable();
+            updateStats();
+        }
+
+        function handleFilter(e) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+            
+            const filter = e.target.dataset.filter;
+            switch(filter) {
+                case 'all':
+                    filteredData = [...modelData];
+                    break;
+                case 'high-performance':
+                    filteredData = modelData.filter(model => model.avg_acc !== null && model.avg_acc > 30);
+                    break;
+                case 'open-source':
+                    filteredData = modelData.filter(model => 
+                        !['GPT-4o', 'Gemini Flash 2.0'].includes(model.model)
+                    );
+                    break;
+            }
+            renderTable();
+            updateStats();
+        }
+
+        function handleSort(e) {
+            const column = e.target.dataset.sort;
+            if (!column) return;
+
+            // Update sort direction
+            if (currentSort.column === column) {
+                currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSort.column = column;
+                currentSort.direction = 'desc';
+            }
+
+            // Update UI
+            document.querySelectorAll('.sortable').forEach(th => {
+                th.classList.remove('sort-asc', 'sort-desc');
+            });
+            e.target.classList.add(currentSort.direction === 'asc' ? 'sort-asc' : 'sort-desc');
+
+            // Sort data
+            filteredData.sort((a, b) => {
+                let aVal = a[column];
+                let bVal = b[column];
+
+                if (column === 'model') {
+                    aVal = aVal.toLowerCase();
+                    bVal = bVal.toLowerCase();
+                    return currentSort.direction === 'asc' ? 
+                        aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+                }
+
+                if (aVal === null && bVal === null) return 0;
+                if (aVal === null) return 1;
+                if (bVal === null) return -1;
+
+                return currentSort.direction === 'asc' ? aVal - bVal : bVal - aVal;
+            });
+
+            renderTable();
+        }
+
+        function updateStats() {
+            const totalModels = filteredData.filter(m => !m.isBaseline).length;
+            const validAccuracies = filteredData.filter(m => m.avg_acc !== null && !m.isBaseline);
+            
+            const maxAccuracy = validAccuracies.length > 0 ? 
+                Math.max(...validAccuracies.map(m => m.avg_acc)).toFixed(1) : '--';
+            
+            const validScores = filteredData.filter(m => m.avg_score !== null && !m.isBaseline);
+            const topScore = validScores.length > 0 ? 
+                Math.max(...validScores.map(m => m.avg_score)).toFixed(2) : '--';
+
+            document.getElementById('total-models').textContent = totalModels;
+            document.getElementById('avg-accuracy').textContent = maxAccuracy + (maxAccuracy !== '--' ? '%' : '');
+            document.getElementById('top-score').textContent = topScore;
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeTable();
+            
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case 'f':
+                            e.preventDefault();
+                            document.getElementById('search').focus();
+                            break;
+                        case '1':
+                            e.preventDefault();
+                            document.querySelector('[data-filter="all"]').click();
+                            break;
+                        case '2':
+                            e.preventDefault();
+                            document.querySelector('[data-filter="high-performance"]').click();
+                            break;
+                        case '3':
+                            e.preventDefault();
+                            document.querySelector('[data-filter="open-source"]').click();
+                            break;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
