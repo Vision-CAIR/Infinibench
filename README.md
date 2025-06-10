@@ -1,6 +1,6 @@
 # <img src="figs/icon_png.png" width=30> InfiniBench: A Benchmark for Large Multi-Modal Models in Long-Form Movies and TV Shows
 
-<font size=3><div align='center' > [[<img src="figs/icon_png.png" width=18> Project Page](https://vision-cair.github.io/InfiniBench/)] [[📝 arXiv Paper](https://arxiv.org/abs/2406.19875)] [[🤗 Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main)] [[🏆Leaderboard](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main)]</div></font>
+<font size=3><div align='center' > [[<img src="figs/icon_png.png" width=18> Project Page](https://vision-cair.github.io/InfiniBench/)] [[📝 arXiv Paper](https://arxiv.org/abs/2406.19875)] [[🤗 Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main)] [[🏆Leaderboard](https://vision-cair.github.io/Infinibench/leaderboard.html)]</div></font>
 ## 🔥 News
 - **[2025-06-10]** This is a new released version of Infinibench.
 # <img src="figs/icon_png.png" width=30>  Overview:
