@@ -39,8 +39,8 @@ These findings highlight critical gaps in current approaches and underscore the 
   </thead>
   <tbody>
     <tr style="background-color:#92a2fc;"><td>Baseline Random</td><td>--</td><td>19.96</td><td>19.77</td><td>18.41</td><td>36.45</td><td>--</td><td>--</td><td>--</td><td>--</td><td>23.65</td><td>--</td></tr>
-    <tr><td>GPT-4o</td><td>450</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-    <tr><td>Gemini Flash 2.0</td><td>1 FPS</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td>GPT-4o</td><td>450</td><td>54.82</td><td>43.76</td><td>45.29</td><td>66.24</td><td>6.35</td><td>6.92</td><td>4.01</td><td>6.72</td><td>52.53</td><td>6.00</td></tr>
+    <tr><td>Gemini Flash 2.0</td><td>1 FPS</td><td>49.06</td><td>45.14</td><td>57.67</td><td>55.80</td><td>5.81</td><td>6.27</td><td>3.97</td><td>6.38</td><td>51.92</td><td>5.61</td></tr>
     <tr><td>Qwen2.5VL</td><td>768</td><td>33.16</td><td>29.85</td><td>29.31</td><td>45.37</td><td>3.34</td><td>4.82</td><td>3.67</td><td>6.39</td><td>34.42</td><td>4.56</td></tr>
     <tr><td>Qwen2VL</td><td>768</td><td>25.79</td><td>31.02</td><td>35.91</td><td>43.07</td><td>2.25</td><td>4.90</td><td>3.29</td><td>6.01</td><td>33.95</td><td>4.11</td></tr>
     <tr><td>Intern VL 3.0</td><td>128</td><td>35.73</td><td>29.64</td><td>24.96</td><td>43.73</td><td>3.92</td><td>4.13</td><td>3.63</td><td>6.17</td><td>33.52</td><td>4.46</td></tr>
