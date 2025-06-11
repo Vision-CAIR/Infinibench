@@ -303,16 +303,17 @@
         .leaderboard-table th {
             background: linear-gradient(135deg, var(--warm-brown) 0%, var(--warm-gray) 100%);
             color: white;
-            padding: 1rem 0.75rem;
+            padding: 0.75rem 0.5rem;
             text-align: center;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             cursor: pointer;
             transition: all 0.3s ease;
             border-right: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
+            line-height: 1.2;
         }
 
         .leaderboard-table th:hover {
@@ -321,20 +322,23 @@
 
         .leaderboard-table th.sortable::after {
             content: '⇅';
-            margin-left: 0.5rem;
+            margin-left: 0.25rem;
             opacity: 0.6;
+            font-size: 0.7rem;
         }
 
         .leaderboard-table th.sort-asc::after {
             content: '↑';
             opacity: 1;
             color: var(--gold-light);
+            font-size: 0.7rem;
         }
 
         .leaderboard-table th.sort-desc::after {
             content: '↓';
             opacity: 1;
             color: var(--gold-light);
+            font-size: 0.7rem;
         }
 
         .grounding-header {
@@ -346,11 +350,12 @@
         }
 
         .leaderboard-table td {
-            padding: 1rem 0.75rem;
+            padding: 0.75rem 0.5rem;
             text-align: center;
             border-bottom: 1px solid rgba(139, 69, 19, 0.08);
             border-right: 1px solid rgba(139, 69, 19, 0.08);
             transition: all 0.3s ease;
+            font-size: 0.85rem;
         }
 
         .leaderboard-table tbody tr {
@@ -662,6 +667,9 @@
                         <th rowspan="2" class="sortable" data-sort="avg_score">
                             <i class="fas fa-trophy mr-2"></i>Avg. Score
                         </th>
+                        <th rowspan="2" class="sortable" data-sort="ranking_score">
+                            <i class="fas fa-medal mr-2"></i>Ranking Score
+                        </th>
                     </tr>
                     <tr class="sub-header">
                         <th class="grounding-header sortable" data-sort="global_appearance" title="Ability to identify and track visual elements across the entire video">Global Appearance</th>
@@ -676,7 +684,7 @@
                 </thead>
                 <tbody id="table-body">
                     <tr class="loading-container">
-                        <td colspan="12">
+                        <td colspan="13">
                             <div class="spinner"></div>
                             Loading leaderboard data...
                         </td>
@@ -691,12 +699,21 @@
                 <strong>InfiniBench Leaderboard</strong> - Comprehensive evaluation across eight video understanding skills. 
                 All models utilize <strong>subtitles</strong> for enhanced performance. Results show Frame Rate configurations: 
                 FPV (Frames Per Video), FPS (Frames Per Second), and FPW (Frames Per Window).
+                <br><br>
+                <strong>Scoring:</strong> Grounding skills (accuracy) are measured as percentages, while Reasoning skills (scores) range from <strong>0 to 10</strong>.
+                Average Accuracy is calculated from grounding skills, and Average Score is calculated from reasoning skills.
+                <br><br>
+                <strong>Ranking Methodology:</strong> The final ranking score represents a balanced evaluation combining both grounding and reasoning capabilities. It is calculated using a weighted formula that normalizes accuracy percentages (0-100) and reasoning scores (0-10) to equivalent scales:
+                <br>
+                <code>Ranking Score = (0.5 × Accuracy/100 + 0.5 × Score/10) × 100</code>
+                <br>
+                This methodology ensures equal contribution from both skill categories, providing a comprehensive assessment of model performance across all video understanding tasks.
             </p>
         </div>
     </div>
 
     <script>
-        // Model data (keeping the existing data structure)
+        // Model data (keeping the existing data structure but removing hardcoded averages)
         const modelData = [
             {
                 model: "Baseline Random",
@@ -709,13 +726,11 @@
                 deep_context: null,
                 spoiler: null,
                 linking_events: null,
-                avg_acc: 23.65,
-                avg_score: null,
                 isBaseline: true
             },
             {
                 model: "GPT-4o",
-                framerate: "450",
+                framerate: "450 FPV",
                 global_appearance: 54.82,
                 scene_transitions: 43.76,
                 character_actions: 45.29,
@@ -723,9 +738,7 @@
                 summarization: 6.35,
                 deep_context: 6.92,
                 spoiler: 4.01,
-                linking_events: 6.72,
-                avg_acc: 52.53,
-                avg_score: 6.00
+                linking_events: 6.72
             },
             {
                 model: "Gemini Flash 2.0",
@@ -737,13 +750,11 @@
                 summarization: 5.81,
                 deep_context: 6.27,
                 spoiler: 3.97,
-                linking_events: 6.38,
-                avg_acc: 51.92,
-                avg_score: 5.61
+                linking_events: 6.38
             },
             {
                 model: "Qwen2.5VL",
-                framerate: "768",
+                framerate: "768 FPV",
                 global_appearance: 33.16,
                 scene_transitions: 29.85,
                 character_actions: 29.31,
@@ -751,13 +762,11 @@
                 summarization: 3.34,
                 deep_context: 4.82,
                 spoiler: 3.67,
-                linking_events: 6.39,
-                avg_acc: 34.42,
-                avg_score: 4.56
+                linking_events: 6.39
             },
             {
                 model: "Qwen2VL",
-                framerate: "768",
+                framerate: "768 FPV",
                 global_appearance: 25.79,
                 scene_transitions: 31.02,
                 character_actions: 35.91,
@@ -765,13 +774,11 @@
                 summarization: 2.25,
                 deep_context: 4.90,
                 spoiler: 3.29,
-                linking_events: 6.01,
-                avg_acc: 33.95,
-                avg_score: 4.11
+                linking_events: 6.01
             },
             {
                 model: "Intern VL 3.0",
-                framerate: "128",
+                framerate: "128 FPV",
                 global_appearance: 35.73,
                 scene_transitions: 29.64,
                 character_actions: 24.96,
@@ -779,13 +786,11 @@
                 summarization: 3.92,
                 deep_context: 4.13,
                 spoiler: 3.63,
-                linking_events: 6.17,
-                avg_acc: 33.52,
-                avg_score: 4.46
+                linking_events: 6.17
             },
             {
                 model: "Video-Flash",
-                framerate: "1000",
+                framerate: "1000 FPV",
                 global_appearance: 22.01,
                 scene_transitions: 30.81,
                 character_actions: 37.67,
@@ -793,27 +798,23 @@
                 summarization: 2.70,
                 deep_context: 3.87,
                 spoiler: 2.95,
-                linking_events: 5.02,
-                avg_acc: 34.52,
-                avg_score: 3.64
+                linking_events: 5.02
             },
             {
                 model: "LongVU",
-                framerate: "1 FPS",
-                global_appearance: null,
-                scene_transitions: null,
-                character_actions: null,
-                chronological: null,
-                summarization: null,
-                deep_context: null,
-                spoiler: null,
-                linking_events: null,
-                avg_acc: null,
-                avg_score: null
+                framerate: "512 FPV",
+                global_appearance: 26.59,
+                scene_transitions: 21.86,
+                character_actions: 23.76,
+                chronological: 37.07,
+                summarization: 1.71,
+                deep_context: 3.23,
+                spoiler: 2.98,
+                linking_events: 4.09
             },
             {
                 model: "LLava-Onevision",
-                framerate: "128",
+                framerate: "128 FPV",
                 global_appearance: 24.19,
                 scene_transitions: 27.83,
                 character_actions: 25.26,
@@ -821,9 +822,7 @@
                 summarization: 2.00,
                 deep_context: 4.09,
                 spoiler: 3.31,
-                linking_events: 6.14,
-                avg_acc: 30.95,
-                avg_score: 3.89
+                linking_events: 6.14
             },
             {
                 model: "InternLM-XComposer",
@@ -835,13 +834,11 @@
                 summarization: 1.67,
                 deep_context: 2.84,
                 spoiler: 2.46,
-                linking_events: 5.00,
-                avg_acc: 31.39,
-                avg_score: 2.99
+                linking_events: 5.00
             },
             {
                 model: "InternVL2.5",
-                framerate: "128",
+                framerate: "128 FPV",
                 global_appearance: 29.05,
                 scene_transitions: 26.65,
                 character_actions: 23.99,
@@ -849,13 +846,11 @@
                 summarization: 2.51,
                 deep_context: 3.14,
                 spoiler: 2.32,
-                linking_events: 5.06,
-                avg_acc: 28.99,
-                avg_score: 3.26
+                linking_events: 5.06
             },
             {
                 model: "InternVL2",
-                framerate: "128",
+                framerate: "128 FPV",
                 global_appearance: 27.44,
                 scene_transitions: 25.48,
                 character_actions: 23.76,
@@ -863,9 +858,7 @@
                 summarization: 2.81,
                 deep_context: 3.77,
                 spoiler: 3.08,
-                linking_events: 5.93,
-                avg_acc: 29.40,
-                avg_score: 3.90
+                linking_events: 5.93
             },
             {
                 model: "Goldfish (Mistral)",
@@ -877,13 +870,11 @@
                 summarization: 3.00,
                 deep_context: 5.42,
                 spoiler: 3.69,
-                linking_events: 6.45,
-                avg_acc: 26.15,
-                avg_score: 4.64
+                linking_events: 6.45
             },
             {
                 model: "MiniGPT4-video (Mistral)",
-                framerate: "60",
+                framerate: "60 FPV",
                 global_appearance: 18.49,
                 scene_transitions: 25.16,
                 character_actions: 28.49,
@@ -891,17 +882,60 @@
                 summarization: 2.81,
                 deep_context: 3.11,
                 spoiler: 3.08,
-                linking_events: 3.87,
-                avg_acc: 28.30,
-                avg_score: 3.22
+                linking_events: 3.87
             }
         ];
 
-        let currentSort = { column: 'avg_acc', direction: 'desc' };
+        // Skill categories
+        const groundingSkills = ['global_appearance', 'scene_transitions', 'character_actions', 'chronological'];
+        const reasoningSkills = ['summarization', 'deep_context', 'spoiler', 'linking_events'];
+
+        // Calculate average accuracy (grounding skills) and average score (reasoning skills)
+        function calculateAverages(model) {
+            // Calculate average accuracy from grounding skills
+            const validGroundingScores = groundingSkills
+                .map(skill => model[skill])
+                .filter(score => score !== null && score !== undefined);
+            
+            const avg_acc = validGroundingScores.length > 0 
+                ? validGroundingScores.reduce((sum, score) => sum + score, 0) / validGroundingScores.length 
+                : null;
+
+            // Calculate average score from reasoning skills
+            const validReasoningScores = reasoningSkills
+                .map(skill => model[skill])
+                .filter(score => score !== null && score !== undefined);
+            
+            const avg_score = validReasoningScores.length > 0 
+                ? validReasoningScores.reduce((sum, score) => sum + score, 0) / validReasoningScores.length 
+                : null;
+
+            // Calculate ranking score using the formula: (0.5*(accuracy/100) + 0.5*(score/10)) * 100
+            let ranking_score = null;
+            if (avg_acc !== null && avg_score !== null) {
+                ranking_score = (0.5 * (avg_acc / 100) + 0.5 * (avg_score / 10)) * 100;
+            }
+
+            return { avg_acc, avg_score, ranking_score };
+        }
+
+        // Process model data to add calculated averages
+        modelData.forEach(model => {
+            const averages = calculateAverages(model);
+            model.avg_acc = averages.avg_acc;
+            model.avg_score = averages.avg_score;
+            model.ranking_score = averages.ranking_score;
+        });
+
+        let currentSort = { column: 'ranking_score', direction: 'desc' };
         let filteredData = [...modelData];
 
         function initializeTable() {
             console.log('Initializing table with', modelData.length, 'models');
+            
+            // Set initial sort indicator on the ranking score column
+            document.querySelector('[data-sort="ranking_score"]').classList.add('sort-desc');
+            
             renderTable();
             updateStats();
             
@@ -932,27 +966,56 @@
             tbody.innerHTML = '';
 
             if (filteredData.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="12" class="empty-cell">No models match your search criteria</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="13" class="empty-cell">No models match your search criteria</td></tr>';
                 return;
             }
 
-            // Sort data by avg_acc for ranking (excluding null values and baseline)
-            const sortedForRank = [...filteredData]
-                .filter(m => m.avg_acc !== null && !m.isBaseline)
-                .sort((a, b) => b.avg_acc - a.avg_acc);
+            // Separate baseline and non-baseline models
+            const baselineModels = filteredData.filter(m => m.isBaseline);
+            const nonBaselineModels = filteredData.filter(m => !m.isBaseline);
 
-            filteredData.forEach((model, index) => {
+            // Sort non-baseline models by current sort settings
+            nonBaselineModels.sort((a, b) => {
+                let aVal = a[currentSort.column];
+                let bVal = b[currentSort.column];
+
+                if (currentSort.column === 'model') {
+                    aVal = aVal.toLowerCase();
+                    bVal = bVal.toLowerCase();
+                    return currentSort.direction === 'asc' ? 
+                        aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+                }
+
+                if (aVal === null && bVal === null) return 0;
+                if (aVal === null) return 1;
+                if (bVal === null) return -1;
+
+                return currentSort.direction === 'asc' ? aVal - bVal : bVal - aVal;
+            });
+
+            // Combine arrays with baseline models first
+            const sortedData = [...baselineModels, ...nonBaselineModels];
+
+            // Sort data by ranking_score for ranking (excluding null values and baseline)
+            const sortedForRank = nonBaselineModels
+                .filter(m => m.ranking_score !== null)
+                .sort((a, b) => b.ranking_score - a.ranking_score);
+
+            sortedData.forEach((model, index) => {
                 const row = document.createElement('tr');
                 if (model.isBaseline) {
                     row.className = 'baseline-row';
                 }
 
-                // Calculate rank only for models with valid avg_acc and not baseline
+                // Calculate rank only for models with valid ranking_score and not baseline
                 let rankHtml = '';
-                if (model.avg_acc !== null && !model.isBaseline) {
+                if (model.ranking_score !== null && !model.isBaseline) {
                     const rank = sortedForRank.findIndex(m => m.model === model.model) + 1;
                     const rankClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : 'rank-other';
                     rankHtml = `<span class="rank-badge ${rankClass}">${rank}</span>`;
+                } else if (model.isBaseline) {
+                    // Add a special baseline indicator
+                    rankHtml = `<span class="rank-badge" style="background: linear-gradient(135deg, var(--warm-gray) 0%, var(--text-medium) 100%);">B</span>`;
                 }
 
                 row.innerHTML = `
@@ -969,8 +1032,9 @@
                     <td class="score-cell">${formatValue(model.deep_context)}</td>
                     <td class="score-cell">${formatValue(model.spoiler)}</td>
                     <td class="score-cell">${formatValue(model.linking_events)}</td>
-                    <td class="score-cell">${formatValue(model.avg_acc)}</td>
+                    <td class="score-cell">${formatValue(model.avg_acc, true)}</td>
                     <td class="score-cell">${formatValue(model.avg_score)}</td>
+                    <td class="score-cell">${formatValue(model.ranking_score)}</td>
                 `;
                 tbody.appendChild(row);
             });
@@ -978,11 +1042,12 @@
             console.log('Table rendered successfully');
         }
 
-        function formatValue(value) {
+        function formatValue(value, isPercentage = false) {
             if (value === null || value === undefined) {
                 return '<span class="empty-cell">--</span>';
             }
-            return value.toString();
+            const formattedValue = typeof value === 'number' ? value.toFixed(2) : value.toString();
+            return isPercentage ? formattedValue : formattedValue;
         }
 
         function handleSearch(e) {
@@ -1004,11 +1069,15 @@
                     filteredData = [...modelData];
                     break;
                 case 'high-performance':
-                    filteredData = modelData.filter(model => model.avg_acc !== null && model.avg_acc > 30);
+                    // Include baseline in high-performance filter for comparison
+                    filteredData = modelData.filter(model => 
+                        model.isBaseline || (model.avg_acc !== null && model.avg_acc > 30)
+                    );
                     break;
                 case 'open-source':
+                    // Include baseline in open-source filter for comparison
                     filteredData = modelData.filter(model => 
-                        !['GPT-4o', 'Gemini Flash 2.0'].includes(model.model)
+                        model.isBaseline || !['GPT-4o', 'Gemini Flash 2.0'].includes(model.model)
                     );
                     break;
             }
