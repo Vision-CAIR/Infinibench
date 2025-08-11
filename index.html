@@ -117,6 +117,75 @@
     color: var(--warm-brown);
   }
 
+  /* Challenge Banner Animations */
+  @keyframes challengeGlow {
+    0%, 100% { box-shadow: 0 0 20px rgba(234, 88, 12, 0.4); }
+    50% { box-shadow: 0 0 40px rgba(234, 88, 12, 0.6); }
+  }
+
+  .challenge-banner {
+    animation: challengeGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulseScale {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  .challenge-pulse {
+    animation: pulseScale 2s ease-in-out infinite;
+  }
+
+  /* Challenge Tab Special Effects */
+  @keyframes challengeTabGlow {
+    0%, 100% { 
+      box-shadow: 0 0 5px rgba(241, 196, 15, 0.5);
+      background: linear-gradient(135deg, rgba(241, 196, 15, 0.1) 0%, rgba(230, 126, 34, 0.1) 100%);
+    }
+    50% { 
+      box-shadow: 0 0 15px rgba(241, 196, 15, 0.8);
+      background: linear-gradient(135deg, rgba(241, 196, 15, 0.2) 0%, rgba(230, 126, 34, 0.2) 100%);
+    }
+  }
+
+  @keyframes challengeTabPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  .challenge-tab {
+    position: relative;
+    animation: challengeTabGlow 2s ease-in-out infinite;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-weight: 600;
+  }
+
+  .challenge-tab::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--gold), var(--primary-orange), var(--gold));
+    border-radius: 10px;
+    z-index: -1;
+    opacity: 0.7;
+    animation: challengeTabPulse 3s ease-in-out infinite;
+  }
+
+  .challenge-tab .emoji {
+    animation: challengeTabPulse 1.5s ease-in-out infinite;
+    display: inline-block;
+  }
+
+  .challenge-tab:hover {
+    animation-play-state: paused;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(241, 196, 15, 1);
+  }
+
   /* Enhanced warm design system */
   * {
     margin: 0;
@@ -783,6 +852,9 @@
           <a href="#benchmark" class="hover:text-orange-600 transition-colors">Benchmark</a>
           <a href="#statistics" class="hover:text-orange-600 transition-colors">Statistics</a>
           <a href="#skills" class="hover:text-orange-600 transition-colors">Skills</a>
+          <a href="https://www.codabench.org/competitions/10063/" target="_blank" class="challenge-tab hover:text-orange-600 transition-colors flex items-center">
+            <span class="emoji mr-1">🏆</span>Challenge
+          </a>
           <a href="leaderboard.html" class="hover:text-orange-600 transition-colors">Leaderboard</a>
           <a href="https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main"
             class="hover:text-orange-600 transition-colors">Download</a>
@@ -801,6 +873,9 @@
         <a href="#benchmark" class="block px-4 py-2 hover:bg-gray-100">Benchmark</a>
         <a href="#statistics" class="block px-4 py-2 hover:bg-gray-100">Statistics</a>
         <a href="#skills" class="block px-4 py-2 hover:bg-gray-100">Skills</a>
+        <a href="https://www.codabench.org/competitions/10063/" target="_blank" class="challenge-tab block px-4 py-2 hover:bg-gray-100 flex items-center">
+          <span class="emoji mr-1">🏆</span>Challenge
+        </a>
         <a href="leaderboard.html" class="block px-4 py-2 hover:bg-gray-100">Leaderboard</a>
         <a href="https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main"
           class="block px-4 py-2 hover:bg-gray-100">Download</a>
@@ -912,6 +987,52 @@
   <script src="js/Underscore-min.js"></script>
   <script src="js/index.js"></script>
 
+  <!-- Challenge Banner -->
+  <section class="py-8" style="background: linear-gradient(135deg, var(--warm-brown) 0%, var(--primary-orange) 50%, var(--warm-brown-light) 100%);">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="challenge-banner" style="background: var(--cream); border: 2px solid var(--primary-orange-light); border-radius: 1rem; padding: 2rem; box-shadow: 0 25px 50px rgba(139, 69, 19, 0.2);">
+          <div class="flex items-center justify-center mb-4">
+            <span class="text-4xl mr-3 challenge-pulse">🏆</span>
+            <h2 class="text-3xl font-bold" style="color: var(--warm-brown);">Live Challenge Running!</h2>
+            <span class="text-4xl ml-3 challenge-pulse">🚀</span>
+          </div>
+          <p class="text-lg mb-6" style="color: var(--text-dark);">
+            Join the <strong>InfiniBench Challenge</strong> and test your models against our comprehensive benchmark!
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="p-4 rounded-lg border" style="background: var(--warm-white); border-color: var(--primary-orange);">
+              <h3 class="font-semibold mb-2 flex items-center" style="color: var(--warm-brown);">
+                <span class="mr-2">📅</span> Duration
+              </h3>
+              <p style="color: var(--text-dark);">
+                <strong>August 12, 2025</strong> to <strong>October 6, 2025</strong>
+              </p>
+            </div>
+            <div class="p-4 rounded-lg border" style="background: var(--warm-white); border-color: var(--warm-brown-light);">
+              <h3 class="font-semibold mb-2 flex items-center" style="color: var(--warm-brown);">
+                <span class="mr-2">🎯</span> Platform
+              </h3>
+              <p style="color: var(--text-dark);">Hosted on <strong>CodaBench</strong></p>
+            </div>
+          </div>
+          <a href="https://www.codabench.org/competitions/10063/" target="_blank" 
+             class="inline-flex items-center px-8 py-4 text-white font-bold text-lg rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+             style="background: linear-gradient(135deg, var(--primary-orange) 0%, var(--warm-brown) 100%); color: white;">
+            <span class="mr-2">🚀</span>
+            Participate Now
+            <span class="ml-2">→</span>
+          </a>
+          <div class="mt-4">
+            <p class="text-sm" style="color: var(--text-medium);">
+              <span class="animate-pulse">⏰</span> Limited time opportunity to showcase your model's capabilities!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="benchmark" class="py-20">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
@@ -921,7 +1042,7 @@
             Understanding long-form videos, such as movies and TV episodes ranging from tens of minutes to two hours, remains a significant challenge for multi-modal models. 
             Existing benchmarks often fail to test the full range of cognitive skills needed to process these temporally rich and narratively complex inputs. 
             Therefore, we introduce InfiniBench, a comprehensive benchmark designed to evaluate the capabilities of models in long video understanding rigorously.
-            InfiniBench offers:
+            InfiniBench offers: 
             (1) Over 1,000 hours of video content, with an average video length of 53 minutes.
             (2) The largest set of question-answer pairs for long video comprehension, totaling around \totalSampleNumber.
             (3) Eight diverse skills that span both grounding-based (e.g., scene transitions, character actions) and reasoning-based (e.g., deep context understanding, multi-event linking).

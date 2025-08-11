@@ -29,6 +29,56 @@
             --text-light: #85929e;
         }
 
+        /* Challenge Tab Special Effects */
+        @keyframes challengeTabGlow {
+            0%, 100% { 
+                box-shadow: 0 0 5px rgba(241, 196, 15, 0.5);
+                background: linear-gradient(135deg, rgba(241, 196, 15, 0.1) 0%, rgba(230, 126, 34, 0.1) 100%);
+            }
+            50% { 
+                box-shadow: 0 0 15px rgba(241, 196, 15, 0.8);
+                background: linear-gradient(135deg, rgba(241, 196, 15, 0.2) 0%, rgba(230, 126, 34, 0.2) 100%);
+            }
+        }
+
+        @keyframes challengeTabPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .challenge-tab {
+            position: relative;
+            animation: challengeTabGlow 2s ease-in-out infinite;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-weight: 600;
+        }
+
+        .challenge-tab::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--gold), var(--primary-orange), var(--gold));
+            border-radius: 10px;
+            z-index: -1;
+            opacity: 0.7;
+            animation: challengeTabPulse 3s ease-in-out infinite;
+        }
+
+        .challenge-tab .emoji {
+            animation: challengeTabPulse 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .challenge-tab:hover {
+            animation-play-state: paused;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(241, 196, 15, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -587,6 +637,9 @@
                 <a href="index.html#benchmark">Benchmark</a>
                 <a href="index.html#statistics">Statistics</a>
                 <a href="index.html#skills">Skills</a>
+                <a href="https://www.codabench.org/competitions/10063/" target="_blank" class="challenge-tab">
+                    <span class="emoji">🏆</span>Challenge
+                </a>
                 <a href="leaderboard.html" class="active">Leaderboard</a>
                 <a href="https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main" target="_blank">
                     <span>🤗</span> Download
