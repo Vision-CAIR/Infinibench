@@ -1,6 +1,6 @@
 # <img src="figs/icon_png.png" width=30> InfiniBench: A Benchmark for Large Multi-Modal Models in Long-Form Movies and TV Shows
 
-<font size=3><div align='center' > [[<img src="figs/icon_png.png" width=18> Project Page](https://vision-cair.github.io/InfiniBench/)] [[📝 arXiv Paper](https://arxiv.org/abs/2406.19875)] [[🤗 Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main)] [[🏆Leaderboard](https://vision-cair.github.io/Infinibench/leaderboard.html)]</div></font>
+<font size=3><div align='center' > [[<img src="figs/icon_png.png" width=18> Project Page](https://vision-cair.github.io/Infinibench/)] [[📝 arXiv Paper](https://arxiv.org/abs/2406.19875)] [[🤗 Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main)] [[🏆Leaderboard](https://vision-cair.github.io/Infinibench/leaderboard.html)]</div></font>
 ## 🔥 News
 - **[2025-06-10]** This is a new released version of Infinibench.
 # <img src="figs/icon_png.png" width=30>  Overview:
@@ -25,6 +25,7 @@ These findings highlight critical gaps in current approaches and underscore the 
       <th colspan="4" style="text-align:center; background-color:#FFF2CC;">Reasoning Skills</th>
       <th rowspan="2" style="background-color:#E4EAFF;">Avg. Acc (0-100)</th>
       <th rowspan="2" style="background-color:#FFF2CC;">Avg. Score (0-10)</th>
+      <th rowspan="2" style="background-color:#FFF2CC;">Overall (0-100)</th>
     </tr>
     <tr>
       <th>Global Appearance</th>
@@ -38,23 +39,94 @@ These findings highlight critical gaps in current approaches and underscore the 
     </tr>
   </thead>
   <tbody>
-    <tr style="background-color:#92a2fc;"><td>Baseline Random</td><td>--</td><td>19.96</td><td>19.77</td><td>18.41</td><td>36.45</td><td>--</td><td>--</td><td>--</td><td>--</td><td>23.65</td><td>--</td></tr>
-    <tr><td>GPT-4o</td><td>450</td><td>54.82</td><td>43.76</td><td>45.29</td><td>66.24</td><td>6.35</td><td>6.92</td><td>4.01</td><td>6.72</td><td>52.53</td><td>6.00</td></tr>
-    <tr><td>Gemini Flash 2.0</td><td>1 FPS</td><td>49.06</td><td>45.14</td><td>57.67</td><td>55.80</td><td>5.81</td><td>6.27</td><td>3.97</td><td>6.38</td><td>51.92</td><td>5.61</td></tr>
-    <tr><td>Qwen2.5VL</td><td>768</td><td>33.16</td><td>29.85</td><td>29.31</td><td>45.37</td><td>3.34</td><td>4.82</td><td>3.67</td><td>6.39</td><td>34.42</td><td>4.56</td></tr>
-    <tr><td>Intern VL 3.0</td><td>128</td><td>35.73</td><td>29.64</td><td>24.96</td><td>43.73</td><td>3.92</td><td>4.13</td><td>3.63</td><td>6.17</td><td>33.52</td><td>4.46</td></tr>
-    <tr><td>Qwen2VL</td><td>768</td><td>25.79</td><td>31.02</td><td>35.91</td><td>43.07</td><td>2.25</td><td>4.90</td><td>3.29</td><td>6.01</td><td>33.95</td><td>4.11</td></tr>
-    <tr><td>Goldfish (Mistral)</td><td>60 FPW</td><td>17.55</td><td>23.67</td><td>23.99</td><td>39.37</td><td>3.00</td><td>5.42</td><td>3.69</td><td>6.45</td><td>26.15</td><td>4.64</td></tr>
-    <tr><td>Video-Flash</td><td>1000</td><td>22.01</td><td>30.81</td><td>37.67</td><td>47.58</td><td>2.70</td><td>3.87</td><td>2.95</td><td>5.02</td><td>34.52</td><td>3.64</td></tr>
-    <tr><td>LLava-Onevision</td><td>128</td><td>24.19</td><td>27.83</td><td>25.26</td><td>46.50</td><td>2.00</td><td>4.09</td><td>3.31</td><td>6.14</td><td>30.95</td><td>3.89</td></tr>
-    <tr><td>InternVL2</td><td>128</td><td>27.44</td><td>25.48</td><td>23.76</td><td>40.93</td><td>2.81</td><td>3.77</td><td>3.08</td><td>5.93</td><td>29.40</td><td>3.90</td></tr>
-    <tr><td>InternVL2.5</td><td>128</td><td>29.05</td><td>26.65</td><td>23.99</td><td>36.26</td><td>2.51</td><td>3.14</td><td>2.32</td><td>5.06</td><td>28.99</td><td>3.26</td></tr>
-    <tr><td>InternLM-XComposer</td><td>16 FPW</td><td>23.27</td><td>29.53</td><td>29.99</td><td>42.78</td><td>1.67</td><td>2.84</td><td>2.46</td><td>5.00</td><td>31.39</td><td>2.99</td></tr>
-    <tr><td>MiniGPT4-video (Mistral)</td><td>60</td><td>18.49</td><td>25.16</td><td>28.49</td><td>41.06</td><td>2.81</td><td>3.11</td><td>3.08</td><td>3.87</td><td>28.30</td><td>3.22</td></tr>
-    <tr><td>LongVU</td><td>512</td><td>26.59</td><td>21.86</td><td>23.76</td><td>37.07</td><td>1.71</td><td>3.23</td><td>2.98</td><td>4.09</td><td>27.32</td><td>3.00</td></tr>
+    <tr style="background-color:#92a2fc;">
+      <td>Baseline Random</td><td>--</td>
+      <td>20.00</td><td>20.02</td><td>20.12</td><td>20.33</td>
+      <td>--</td><td>--</td><td>--</td><td>--</td>
+      <td>20.12</td><td>--</td><td>--</td>
+    </tr>
+    <tr>
+      <td>GPT-4o</td><td>450 FPV</td>
+      <td>49.67</td><td>37.71</td><td>39.93</td><td>60.98</td>
+      <td>6.27</td><td>6.38</td><td>6.59</td><td>6.76</td>
+      <td>47.07</td><td>6.50</td><td>56.04</td>
+    </tr>
+    <tr>
+      <td>Gemini Flash 2.0</td><td>1 FPS</td>
+      <td>45.11</td><td>39.31</td><td>50.00</td><td>50.10</td>
+      <td>5.71</td><td>6.00</td><td>4.35</td><td>5.40</td>
+      <td>46.13</td><td>5.37</td><td>49.89</td>
+    </tr>
+    <tr>
+      <td>Intern VL 3.0</td><td>128 FPV</td>
+      <td>34.30</td><td>27.76</td><td>20.49</td><td>31.12</td>
+      <td>3.83</td><td>3.73</td><td>3.31</td><td>5.26</td>
+      <td>28.42</td><td>4.03</td><td>34.37</td>
+    </tr>
+    <tr>
+      <td>Qwen2.5VL</td><td>768 FPV</td>
+      <td>30.03</td><td>25.28</td><td>22.74</td><td>20.35</td>
+      <td>3.30</td><td>4.29</td><td>3.39</td><td>5.41</td>
+      <td>24.60</td><td>4.10</td><td>32.79</td>
+    </tr>
+    <tr>
+      <td>Qwen2VL</td><td>768 FPV</td>
+      <td>23.54</td><td>28.18</td><td>30.21</td><td>27.40</td>
+      <td>2.23</td><td>4.29</td><td>3.55</td><td>5.01</td>
+      <td>27.33</td><td>3.77</td><td>32.52</td>
+    </tr>
+    <tr>
+      <td>Goldfish (Mistral)</td><td>60 FPW</td>
+      <td>16.20</td><td>22.93</td><td>21.35</td><td>25.44</td>
+      <td>2.98</td><td>4.89</td><td>3.39</td><td>5.65</td>
+      <td>21.48</td><td>4.23</td><td>31.88</td>
+    </tr>
+    <tr>
+      <td>Video-Flash</td><td>1000 FPV</td>
+      <td>20.52</td><td>29.56</td><td>34.90</td><td>37.38</td>
+      <td>2.64</td><td>3.45</td><td>2.20</td><td>4.23</td>
+      <td>30.59</td><td>3.13</td><td>30.95</td>
+    </tr>
+    <tr>
+      <td>InternVL2</td><td>128 FPV</td>
+      <td>26.62</td><td>24.86</td><td>21.53</td><td>26.61</td>
+      <td>2.88</td><td>3.47</td><td>3.02</td><td>4.97</td>
+      <td>24.91</td><td>3.59</td><td>30.38</td>
+    </tr>
+    <tr>
+      <td>LLava-Onevision</td><td>128 FPV</td>
+      <td>21.05</td><td>24.72</td><td>23.26</td><td>30.33</td>
+      <td>2.03</td><td>3.75</td><td>2.69</td><td>5.10</td>
+      <td>24.84</td><td>3.39</td><td>29.38</td>
+    </tr>
+    <tr>
+      <td>InternVL2.5</td><td>128 FPV</td>
+      <td>27.08</td><td>25.14</td><td>21.18</td><td>29.16</td>
+      <td>2.45</td><td>2.83</td><td>2.14</td><td>4.22</td>
+      <td>25.64</td><td>2.91</td><td>27.37</td>
+    </tr>
+    <tr>
+      <td>InternLM-XComposer</td><td>16 FPW</td>
+      <td>20.13</td><td>27.90</td><td>26.56</td><td>26.42</td>
+      <td>1.62</td><td>2.59</td><td>2.25</td><td>4.04</td>
+      <td>25.25</td><td>2.63</td><td>25.75</td>
+    </tr>
+    <tr>
+      <td>LongVU</td><td>512 FPV</td>
+      <td>27.67</td><td>20.99</td><td>27.95</td><td>18.98</td>
+      <td>1.68</td><td>2.90</td><td>2.76</td><td>3.58</td>
+      <td>23.90</td><td>2.73</td><td>25.60</td>
+    </tr>
+    <tr>
+      <td>MiniGPT4-video (Mistral)</td><td>60 FPV</td>
+      <td>18.16</td><td>23.07</td><td>25.87</td><td>23.09</td>
+      <td>2.04</td><td>2.86</td><td>2.04</td><td>3.33</td>
+      <td>22.55</td><td>2.57</td><td>24.11</td>
+    </tr>
     
   </tbody>
 </table>
+
 <p><strong>InfiniBench leaderboard</strong> across eight skills. FPV (Frames Per Video), FPS (Frames Per Second), and FPW (Frames Per Window) are reported. All models in this evaluation utilize <strong>subtitles</strong>.</p>
 
 # 📊Benchmark statistics:
@@ -76,7 +148,8 @@ To make it easier to use the benchmark, we have preprocessed the videos and subt
 | Split                | Download link                                                                                   |
 | -------------------- | ----------------------------------------------------------------------------------------------- |
 | Test (verified)      | [Videos + Annotations](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main/test)  |
-| Train (not verified) | [Videos + Annotations](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main/train) |
+| Validation (verified) | [Videos + Annotations](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main/validation) |
+| Train   | [Videos + Annotations](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main/train) |
 
 **OR** <br>
 
