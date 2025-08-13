@@ -2,6 +2,7 @@
 
 <font size=3><div align='center' > [[<img src="figs/icon_png.png" width=18> Project Page](https://vision-cair.github.io/Infinibench/)] [[📝 arXiv Paper](https://arxiv.org/abs/2406.19875)] [[🤗 Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main)] [[🏆Leaderboard](https://vision-cair.github.io/Infinibench/leaderboard.html)]</div></font>
 ## 🔥 News
+- **[2025-08-14]** 🏆 **[2025 ICCV CLVL - Long Video Understanding Challenge (InfiniBench)](https://www.codabench.org/competitions/10065/)** is now live! Submit your predictions for test set evaluation.
 - **[2025-06-10]** This is a new released version of Infinibench.
 # <img src="figs/icon_png.png" width=30>  Overview:
 ![InfiniBench teaser figure](figs/teaser_fig.png)
@@ -149,6 +150,19 @@ To make it easier to use the benchmark, we have preprocessed the videos and subt
 
 You can download the original data and preprocess it using the scripts provided in this repository<br>
 View [Videos preprocessing](data_genration/README.md)
+
+# 🏆 Evaluation
+
+## Test Set Evaluation
+
+Submit your predictions to the [2025 ICCV CLVL - Long Video Understanding Challenge (InfiniBench)](https://www.codabench.org/competitions/10065/). The evaluation will be performed automatically on the Codabench platform. Please follow the guidelines provided in the challenge description.
+
+## Validation Set Evaluation
+
+Follow the instructions below to run the evaluation script locally in the [evaluation](evaluation/) directory.
+
+> **Note:** Test set ground truth is not publicly available. Evaluation is based on the predictions you provide during challenge submission. Ensure your predictions follow the correct format as specified in the challenge guidelines.
+
 ## 💡 Benchmark Examples
 
 <p align="center">
