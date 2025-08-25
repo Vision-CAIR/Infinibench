@@ -1,7 +1,8 @@
-# <img src="figs/icon_png.png" width=30> InfiniBench: A Benchmark for Large Multi-Modal Models in Long-Form Movies and TV Shows
+# <img src="figs/icon_png.png" width=30> [EMNLP 2025] InfiniBench: A Benchmark for Large Multi-Modal Models in Long-Form Movies and TV Shows
 
 <font size=3><div align='center' > [[<img src="figs/icon_png.png" width=18> Project Page](https://vision-cair.github.io/Infinibench/)] [[📝 arXiv Paper](https://arxiv.org/abs/2406.19875)] [[🤗 Download](https://huggingface.co/datasets/Vision-CAIR/InfiniBench/tree/main)] [[🏆Leaderboard](https://vision-cair.github.io/Infinibench/leaderboard.html)]</div></font>
 ## 🔥 News
+- **[2025-08-20]** 🎉 InfiniBench accepted at **EMNLP 2025**.
 - **[2025-08-14]** 🏆 **[2025 ICCV CLVL - Long Video Understanding Challenge (InfiniBench)](https://www.codabench.org/competitions/10065/)** is now live! Submit your predictions for test set evaluation.
 - **[2025-06-10]** This is a new released version of Infinibench.
 # <img src="figs/icon_png.png" width=30>  Overview:
