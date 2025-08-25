@@ -148,6 +148,49 @@
     }
   }
 
+  /* EMNLP 2025 Badge Styles */
+  @keyframes emnlpGlow {
+    0%, 100% { 
+      box-shadow: 0 0 20px rgba(230, 126, 34, 0.4), 0 0 40px rgba(241, 196, 15, 0.2);
+    }
+    50% { 
+      box-shadow: 0 0 30px rgba(230, 126, 34, 0.6), 0 0 60px rgba(241, 196, 15, 0.3);
+    }
+  }
+
+  @keyframes emnlpStarSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .emnlp-badge {
+    background: linear-gradient(135deg, var(--primary-orange) 0%, var(--gold) 50%, var(--warm-brown) 100%) !important;
+    animation: emnlpGlow 3s ease-in-out infinite;
+    position: relative;
+    border: 2px solid var(--gold-light) !important;
+    backdrop-filter: blur(10px);
+    font-family: 'Google Sans', sans-serif;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(230, 126, 34, 0.3), 0 0 0 1px rgba(241, 196, 15, 0.2) inset;
+  }
+
+  .emnlp-badge:hover {
+    animation-play-state: paused;
+    box-shadow: 0 0 40px rgba(230, 126, 34, 0.8), 0 0 80px rgba(241, 196, 15, 0.4);
+    transform: scale(1.05) !important;
+    background: linear-gradient(135deg, var(--primary-orange-light) 0%, var(--gold-light) 50%, var(--warm-brown-light) 100%) !important;
+  }
+
+  .emnlp-badge svg {
+    animation: emnlpStarSpin 4s linear infinite;
+    color: var(--gold-light);
+  }
+
+  .emnlp-badge:hover svg {
+    animation-duration: 0.5s;
+    color: white;
+  }
+
   @keyframes challengeTabPulse {
     0%, 100% { transform: scale(1); }
     50% { transform: scale(1.1); }
@@ -898,6 +941,7 @@
           <img src="repo_images/icon.png" width="60" class="mr-3">
           <h1 class="text-5xl font-bold">InfiniBench</h1>
         </div>
+        
         <h2 class="text-3xl font-semibold mb-6">A Benchmark for Large Multi-Modal Models<br>in Long-Form Movies & TV
           Shows</h2>
 
@@ -927,6 +971,19 @@
           <span class="author-block">
             <a href="https://www.mohamed-elhoseiny.com/" style="color:#f39c12;font-weight:normal;">Mohamed Elhoseiny</a>
           </span>
+        </div>
+
+        <!-- EMNLP 2025 Acceptance Badge -->
+        <div class="flex justify-center mb-8">
+          <div class="emnlp-badge bg-gradient-to-r from-orange-600 to-amber-600 text-white px-8 py-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center space-x-3 border-2 border-orange-300">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="font-bold text-xl tracking-wide">🎉 Accepted at EMNLP 2025 🎉</span>
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
         </div>
 
         <p class="text-xl mb-8">Rigorously evaluating the capabilities of multimodal models across 8 key skills with
